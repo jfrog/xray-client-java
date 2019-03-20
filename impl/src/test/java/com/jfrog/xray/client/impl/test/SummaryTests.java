@@ -37,7 +37,7 @@ public class SummaryTests extends XrayTestsBase {
         assertNull(summary.getErrors());
         assertNotNull(summary.getArtifacts());
         assertNotNull(summary.getArtifacts());
-        assertTrue(summary.getArtifacts().size() == 1, "Expecting one Artifact only.");
+        assertEquals(summary.getArtifacts().size(), 1, "Expecting one Artifact only.");
 
         for (Artifact artifact : summary.getArtifacts()) {
             assertNotNull(artifact.getGeneral());
