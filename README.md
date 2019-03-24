@@ -1,6 +1,6 @@
-# Artifactory Xray Client 
+# Xray Java Client 
 
-JFrog Artifactory Xray Client adds JFrog Xray scanning capabilities to your java application.
+JFrog Xray Client adds JFrog Xray scanning capabilities to your java application.
 
 # Building and Testing the Sources
 
