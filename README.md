@@ -1,3 +1,5 @@
+[![Build status](https://ci.appveyor.com/api/projects/status/9f5ky95h430ppmn1?svg=true)](https://ci.appveyor.com/project/jfrog-ecosystem/xray-client-java)
+
 # Xray Java Client 
 
 JFrog Xray Client adds JFrog Xray scanning capabilities to your java application.
