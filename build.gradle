@@ -1,0 +1,89 @@
+allprojects {
+    apply plugin: 'maven'
+    apply plugin: 'java'
+
+    group = 'org.jfrog.xray.client'
+}
+
+subprojects() {
+    repositories {
+        jcenter()
+        mavenLocal()
+    }
+
+    sourceCompatibility = 1.8
+    targetCompatibility = 1.8
+
+    dependencies {
+        compile addSlf4J('slf4j-api')
+        compile addSlf4J('log4j-over-slf4j')
+        compile addSlf4J('jcl-over-slf4j')
+        compile group: 'commons-io', name: 'commons-io', version: '2.6'
+        compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.9.8'
+        compile group: 'com.fasterxml.jackson.core', name: 'jackson-core', version: '2.9.8'
+    }
+
+    task sourcesJar(type: Jar) {
+        from sourceSets.main.allSource
+        classifier = 'sources'
+    }
+
+    task javadocJar(type: Jar, dependsOn: javadoc) {
+        classifier = 'javadoc'
+        from javadoc.destinationDir
+    }
+
+    task testResultsZip(type: Zip) {
+        classifier = 'testreports'
+        from testReportDir
+    }
+
+    test {
+        jvmArgs(['-Dorg.apache.commons.logging.Log=org.apache.commons.logging.impl.SimpleLog',
+                 '-Dorg.apache.commons.logging.simplelog.showdatetime=true',
+                 '-Dorg.apache.commons.logging.simplelog.log.org.apache.http=ERROR',
+                 '-Dorg.apache.commons.logging.simplelog.log.org.apache.http.wire=ERROR'])
+        testLogging {
+            exceptionFormat "full"
+            events "started", "passed", "skipped", "failed", "standardOut", "standardError"
+            minGranularity 0
+        }
+        // Have the XraySpecSuite run all tests
+        exclude 'com/jfrog/xray/client/test/spec'
+        finalizedBy(testResultsZip)
+    }
+}
+
+project(':xray-client-java-service') {
+    dependencies {
+        compile project(':xray-client-java-api')
+        compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.8.1'
+        compile group: 'org.jfrog.common', name: 'jfrog-http-client', version: '3.1.8'
+        testCompile group: 'org.testng', name: 'testng', version: '6.14.3'
+    }
+
+    test {
+        useTestNG()
+        testLogging {
+            exceptionFormat "full"
+            events "started", "passed", "skipped", "failed", "standardOut", "standardError"
+            minGranularity 0
+        }
+    }
+
+    jar {
+        manifest {
+            attributes 'Implementation-Version': version
+        }
+    }
+}
+
+project(':xray-client-java-api') {
+    apply plugin: 'java'
+    sourceCompatibility = 1.8
+    targetCompatibility = 1.8
+}
+
+def static addSlf4J(name) {
+    [group: 'org.slf4j', name: name, version: '1.7.26']
+}
