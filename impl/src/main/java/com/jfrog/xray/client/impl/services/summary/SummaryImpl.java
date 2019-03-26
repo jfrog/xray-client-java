@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.jfrog.xray.client.impl.XrayImpl;
+import com.jfrog.xray.client.impl.util.HttpUtils;
 import com.jfrog.xray.client.impl.util.ObjectMapperHelper;
 import com.jfrog.xray.client.services.summary.Components;
 import com.jfrog.xray.client.services.summary.Summary;
@@ -11,7 +12,6 @@ import com.jfrog.xray.client.services.summary.SummaryResponse;
 import org.apache.http.HttpResponse;
 
 import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
@@ -22,6 +22,7 @@ import java.util.Map;
  */
 public class SummaryImpl implements Summary {
 
+    private static ObjectMapper mapper = ObjectMapperHelper.get();
     private final XrayImpl xray;
 
     public SummaryImpl(XrayImpl xray) {
@@ -33,18 +34,7 @@ public class SummaryImpl implements Summary {
         if (checksums == null && paths == null) {
             return new SummaryResponseImpl();
         }
-
-        ObjectMapper mapper = ObjectMapperHelper.get();
-        ArtifactSummaryBody summaryBody = new ArtifactSummaryBody(checksums, paths);
-        ByteArrayOutputStream out = new ByteArrayOutputStream();
-        mapper.writeValue(out, summaryBody);
-        ByteArrayInputStream content = new ByteArrayInputStream(out.toByteArray());
-
-        Map<String, String> headers = new HashMap<>();
-        XrayImpl.addContentTypeJsonHeader(headers);
-
-        HttpResponse response = xray.post("summary/artifact", headers, content);
-        return mapper.readValue(response.getEntity().getContent(), SummaryResponseImpl.class);
+        return post("artifact", new ArtifactSummaryBody(checksums, paths));
     }
 
     @Override
@@ -52,17 +42,21 @@ public class SummaryImpl implements Summary {
         if (components == null) {
             return new SummaryResponseImpl();
         }
+        return post("component", components);
+    }
 
-        ObjectMapper mapper = ObjectMapperHelper.get();
-        ByteArrayOutputStream out = new ByteArrayOutputStream();
-        mapper.writeValue(out, components);
-        ByteArrayInputStream content = new ByteArrayInputStream(out.toByteArray());
+    private SummaryResponse post(String api, Object body) throws IOException {
+        HttpResponse response = null;
+        try (ByteArrayInputStream content = new ByteArrayInputStream(mapper.writeValueAsBytes(body))) {
+            Map<String, String> headers = new HashMap<>();
+            XrayImpl.addContentTypeJsonHeader(headers);
 
-        Map<String, String> headers = new HashMap<>();
-        XrayImpl.addContentTypeJsonHeader(headers);
+            response = xray.post("summary/" + api, headers, content);
+            return mapper.readValue(response.getEntity().getContent(), SummaryResponseImpl.class);
+        } finally {
+            HttpUtils.consumeResponse(response);
+        }
 
-        HttpResponse response = xray.post("summary/component", headers, content);
-        return mapper.readValue(response.getEntity().getContent(), SummaryResponseImpl.class);
     }
 
     @JsonInclude(JsonInclude.Include.NON_NULL)
@@ -71,16 +65,18 @@ public class SummaryImpl implements Summary {
         private List<String> checksums;
         private List<String> paths;
 
-        public ArtifactSummaryBody(List<String> checksums, List<String> paths) {
+        ArtifactSummaryBody(List<String> checksums, List<String> paths) {
             this.checksums = checksums;
             this.paths = paths;
         }
 
+        @SuppressWarnings("unused")
         @JsonProperty("checksums")
         public List<String> getChecksums() {
             return checksums;
         }
 
+        @SuppressWarnings("unused")
         @JsonProperty("paths")
         public List<String> getPaths() {
             return paths;

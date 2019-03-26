@@ -2,6 +2,7 @@ package com.jfrog.xray.client.impl.services.system;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.jfrog.xray.client.impl.XrayImpl;
+import com.jfrog.xray.client.impl.util.HttpUtils;
 import com.jfrog.xray.client.impl.util.ObjectMapperHelper;
 import com.jfrog.xray.client.services.system.System;
 import com.jfrog.xray.client.services.system.Version;
@@ -15,6 +16,7 @@ import java.io.IOException;
  */
 public class SystemImpl implements System {
 
+    private static ObjectMapper mapper = ObjectMapperHelper.get();
     private XrayImpl xray;
 
     public SystemImpl(XrayImpl xray) {
@@ -23,22 +25,25 @@ public class SystemImpl implements System {
 
     @Override
     public boolean ping() {
+        HttpResponse response = null;
         try {
-            HttpResponse response = xray.get("system/ping", null);
-            if (response.getStatusLine().getStatusCode() == HttpStatus.SC_OK) {
-                return true;
-            }
+            response = xray.get("system/ping", null);
+            return response.getStatusLine().getStatusCode() == HttpStatus.SC_OK;
         } catch (Exception e) {
-            // Do nothing
+            return false;
+        } finally {
+            HttpUtils.consumeResponse(response);
         }
-        return false;
     }
 
     @Override
     public Version version() throws IOException {
-        ObjectMapper mapper = ObjectMapperHelper.get();
-
-        HttpResponse response = xray.get("system/version", null);
-        return mapper.readValue(response.getEntity().getContent(), VersionImpl.class);
+        HttpResponse response = null;
+        try {
+            response = xray.get("system/version", null);
+            return mapper.readValue(response.getEntity().getContent(), VersionImpl.class);
+        } finally {
+            HttpUtils.consumeResponse(response);
+        }
     }
 }
