@@ -1,87 +1,72 @@
-allprojects {
-    apply plugin: 'maven'
-    apply plugin: 'java'
-
-    group = 'org.jfrog.xray.client'
+plugins {
+    id 'java'
+    id 'maven'
 }
 
-subprojects() {
-    repositories {
-        jcenter()
-        mavenLocal()
-    }
+group 'com.jfrog.xray.client'
 
-    sourceCompatibility = 1.8
-    targetCompatibility = 1.8
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
 
-    dependencies {
-        compile addSlf4J('slf4j-api')
-        compile addSlf4J('log4j-over-slf4j')
-        compile addSlf4J('jcl-over-slf4j')
-        compile group: 'commons-io', name: 'commons-io', version: '2.6'
-        compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.9.8'
-        compile group: 'com.fasterxml.jackson.core', name: 'jackson-core', version: '2.9.8'
-    }
-
-    task sourcesJar(type: Jar) {
-        from sourceSets.main.allSource
-        classifier = 'sources'
-    }
-
-    task javadocJar(type: Jar, dependsOn: javadoc) {
-        classifier = 'javadoc'
-        from javadoc.destinationDir
-    }
-
-    task testResultsZip(type: Zip) {
-        classifier = 'testreports'
-        from testReportDir
-    }
-
-    test {
-        jvmArgs(['-Dorg.apache.commons.logging.Log=org.apache.commons.logging.impl.SimpleLog',
-                 '-Dorg.apache.commons.logging.simplelog.showdatetime=true',
-                 '-Dorg.apache.commons.logging.simplelog.log.org.apache.http=ERROR',
-                 '-Dorg.apache.commons.logging.simplelog.log.org.apache.http.wire=ERROR'])
-        testLogging {
-            exceptionFormat "full"
-            events "started", "passed", "skipped", "failed", "standardOut", "standardError"
-            minGranularity 0
-        }
-        // Have the XraySpecSuite run all tests
-        exclude 'com/jfrog/xray/client/test/spec'
-        finalizedBy(testResultsZip)
-    }
+repositories {
+    jcenter()
+    mavenLocal()
 }
 
-project(':xray-client-java-service') {
-    dependencies {
-        compile project(':xray-client-java-api')
-        compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.8.1'
-        compile group: 'org.jfrog.common', name: 'jfrog-http-client', version: '3.1.8'
-        testCompile group: 'org.testng', name: 'testng', version: '6.14.3'
-    }
-
-    test {
-        useTestNG()
-        testLogging {
-            exceptionFormat "full"
-            events "started", "passed", "skipped", "failed", "standardOut", "standardError"
-            minGranularity 0
-        }
-    }
-
-    jar {
-        manifest {
-            attributes 'Implementation-Version': version
-        }
-    }
+dependencies {
+    compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.9.8'
+    compile group: 'com.fasterxml.jackson.core', name: 'jackson-core', version: '2.9.8'
+    compile group: 'org.jfrog.common', name: 'jfrog-http-client', version: '3.1.8'
+    compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.8.1'
+    compile group: 'commons-io', name: 'commons-io', version: '2.6'
+    compile addSlf4J('log4j-over-slf4j')
+    compile addSlf4J('jcl-over-slf4j')
+    compile addSlf4J('slf4j-api')
+    testCompile group: 'org.testng', name: 'testng', version: '6.14.3'
 }
 
-project(':xray-client-java-api') {
-    apply plugin: 'java'
-    sourceCompatibility = 1.8
-    targetCompatibility = 1.8
+//noinspection GroovyAssignabilityCheck
+task sourcesJar(type: Jar, dependsOn: classes) {
+    classifier = 'sources'
+    from sourceSets.main.allSource
+}
+
+//noinspection GroovyAssignabilityCheck
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    classifier = 'javadoc'
+    from javadoc.destinationDir
+}
+
+//noinspection GroovyAssignabilityCheck
+task testResultsZip(type: Zip) {
+    classifier = 'testreports'
+    from testReportDir
+}
+
+test {
+    useTestNG()
+    jvmArgs(['-Dorg.apache.commons.logging.Log=org.apache.commons.logging.com.jfrog.xray.client.impl.SimpleLog',
+             '-Dorg.apache.commons.logging.simplelog.showdatetime=true',
+             '-Dorg.apache.commons.logging.simplelog.log.org.apache.http=ERROR',
+             '-Dorg.apache.commons.logging.simplelog.log.org.apache.http.wire=ERROR'])
+    testLogging {
+        exceptionFormat "full"
+        events "started", "passed", "skipped", "failed", "standardOut", "standardError"
+        minGranularity 0
+    }
+    // Have the XraySpecSuite run all tests
+    exclude 'com/jfrog/xray/client/test/spec'
+    finalizedBy(testResultsZip)
+}
+
+artifacts {
+    archives sourcesJar
+}
+
+jar {
+    manifest {
+        attributes 'Implementation-Version': version
+    }
 }
 
 def static addSlf4J(name) {
