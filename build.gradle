@@ -27,19 +27,19 @@ dependencies {
 
 //noinspection GroovyAssignabilityCheck
 task sourcesJar(type: Jar, dependsOn: classes) {
-    classifier = 'sources'
+    archiveClassifier.set('sources')
     from sourceSets.main.allSource
 }
 
 //noinspection GroovyAssignabilityCheck
 task javadocJar(type: Jar, dependsOn: javadoc) {
-    classifier = 'javadoc'
+    archiveClassifier.set('javadoc')
     from javadoc.destinationDir
 }
 
 //noinspection GroovyAssignabilityCheck
 task testResultsZip(type: Zip) {
-    classifier = 'testreports'
+    archiveClassifier.set('testreports')
     from testReportDir
 }
 
