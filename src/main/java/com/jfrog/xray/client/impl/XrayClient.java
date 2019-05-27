@@ -4,6 +4,7 @@ import com.jfrog.xray.client.Xray;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.jfrog.client.http.HttpBuilderBase;
 import org.jfrog.client.http.auth.PreemptiveAuthInterceptor;
+import org.jfrog.client.http.model.ProxyConfig;
 
 /**
  * Created by romang on 2/2/17.
@@ -20,7 +21,7 @@ public class XrayClient {
     /**
      * Username, API key, and custom url
      */
-    static public Xray create(String url, String username, String password, String userAgent) {
+    static public Xray create(String url, String username, String password, String userAgent, ProxyConfig proxyConfig) {
         HttpBuilderBase configurator = new HttpBuilderBase() {
         };
         configurator.hostFromUrl(url)
@@ -28,12 +29,13 @@ public class XrayClient {
                 .connectionTimeout(CONNECTION_TIMEOUT_MILLISECONDS)
                 .socketTimeout(CONNECTION_TIMEOUT_MILLISECONDS)
                 .userAgent(userAgent)
+                .proxy(proxyConfig)
                 .addRequestInterceptor(new PreemptiveAuthInterceptor());
 
         return new XrayImpl(configurator.build(), url);
     }
 
-    static public Xray create(String url, String username, String password) {
-        return create(url, username, password, DEFAULT_USER_AGENT);
+    static public Xray create(String url, String username, String password, ProxyConfig proxyConfig) {
+        return create(url, username, password, DEFAULT_USER_AGENT, proxyConfig);
     }
 }
