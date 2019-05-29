@@ -11,11 +11,11 @@ import java.util.Set;
  */
 public class ComponentsFactory {
 
-    static public Components create(Set<ComponentDetail> componentDetails) {
+    public static Components create(Set<ComponentDetail> componentDetails) {
         return new ComponentsImpl(componentDetails);
     }
 
-    static public Components create() {
+    public static Components create() {
         return new ComponentsImpl();
     }
 }
