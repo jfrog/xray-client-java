@@ -20,6 +20,8 @@ public class IssueImpl implements Issue {
     private String issueType;
     @JsonProperty("impact_path")
     private List<String> impactPath = null;
+    @JsonProperty("components")
+    private List<VulnerableComponentsImpl> vulnerableComponents = null;
 
     @Override
     @JsonProperty("summary")
@@ -61,6 +63,12 @@ public class IssueImpl implements Issue {
     @JsonProperty("impact_path")
     public List<String> getImpactPath() {
         return impactPath;
+    }
+
+    @Override
+    @JsonProperty("components")
+    public List<VulnerableComponentsImpl> getVulnerableComponents() {
+        return vulnerableComponents;
     }
 
     @Override

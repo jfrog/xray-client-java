@@ -21,4 +21,6 @@ public interface Issue extends Serializable {
     String getCreated();
 
     List<String> getImpactPath();
+
+    List<? extends VulnerableComponents> getVulnerableComponents();
 }

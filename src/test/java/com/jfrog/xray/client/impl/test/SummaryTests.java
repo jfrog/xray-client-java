@@ -31,7 +31,7 @@ public class SummaryTests extends XrayTestsBase {
     @Test
     public void testArtifactSummaryComponent() throws IOException {
         Components components = ComponentsFactory.create();
-        components.addComponent("gav://org.acegisecurity:acegi-security:1.0.5", "");
+        components.addComponent("gav://org.springframework.security.oauth:spring-security-oauth2:2.2.3.RELEASE", "");
         SummaryResponse summary = xray.summary().component(components);
 
         assertNull(summary.getErrors());
@@ -41,8 +41,12 @@ public class SummaryTests extends XrayTestsBase {
 
         for (Artifact artifact : summary.getArtifacts()) {
             assertNotNull(artifact.getGeneral());
-            assertNotNull(artifact.getIssues());
             assertNotNull(artifact.getLicenses());
+            assertNotNull(artifact.getIssues());
+            assertEquals(3, artifact.getIssues().size());
+            assertNotNull(artifact.getIssues().get(0).getVulnerableComponents());
+            assertEquals(1, artifact.getIssues().get(0).getVulnerableComponents().size());
+            assertEquals(artifact.getIssues().get(0).getVulnerableComponents().get(0).getFixedVersions().size(), 4);
         }
     }
 
