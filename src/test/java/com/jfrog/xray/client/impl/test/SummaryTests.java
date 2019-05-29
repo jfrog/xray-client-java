@@ -1,10 +1,14 @@
 package com.jfrog.xray.client.impl.test;
 
+import com.jfrog.xray.client.Xray;
 import com.jfrog.xray.client.impl.ComponentsFactory;
 import com.jfrog.xray.client.services.summary.Artifact;
 import com.jfrog.xray.client.services.summary.Components;
 import com.jfrog.xray.client.services.summary.Error;
 import com.jfrog.xray.client.services.summary.SummaryResponse;
+import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.ArrayUtils;
+import org.mockserver.mock.Expectation;
 import org.testng.annotations.Test;
 
 import java.io.IOException;
@@ -30,6 +34,25 @@ public class SummaryTests extends XrayTestsBase {
 
     @Test
     public void testArtifactSummaryComponent() throws IOException {
+        testArtifactSummaryComponent(xray);
+    }
+
+    @Test
+    public void testArtifactSummaryComponentProxy() throws IOException {
+        testArtifactSummaryComponent(xrayProxies);
+        Expectation[] expectations = mockServer.retrieveRecordedExpectations(null);
+        assertEquals(1, ArrayUtils.getLength(expectations));
+
+        // Assert that request passed through proxy
+        String requestBody = ((String) expectations[0].getHttpRequest().getBody().getValue());
+        assertTrue(StringUtils.contains(requestBody, "acegi-security"));
+
+        // Assert that response passed through proxy
+        String responseBody = ((String) expectations[0].getHttpResponse().getBody().getValue());
+        assertTrue(StringUtils.contains(responseBody, "acegi-security"));
+    }
+
+    private void testArtifactSummaryComponent(Xray xray) throws IOException {
         Components components = ComponentsFactory.create();
         components.addComponent("gav://org.springframework.security.oauth:spring-security-oauth2:2.2.3.RELEASE", "");
         SummaryResponse summary = xray.summary().component(components);

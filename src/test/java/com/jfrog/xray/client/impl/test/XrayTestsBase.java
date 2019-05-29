@@ -1,9 +1,12 @@
 package com.jfrog.xray.client.impl.test;
 
 import com.jfrog.xray.client.Xray;
+import org.jfrog.client.http.model.ProxyConfig;
+import org.mockserver.integration.ClientAndServer;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -18,11 +21,11 @@ public class XrayTestsBase {
     private static final String CLIENTTESTS_XRAY_ENV_VAR_PREFIX = "CLIENTTESTS_XRAY_";
     private static final String CLIENTTESTS_XRAY_PROPERTIES_PREFIX = "clienttests.xray.";
 
-    Xray xray;
+    Xray xray, xrayProxies;
+    ClientAndServer mockServer;
 
     @BeforeClass
     public void init() throws IOException {
-
         Properties props = new Properties();
         // This file is not in GitHub. Create your own in src/test/resources.
         InputStream inputStream = this.getClass().getResourceAsStream("/xray-client.properties");
@@ -37,7 +40,22 @@ public class XrayTestsBase {
         String username = readParam(props, "username");
         String password = readParam(props, "password");
 
-        xray = create(url, username, password);
+        // Create an xray client
+        xray = create(url, username, password, null);
+
+        // Create an xray client that uses proxy
+        ProxyConfig proxyConfig = new ProxyConfig();
+        proxyConfig.setPort(8888);
+        proxyConfig.setHost("localhost");
+        xrayProxies = create(url, username, password, proxyConfig);
+
+        // Create a mock proxy server
+        mockServer = ClientAndServer.startClientAndServer(8888);
+    }
+
+    @BeforeMethod
+    public void beforeMethod() {
+        mockServer.reset();
     }
 
     private String readParam(Properties props, String paramName) {
@@ -78,5 +96,7 @@ public class XrayTestsBase {
     @AfterClass
     public void clean() {
         xray.close();
+        xrayProxies.close();
+        mockServer.stop();
     }
 }

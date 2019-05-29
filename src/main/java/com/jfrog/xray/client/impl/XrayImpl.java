@@ -43,11 +43,11 @@ public class XrayImpl implements Xray {
         this.baseApiUrl = URIUtil.concatUrl(url, API_BASE);
     }
 
-    static public void addContentTypeJsonHeader(Map<String, String> headers) {
+    public static void addContentTypeJsonHeader(Map<String, String> headers) {
         headers.put(HttpHeaders.CONTENT_TYPE, ContentType.APPLICATION_JSON.getMimeType());
     }
 
-    static public void addContentTypeBinaryHeader(Map<String, String> headers) {
+    public static void addContentTypeBinaryHeader(Map<String, String> headers) {
         headers.put(HttpHeaders.CONTENT_TYPE, ContentType.DEFAULT_BINARY.getMimeType());
     }
 
@@ -130,7 +130,7 @@ public class XrayImpl implements Xray {
         if (stream == null) {
             return "";
         }
-        try (StringWriter writer = new StringWriter()){
+        try (StringWriter writer = new StringWriter()) {
             IOUtils.copy(stream, writer, "UTF-8");
             return writer.toString();
         }
