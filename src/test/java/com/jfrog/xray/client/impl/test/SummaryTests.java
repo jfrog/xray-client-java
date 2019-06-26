@@ -45,11 +45,11 @@ public class SummaryTests extends XrayTestsBase {
 
         // Assert that request passed through proxy
         String requestBody = ((String) expectations[0].getHttpRequest().getBody().getValue());
-        assertTrue(StringUtils.contains(requestBody, "acegi-security"));
+        assertTrue(StringUtils.contains(requestBody, "spring-security-oauth2"));
 
         // Assert that response passed through proxy
         String responseBody = ((String) expectations[0].getHttpResponse().getBody().getValue());
-        assertTrue(StringUtils.contains(responseBody, "acegi-security"));
+        assertTrue(StringUtils.contains(responseBody, "spring-security-oauth2"));
     }
 
     private void testArtifactSummaryComponent(Xray xray) throws IOException {
@@ -66,9 +66,9 @@ public class SummaryTests extends XrayTestsBase {
             assertNotNull(artifact.getGeneral());
             assertNotNull(artifact.getLicenses());
             assertNotNull(artifact.getIssues());
-            assertEquals(3, artifact.getIssues().size());
+            assertEquals(artifact.getIssues().size(), 4);
             assertNotNull(artifact.getIssues().get(0).getVulnerableComponents());
-            assertEquals(1, artifact.getIssues().get(0).getVulnerableComponents().size());
+            assertEquals(artifact.getIssues().get(0).getVulnerableComponents().size(), 1);
             assertEquals(artifact.getIssues().get(0).getVulnerableComponents().get(0).getFixedVersions().size(), 4);
         }
     }

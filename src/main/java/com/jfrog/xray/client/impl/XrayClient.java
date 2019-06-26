@@ -21,8 +21,8 @@ public class XrayClient {
     /**
      * Username, API key, and custom url
      */
-    public static Xray create(String url, String username, String password, String userAgent, ProxyConfig proxyConfig) {
-        HttpBuilderBase configurator = new HttpBuilderBase() {
+    public static Xray create(String url, String username, String password, String userAgent, boolean trustSelfSignCert, ProxyConfig proxyConfig) {
+         HttpBuilderBase configurator = new HttpBuilderBase() {
         };
         configurator.hostFromUrl(url)
                 .authentication(username, password, true)
@@ -30,12 +30,13 @@ public class XrayClient {
                 .socketTimeout(CONNECTION_TIMEOUT_MILLISECONDS)
                 .userAgent(userAgent)
                 .proxy(proxyConfig)
+                .trustSelfSignCert(trustSelfSignCert)
                 .addRequestInterceptor(new PreemptiveAuthInterceptor());
 
         return new XrayImpl(configurator.build(), url);
     }
 
-    public static Xray create(String url, String username, String password, ProxyConfig proxyConfig) {
-        return create(url, username, password, DEFAULT_USER_AGENT, proxyConfig);
+    public static Xray create(String url, String username, String password, boolean trustSelfSignCert, ProxyConfig proxyConfig) {
+        return create(url, username, password, DEFAULT_USER_AGENT, trustSelfSignCert, proxyConfig);
     }
 }
