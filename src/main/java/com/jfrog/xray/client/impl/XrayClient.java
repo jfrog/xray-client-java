@@ -22,7 +22,7 @@ public class XrayClient {
      * Username, API key, and custom url
      */
     public static Xray create(String url, String username, String password, String userAgent, boolean trustSelfSignCert, ProxyConfig proxyConfig) {
-         HttpBuilderBase configurator = new HttpBuilderBase() {
+        HttpBuilderBase configurator = new HttpBuilderBase() {
         };
         configurator.hostFromUrl(url)
                 .authentication(username, password, true)
