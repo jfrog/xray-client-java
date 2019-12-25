@@ -41,13 +41,13 @@ public class XrayTestsBase {
         String password = readParam(props, "password");
 
         // Create an xray client
-        xray = create(url, username, password, false, null);
+        xray = create(url, username, password, false, null, null);
 
         // Create an xray client that uses proxy
         ProxyConfig proxyConfig = new ProxyConfig();
         proxyConfig.setPort(8888);
         proxyConfig.setHost("localhost");
-        xrayProxies = create(url, username, password, true, proxyConfig);
+        xrayProxies = create(url, username, password, true, null, proxyConfig);
 
         // Create a mock proxy server
         mockServer = ClientAndServer.startClientAndServer(8888);
