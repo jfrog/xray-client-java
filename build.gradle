@@ -14,10 +14,10 @@ repositories {
 }
 
 dependencies {
-    compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.9.8'
-    compile group: 'com.fasterxml.jackson.core', name: 'jackson-core', version: '2.9.8'
-    compile group: 'org.jfrog.common', name: 'jfrog-http-client', version: '3.2.9'
-    compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.8.1'
+    compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.10.1'
+    compile group: 'com.fasterxml.jackson.core', name: 'jackson-core', version: '2.10.1'
+    compile group: 'org.jfrog.common', name: 'jfrog-http-client', version: '3.8.0'
+    compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.9'
     compile group: 'commons-io', name: 'commons-io', version: '2.6'
     compile addSlf4J('log4j-over-slf4j')
     compile addSlf4J('jcl-over-slf4j')
@@ -71,5 +71,5 @@ jar {
 }
 
 def static addSlf4J(name) {
-    [group: 'org.slf4j', name: name, version: '1.7.26']
+    [group: 'org.slf4j', name: name, version: '1.7.30']
 }
