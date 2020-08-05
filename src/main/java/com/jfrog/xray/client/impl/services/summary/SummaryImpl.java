@@ -3,7 +3,7 @@ package com.jfrog.xray.client.impl.services.summary;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.jfrog.xray.client.impl.XrayImpl;
+import com.jfrog.xray.client.impl.XrayClient;
 import com.jfrog.xray.client.impl.util.HttpUtils;
 import com.jfrog.xray.client.impl.util.ObjectMapperHelper;
 import com.jfrog.xray.client.services.summary.Components;
@@ -11,7 +11,6 @@ import com.jfrog.xray.client.services.summary.Summary;
 import com.jfrog.xray.client.services.summary.SummaryResponse;
 import org.apache.http.HttpResponse;
 
-import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
@@ -22,10 +21,10 @@ import java.util.Map;
  */
 public class SummaryImpl implements Summary {
 
-    private static ObjectMapper mapper = ObjectMapperHelper.get();
-    private final XrayImpl xray;
+    private static final ObjectMapper mapper = ObjectMapperHelper.get();
+    private final XrayClient xray;
 
-    public SummaryImpl(XrayImpl xray) {
+    public SummaryImpl(XrayClient xray) {
         this.xray = xray;
     }
 
@@ -47,23 +46,21 @@ public class SummaryImpl implements Summary {
 
     private SummaryResponse post(String api, Object body) throws IOException {
         HttpResponse response = null;
-        try (ByteArrayInputStream content = new ByteArrayInputStream(mapper.writeValueAsBytes(body))) {
-            Map<String, String> headers = new HashMap<>();
-            XrayImpl.addContentTypeJsonHeader(headers);
-
-            response = xray.post("summary/" + api, headers, content);
+        Map<String, String> headers = new HashMap<>();
+        XrayClient.addContentTypeJsonHeader(headers);
+        try {
+            response = xray.post("summary/" + api, headers, body);
             return mapper.readValue(response.getEntity().getContent(), SummaryResponseImpl.class);
         } finally {
             HttpUtils.consumeResponse(response);
         }
-
     }
 
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    private class ArtifactSummaryBody {
+    private static class ArtifactSummaryBody {
 
-        private List<String> checksums;
-        private List<String> paths;
+        private final List<String> checksums;
+        private final List<String> paths;
 
         ArtifactSummaryBody(List<String> checksums, List<String> paths) {
             this.checksums = checksums;

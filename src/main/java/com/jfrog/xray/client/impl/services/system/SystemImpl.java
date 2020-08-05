@@ -1,7 +1,7 @@
 package com.jfrog.xray.client.impl.services.system;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.jfrog.xray.client.impl.XrayImpl;
+import com.jfrog.xray.client.impl.XrayClient;
 import com.jfrog.xray.client.impl.util.HttpUtils;
 import com.jfrog.xray.client.impl.util.ObjectMapperHelper;
 import com.jfrog.xray.client.services.system.System;
@@ -16,10 +16,10 @@ import java.io.IOException;
  */
 public class SystemImpl implements System {
 
-    private static ObjectMapper mapper = ObjectMapperHelper.get();
-    private XrayImpl xray;
+    private static final ObjectMapper mapper = ObjectMapperHelper.get();
+    private final XrayClient xray;
 
-    public SystemImpl(XrayImpl xray) {
+    public SystemImpl(XrayClient xray) {
         this.xray = xray;
     }
 
