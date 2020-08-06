@@ -17,8 +17,8 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpHead;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpUriRequest;
+import org.apache.http.entity.ByteArrayEntity;
 import org.apache.http.entity.ContentType;
-import org.apache.http.entity.InputStreamEntity;
 import org.apache.http.impl.client.BasicCredentialsProvider;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.impl.conn.PoolingHttpClientConnectionManager;
@@ -26,7 +26,6 @@ import org.apache.http.util.EntityUtils;
 import org.jfrog.build.api.util.Log;
 import org.jfrog.build.client.PreemptiveHttpClient;
 
-import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.StringWriter;
@@ -75,44 +74,33 @@ public class XrayClient extends PreemptiveHttpClient implements Xray {
         return new SummaryImpl(this);
     }
 
-    private void setHeaders(HttpUriRequest request, Map<String, String> headers) {
-        if (headers != null && !headers.isEmpty()) {
-            for (Map.Entry<String, String> header : headers.entrySet()) {
-                request.setHeader(header.getKey(), header.getValue());
-            }
-        }
-    }
-
-    public HttpResponse get(String uri, Map<String, String> headers) throws IOException {
+    public HttpResponse get(String uri) throws IOException {
         HttpGet getRequest = new HttpGet(createUrl(uri));
         log.debug("GET " + getRequest.getURI());
-        return setHeadersAndExecute(getRequest, headers);
+        return setHeadersAndExecute(getRequest);
     }
 
     @SuppressWarnings("unused")
-    public HttpResponse head(String uri, Map<String, String> headers) throws IOException {
+    public HttpResponse head(String uri) throws IOException {
         HttpHead headRequest = new HttpHead(createUrl(uri));
         log.debug("HEAD " + headRequest.getURI());
-        return setHeadersAndExecute(headRequest, headers);
+        return setHeadersAndExecute(headRequest);
     }
 
-    public HttpResponse post(String uri, Map<String, String> headers, Object payload) throws IOException {
+    public HttpResponse post(String uri, Object payload) throws IOException {
         HttpPost postRequest = new HttpPost(createUrl(uri));
         byte[] body = mapper.writeValueAsBytes(payload);
         log.debug("POST " + postRequest.getURI() + "\n" + new String(body, StandardCharsets.UTF_8));
-        try (ByteArrayInputStream content = new ByteArrayInputStream(body)) {
-            HttpEntity requestEntity = new InputStreamEntity(content);
-            postRequest.setEntity(requestEntity);
-            return setHeadersAndExecute(postRequest, headers);
-        }
+        HttpEntity requestEntity = new ByteArrayEntity(body, ContentType.APPLICATION_JSON);
+        postRequest.setEntity(requestEntity);
+        return setHeadersAndExecute(postRequest);
     }
 
     private String createUrl(String queryPath) {
         return URIUtil.concatUrl(baseApiUrl, queryPath);
     }
 
-    private HttpResponse setHeadersAndExecute(HttpUriRequest request, Map<String, String> headers) throws IOException {
-        setHeaders(request, headers);
+    private HttpResponse setHeadersAndExecute(HttpUriRequest request) throws IOException {
         HttpResponse response = execute(request);
         StatusLine statusLine = response.getStatusLine();
         int statusCode = statusLine.getStatusCode();

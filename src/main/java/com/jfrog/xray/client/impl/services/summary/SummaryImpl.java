@@ -12,9 +12,7 @@ import com.jfrog.xray.client.services.summary.SummaryResponse;
 import org.apache.http.HttpResponse;
 
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by romang on 2/27/17.
@@ -46,10 +44,8 @@ public class SummaryImpl implements Summary {
 
     private SummaryResponse post(String api, Object body) throws IOException {
         HttpResponse response = null;
-        Map<String, String> headers = new HashMap<>();
-        XrayClient.addContentTypeJsonHeader(headers);
         try {
-            response = xray.post("summary/" + api, headers, body);
+            response = xray.post("summary/" + api, body);
             return mapper.readValue(response.getEntity().getContent(), SummaryResponseImpl.class);
         } finally {
             HttpUtils.consumeResponse(response);

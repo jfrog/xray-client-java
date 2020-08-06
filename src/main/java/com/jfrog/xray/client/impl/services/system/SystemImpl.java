@@ -27,7 +27,7 @@ public class SystemImpl implements System {
     public boolean ping() {
         HttpResponse response = null;
         try {
-            response = xray.get("system/ping", null);
+            response = xray.get("system/ping");
             return response.getStatusLine().getStatusCode() == HttpStatus.SC_OK;
         } catch (Exception e) {
             return false;
@@ -40,7 +40,7 @@ public class SystemImpl implements System {
     public Version version() throws IOException {
         HttpResponse response = null;
         try {
-            response = xray.get("system/version", null);
+            response = xray.get("system/version");
             return mapper.readValue(response.getEntity().getContent(), VersionImpl.class);
         } finally {
             HttpUtils.consumeResponse(response);
