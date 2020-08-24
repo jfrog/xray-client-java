@@ -1,7 +1,7 @@
 node('java') {
     cleanWs()
     git url: 'https://github.com/jfrog/xray-client-java.git'
-    def jdktool = tool name: "openjdk-8"
+    def jdktool = tool name: "jdk-8u111-linux-x64-jce-unlimited-policy"
     env.JAVA_HOME = jdktool
     echo jdktool
     def server = Artifactory.server('oss.jfrog.org')
