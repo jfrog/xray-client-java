@@ -1,7 +1,8 @@
 package com.jfrog.xray.client.impl.test;
 
 import com.jfrog.xray.client.Xray;
-import org.jfrog.client.http.model.ProxyConfig;
+import com.jfrog.xray.client.impl.XrayClientBuilder;
+import org.jfrog.build.client.ProxyConfiguration;
 import org.mockserver.integration.ClientAndServer;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
@@ -11,8 +12,6 @@ import org.testng.annotations.BeforeMethod;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
-
-import static com.jfrog.xray.client.impl.XrayClient.create;
 
 /**
  * Created by romang on 2/2/17.
@@ -41,13 +40,23 @@ public class XrayTestsBase {
         String password = readParam(props, "password");
 
         // Create an xray client
-        xray = create(url, username, password, false, null, null);
+        xray = (Xray) new XrayClientBuilder()
+                .setUrl(url)
+                .setUserName(username)
+                .setPassword(password)
+                .build();
 
         // Create an xray client that uses proxy
-        ProxyConfig proxyConfig = new ProxyConfig();
-        proxyConfig.setPort(8888);
-        proxyConfig.setHost("localhost");
-        xrayProxies = create(url, username, password, true, null, proxyConfig);
+        ProxyConfiguration proxyConfig = new ProxyConfiguration();
+        proxyConfig.port = 8888;
+        proxyConfig.host = "localhost";
+        xrayProxies = (Xray) new XrayClientBuilder()
+                .setUrl(url)
+                .setUserName(username)
+                .setPassword(password)
+                .setProxyConfiguration(proxyConfig)
+                .setInsecureTls(true)
+                .build();
 
         // Create a mock proxy server
         mockServer = ClientAndServer.startClientAndServer(8888);

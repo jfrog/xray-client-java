@@ -15,13 +15,10 @@ repositories {
 
 dependencies {
     compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.10.1'
+    compile group: 'org.jfrog.buildinfo', name: 'build-info-extractor', version: '2.19.x-SNAPSHOT'
     compile group: 'com.fasterxml.jackson.core', name: 'jackson-core', version: '2.10.1'
-    compile group: 'org.jfrog.common', name: 'jfrog-http-client', version: '3.8.0'
     compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.9'
     compile group: 'commons-io', name: 'commons-io', version: '2.6'
-    compile addSlf4J('log4j-over-slf4j')
-    compile addSlf4J('jcl-over-slf4j')
-    compile addSlf4J('slf4j-api')
     testCompile group: 'org.testng', name: 'testng', version: '6.14.3'
     testCompile group: 'org.mock-server', name: 'mockserver-netty', version: '5.5.4'
 }
@@ -46,10 +43,6 @@ task testResultsZip(type: Zip) {
 
 test {
     useTestNG()
-    jvmArgs(['-Dorg.apache.commons.logging.Log=org.apache.commons.logging.com.jfrog.xray.client.impl.SimpleLog',
-             '-Dorg.apache.commons.logging.simplelog.showdatetime=true',
-             '-Dorg.apache.commons.logging.simplelog.log.org.apache.http=ERROR',
-             '-Dorg.apache.commons.logging.simplelog.log.org.apache.http.wire=ERROR'])
     testLogging {
         exceptionFormat "full"
         events "started", "passed", "skipped", "failed", "standardOut", "standardError"
@@ -68,8 +61,4 @@ jar {
     manifest {
         attributes 'Implementation-Version': version
     }
-}
-
-def static addSlf4J(name) {
-    [group: 'org.slf4j', name: name, version: '1.7.30']
 }
