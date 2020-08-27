@@ -11,6 +11,12 @@ targetCompatibility = 1.8
 repositories {
     jcenter()
     mavenLocal()
+    maven {
+        url "https://oss.jfrog.org/artifactory/libs-snapshot"
+        mavenContent {
+            snapshotsOnly()
+        }
+    }
 }
 
 dependencies {
