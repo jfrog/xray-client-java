@@ -13,6 +13,7 @@ import static java.util.concurrent.TimeUnit.MINUTES;
 public class XrayClientBuilder extends PreemptiveHttpClientBuilder {
 
     private static final String DEFAULT_USER_AGENT = "jfrog-xray-client/" + XrayClient.class.getPackage().getImplementationVersion();
+    // 1 minute timeout
     private static final int CONNECTION_TIMEOUT_MILLISECONDS = (int) MINUTES.toMillis(1);
 
     private String url = StringUtils.EMPTY;

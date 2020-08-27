@@ -15,7 +15,7 @@ repositories {
 
 dependencies {
     compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.10.1'
-    compile group: 'org.jfrog.buildinfo', name: 'build-info-extractor', version: '2.18.x-SNAPSHOT'
+    compile group: 'org.jfrog.buildinfo', name: 'build-info-extractor', version: '2.19.x-SNAPSHOT'
     compile group: 'com.fasterxml.jackson.core', name: 'jackson-core', version: '2.10.1'
     compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.9'
     compile group: 'commons-io', name: 'commons-io', version: '2.6'

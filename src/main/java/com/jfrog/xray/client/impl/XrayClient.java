@@ -10,7 +10,10 @@ import com.jfrog.xray.client.services.summary.Summary;
 import com.jfrog.xray.client.services.system.System;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.http.*;
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.HttpStatus;
+import org.apache.http.StatusLine;
 import org.apache.http.client.AuthCache;
 import org.apache.http.client.HttpResponseException;
 import org.apache.http.client.methods.HttpGet;
@@ -30,7 +33,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.StringWriter;
 import java.nio.charset.StandardCharsets;
-import java.util.Map;
 
 
 /**
@@ -47,15 +49,6 @@ public class XrayClient extends PreemptiveHttpClient implements Xray {
         super(connectionManager, credentialsProvider, accessToken, authCache, clientBuilder, connectionRetries, log);
         this.baseApiUrl = URIUtil.concatUrl(url, API_BASE);
         this.log = log;
-    }
-
-    public static void addContentTypeJsonHeader(Map<String, String> headers) {
-        headers.put(HttpHeaders.CONTENT_TYPE, ContentType.APPLICATION_JSON.getMimeType());
-    }
-
-    @SuppressWarnings("unused")
-    public static void addContentTypeBinaryHeader(Map<String, String> headers) {
-        headers.put(HttpHeaders.CONTENT_TYPE, ContentType.DEFAULT_BINARY.getMimeType());
     }
 
     private static boolean statusNotOk(int statusCode) {
