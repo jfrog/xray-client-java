@@ -2,12 +2,13 @@ package com.jfrog.xray.client.impl.services.system;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.jfrog.xray.client.impl.XrayClient;
-import com.jfrog.xray.client.impl.util.HttpUtils;
 import com.jfrog.xray.client.impl.util.ObjectMapperHelper;
 import com.jfrog.xray.client.services.system.System;
 import com.jfrog.xray.client.services.system.Version;
-import org.apache.http.HttpResponse;
+import org.apache.http.HttpEntity;
 import org.apache.http.HttpStatus;
+import org.apache.http.client.methods.CloseableHttpResponse;
+import org.apache.http.util.EntityUtils;
 
 import java.io.IOException;
 
@@ -25,25 +26,25 @@ public class SystemImpl implements System {
 
     @Override
     public boolean ping() {
-        HttpResponse response = null;
-        try {
-            response = xray.get("system/ping");
+        HttpEntity entity = null;
+        try (CloseableHttpResponse response = xray.get("system/ping")) {
+            entity = response.getEntity();
             return response.getStatusLine().getStatusCode() == HttpStatus.SC_OK;
         } catch (Exception e) {
             return false;
         } finally {
-            HttpUtils.consumeResponse(response);
+            EntityUtils.consumeQuietly(entity);
         }
     }
 
     @Override
     public Version version() throws IOException {
-        HttpResponse response = null;
-        try {
-            response = xray.get("system/version");
+        HttpEntity entity = null;
+        try (CloseableHttpResponse response = xray.get("system/version")) {
+            entity = response.getEntity();
             return mapper.readValue(response.getEntity().getContent(), VersionImpl.class);
         } finally {
-            HttpUtils.consumeResponse(response);
+            EntityUtils.consumeQuietly(entity);
         }
     }
 }
