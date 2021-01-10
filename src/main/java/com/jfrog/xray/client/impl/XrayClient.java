@@ -11,15 +11,11 @@ import com.jfrog.xray.client.services.system.System;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
 import org.apache.http.StatusLine;
 import org.apache.http.client.AuthCache;
 import org.apache.http.client.HttpResponseException;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.client.methods.HttpHead;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.client.methods.HttpUriRequest;
+import org.apache.http.client.methods.*;
 import org.apache.http.entity.ByteArrayEntity;
 import org.apache.http.entity.ContentType;
 import org.apache.http.impl.client.BasicCredentialsProvider;
@@ -67,20 +63,20 @@ public class XrayClient extends PreemptiveHttpClient implements Xray {
         return new SummaryImpl(this);
     }
 
-    public HttpResponse get(String uri) throws IOException {
+    public CloseableHttpResponse get(String uri) throws IOException {
         HttpGet getRequest = new HttpGet(createUrl(uri));
         log.debug("GET " + getRequest.getURI());
         return setHeadersAndExecute(getRequest);
     }
 
     @SuppressWarnings("unused")
-    public HttpResponse head(String uri) throws IOException {
+    public CloseableHttpResponse head(String uri) throws IOException {
         HttpHead headRequest = new HttpHead(createUrl(uri));
         log.debug("HEAD " + headRequest.getURI());
         return setHeadersAndExecute(headRequest);
     }
 
-    public HttpResponse post(String uri, Object payload) throws IOException {
+    public CloseableHttpResponse post(String uri, Object payload) throws IOException {
         HttpPost postRequest = new HttpPost(createUrl(uri));
         byte[] body = mapper.writeValueAsBytes(payload);
         log.debug("POST " + postRequest.getURI() + "\n" + new String(body, StandardCharsets.UTF_8));
@@ -93,8 +89,8 @@ public class XrayClient extends PreemptiveHttpClient implements Xray {
         return URIUtil.concatUrl(baseApiUrl, queryPath);
     }
 
-    private HttpResponse setHeadersAndExecute(HttpUriRequest request) throws IOException {
-        HttpResponse response = execute(request);
+    private CloseableHttpResponse setHeadersAndExecute(HttpUriRequest request) throws IOException {
+        CloseableHttpResponse response = execute(request);
         StatusLine statusLine = response.getStatusLine();
         int statusCode = statusLine.getStatusCode();
         if (statusNotOk(statusCode)) {

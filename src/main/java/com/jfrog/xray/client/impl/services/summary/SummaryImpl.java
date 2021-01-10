@@ -4,12 +4,13 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.jfrog.xray.client.impl.XrayClient;
-import com.jfrog.xray.client.impl.util.HttpUtils;
 import com.jfrog.xray.client.impl.util.ObjectMapperHelper;
 import com.jfrog.xray.client.services.summary.Components;
 import com.jfrog.xray.client.services.summary.Summary;
 import com.jfrog.xray.client.services.summary.SummaryResponse;
-import org.apache.http.HttpResponse;
+import org.apache.http.HttpEntity;
+import org.apache.http.client.methods.CloseableHttpResponse;
+import org.apache.http.util.EntityUtils;
 
 import java.io.IOException;
 import java.util.List;
@@ -43,12 +44,12 @@ public class SummaryImpl implements Summary {
     }
 
     private SummaryResponse post(String api, Object body) throws IOException {
-        HttpResponse response = null;
-        try {
-            response = xray.post("summary/" + api, body);
+        HttpEntity entity = null;
+        try (CloseableHttpResponse response = xray.post("summary/" + api, body)) {
+            entity = response.getEntity();
             return mapper.readValue(response.getEntity().getContent(), SummaryResponseImpl.class);
         } finally {
-            HttpUtils.consumeResponse(response);
+            EntityUtils.consumeQuietly(entity);
         }
     }
 

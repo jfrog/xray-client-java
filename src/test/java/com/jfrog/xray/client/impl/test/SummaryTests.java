@@ -9,6 +9,7 @@ import com.jfrog.xray.client.services.summary.SummaryResponse;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang3.ArrayUtils;
 import org.mockserver.mock.Expectation;
+import org.mockserver.model.HttpRequest;
 import org.testng.annotations.Test;
 
 import java.io.IOException;
@@ -44,11 +45,11 @@ public class SummaryTests extends XrayTestsBase {
         assertEquals(1, ArrayUtils.getLength(expectations));
 
         // Assert that request passed through proxy
-        String requestBody = ((String) expectations[0].getHttpRequest().getBody().getValue());
+        String requestBody = ((HttpRequest) expectations[0].getHttpRequest()).getBody().getValue().toString();
         assertTrue(StringUtils.contains(requestBody, "spring-security-oauth2"));
 
         // Assert that response passed through proxy
-        String responseBody = ((String) expectations[0].getHttpResponse().getBody().getValue());
+        String responseBody = expectations[0].getHttpResponse().getBody().getValue().toString();
         assertTrue(StringUtils.contains(responseBody, "spring-security-oauth2"));
     }
 

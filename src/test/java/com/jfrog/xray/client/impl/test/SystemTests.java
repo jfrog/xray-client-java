@@ -5,6 +5,7 @@ import com.jfrog.xray.client.services.system.Version;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang3.ArrayUtils;
 import org.mockserver.mock.Expectation;
+import org.mockserver.model.HttpRequest;
 import org.testng.annotations.Test;
 
 import java.io.IOException;
@@ -28,7 +29,7 @@ public class SystemTests extends XrayTestsBase {
         // Assert that request passed through proxy
         Expectation[] expectations = mockServer.retrieveRecordedExpectations(null);
         assertEquals(1, ArrayUtils.getLength(expectations));
-        String requestPath = expectations[0].getHttpRequest().getPath().toString();
+        String requestPath = ((HttpRequest) expectations[0].getHttpRequest()).getPath().toString();
         assertTrue(StringUtils.contains(requestPath, "system/ping"));
 
         // Assert that response passed through proxy
@@ -47,7 +48,7 @@ public class SystemTests extends XrayTestsBase {
         assertEquals(1, ArrayUtils.getLength(expectations));
 
         // Assert that request passed through proxy
-        String requestPath = expectations[0].getHttpRequest().getPath().toString();
+        String requestPath = ((HttpRequest) expectations[0].getHttpRequest()).getPath().toString();
         assertTrue(StringUtils.contains(requestPath, "system/version"));
 
         // Assert that response passed through proxy
