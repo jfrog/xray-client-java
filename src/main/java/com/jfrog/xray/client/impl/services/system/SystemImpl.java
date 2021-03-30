@@ -17,7 +17,6 @@ import java.io.IOException;
  */
 public class SystemImpl implements System {
 
-    private final String BASE_API = "v1/system/";
     private static final ObjectMapper mapper = ObjectMapperHelper.get();
     private final XrayClient xray;
 
@@ -28,7 +27,7 @@ public class SystemImpl implements System {
     @Override
     public boolean ping() {
         HttpEntity entity = null;
-        try (CloseableHttpResponse response = xray.get(BASE_API + "ping")) {
+        try (CloseableHttpResponse response = xray.get("system/ping")) {
             entity = response.getEntity();
             return response.getStatusLine().getStatusCode() == HttpStatus.SC_OK;
         } catch (Exception e) {
@@ -41,7 +40,7 @@ public class SystemImpl implements System {
     @Override
     public Version version() throws IOException {
         HttpEntity entity = null;
-        try (CloseableHttpResponse response = xray.get(BASE_API + "version")) {
+        try (CloseableHttpResponse response = xray.get("system/version")) {
             entity = response.getEntity();
             return mapper.readValue(response.getEntity().getContent(), VersionImpl.class);
         } finally {
