@@ -4,12 +4,17 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.jfrog.xray.client.services.summary.General;
 
+import java.util.List;
+
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class GeneralImpl implements General {
 
     private String name;
     private String path;
+    private String sha1;
     private String sha256;
+    @JsonProperty("parent_sha256")
+    private List<String> parentSha256;
     @JsonProperty("pkg_type")
     private String pkgType;
     @JsonProperty("component_id")
@@ -30,9 +35,19 @@ public class GeneralImpl implements General {
         return pkgType;
     }
 
+    @JsonProperty("sha1")
+    public String getSha1() {
+        return sha1;
+    }
+
     @JsonProperty("sha256")
     public String getSha256() {
         return sha256;
+    }
+
+    @JsonProperty("parent_sha256")
+    public List<String> getParentSha256() {
+        return parentSha256;
     }
 
     @JsonProperty("component_id")
@@ -48,6 +63,11 @@ public class GeneralImpl implements General {
     @SuppressWarnings("unused")
     public void setPath(String path) {
         this.path = path;
+    }
+
+    @SuppressWarnings("unused")
+    public void setSha1(String sha1) {
+        this.sha1 = sha1;
     }
 
     @SuppressWarnings("unused")
