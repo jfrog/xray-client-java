@@ -12,6 +12,8 @@ import org.apache.http.util.EntityUtils;
 
 import java.io.IOException;
 
+import static com.jfrog.xray.client.impl.util.URIUtil.encode;
+
 /**
  * @author yahavi
  **/
@@ -28,7 +30,7 @@ public class DetailsImpl implements Details {
         if (StringUtils.isAnyBlank(buildName, buildNumber)) {
             return new DetailsResponseImpl();
         }
-        String url = String.format("details/build?build_name=%s&build_number=%s", buildName, buildNumber);
+        String url = String.format("details/build?build_name=%s&build_number=%s", encode(buildName), encode(buildNumber));
         HttpEntity entity = null;
         try (CloseableHttpResponse response = xray.get(url)) {
             entity = response.getEntity();
