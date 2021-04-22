@@ -1,0 +1,779 @@
+{
+  "build_name": "maven-build",
+  "build_number": "1",
+  "is_scan_completed": true,
+  "components": [
+    {
+      "general": {
+        "name": "aopalliance-1.0.jar",
+        "component_id": "aopalliance:aopalliance:1.0",
+        "pkg_type": "maven",
+        "sha256": "0addec670fedcd3f113c5c8091d783280d23f75e3acb841b61a9cdb079376a08",
+        "sha1": "0235ba8b489512805ac13a8f9ea77a1ca5ebe3e8",
+        "parent_sha256": [
+          "df0183eee62f51ac6835c710c0755c3f99d3631ee5dcc471f3d5023119ea818c"
+        ]
+      },
+      "issues": [],
+      "licenses": [
+        {
+          "name": "Public Domain",
+          "full_name": "Public Domain",
+          "more_info_url": [
+            "http://creativecommons.org/licenses/publicdomain/"
+          ],
+          "components": [
+            "gav://aopalliance:aopalliance:1.0"
+          ]
+        }
+      ]
+    },
+    {
+      "general": {
+        "name": "activation-1.1.jar",
+        "component_id": "javax.activation:activation:1.1",
+        "pkg_type": "maven",
+        "sha256": "2881c79c9d6ef01c58e62beea13e9d1ac8b8baa16f2fc198ad6e6776defdcdd3",
+        "sha1": "e6cb541461c2834bdea3eb920f1884d1eb508b50",
+        "parent_sha256": [
+          "df0183eee62f51ac6835c710c0755c3f99d3631ee5dcc471f3d5023119ea818c"
+        ]
+      },
+      "issues": [],
+      "licenses": [
+        {
+          "name": "CDDL-1.0",
+          "full_name": "Common Development and Distribution License (CDDL)\n            1.0",
+          "more_info_url": [
+            "http://www.opensource.org/licenses/cddl1.php",
+            "https://spdx.org/licenses/CDDL-1.0",
+            "https://spdx.org/licenses/CDDL-1.0.html",
+            "http://www.opensource.org/licenses/cddl1"
+          ],
+          "components": [
+            "gav://javax.activation:activation:1.1"
+          ]
+        }
+      ]
+    },
+    {
+      "general": {
+        "name": "multi3-3.7-20210317.083746-1.war",
+        "component_id": "multi3-3.7-20210317.083746-1.war",
+        "pkg_type": "generic",
+        "sha256": "b912e498e1cfc48b9256cf4e6e6319aed54103fdbf6d8afd3d0e03ac5253b758",
+        "sha1": "a6b625f3a8c62752b4a8fb21f1ac23036b61ae35",
+        "parent_sha256": [
+          "3f8feda52f9d939bc8d6b6c89ae06a04c80d8a373d6fe4385cb6b544117d93fe"
+        ]
+      },
+      "issues": [],
+      "licenses": [
+        {
+          "name": "Unknown",
+          "full_name": "Unknown license",
+          "components": [
+            "generic://sha256:b912e498e1cfc48b9256cf4e6e6319aed54103fdbf6d8afd3d0e03ac5253b758/multi3-3.7-20210317.083746-1.war"
+          ]
+        }
+      ]
+    },
+    {
+      "general": {
+        "name": "multi1-3.7-20210317.083746-1-sources.jar",
+        "component_id": "multi1-3.7-20210317.151616-4-sources.jar",
+        "pkg_type": "generic",
+        "sha256": "c445311b649636e64837ec85fbbd30b915d18d545c4db87125050a33dedeace3",
+        "sha1": "02fe965159ae082a4f1f790485f2694735df1241",
+        "parent_sha256": [
+          "3f8feda52f9d939bc8d6b6c89ae06a04c80d8a373d6fe4385cb6b544117d93fe"
+        ]
+      },
+      "issues": [],
+      "licenses": [
+        {
+          "name": "Unknown",
+          "full_name": "Unknown license",
+          "components": [
+            "generic://sha256:c445311b649636e64837ec85fbbd30b915d18d545c4db87125050a33dedeace3/multi1-3.7-20210317.151616-4-sources.jar"
+          ]
+        }
+      ]
+    },
+    {
+      "general": {
+        "name": "junit:junit:3.8.1.jar",
+        "component_id": "junit:junit:3.8.1.jar",
+        "pkg_type": "generic",
+        "sha256": "00000000000000000000000099129f16442844f6a4a11ae22fbbee40b14d774f",
+        "sha1": "99129f16442844f6a4a11ae22fbbee40b14d774f",
+        "parent_sha256": [
+          "3f8feda52f9d939bc8d6b6c89ae06a04c80d8a373d6fe4385cb6b544117d93fe"
+        ]
+      },
+      "issues": [],
+      "licenses": [
+        {
+          "name": "Unknown",
+          "full_name": "Unknown license",
+          "components": [
+            "generic://sha256:00000000000000000000000099129f16442844f6a4a11ae22fbbee40b14d774f/junit:junit:3.8.1.jar"
+          ]
+        }
+      ]
+    },
+    {
+      "general": {
+        "name": "mail-1.4.jar",
+        "component_id": "javax.mail:mail:1.4",
+        "pkg_type": "maven",
+        "sha256": "96868f82264ebd9b7d41f04d78cbe87ab75d68a7bbf8edfb82416aabe9b54b6c",
+        "sha1": "1aa1579ae5ecd41920c4f355b0a9ef40b68315dd",
+        "parent_sha256": [
+          "df0183eee62f51ac6835c710c0755c3f99d3631ee5dcc471f3d5023119ea818c"
+        ]
+      },
+      "issues": [],
+      "licenses": [
+        {
+          "name": "CDDL-1.0",
+          "full_name": "Common Development and Distribution License (CDDL)\n            1.0",
+          "more_info_url": [
+            "http://www.opensource.org/licenses/cddl1.php",
+            "https://spdx.org/licenses/CDDL-1.0",
+            "https://spdx.org/licenses/CDDL-1.0.html",
+            "http://www.opensource.org/licenses/cddl1"
+          ],
+          "components": [
+            "gav://javax.mail:mail:1.4"
+          ]
+        }
+      ]
+    },
+    {
+      "general": {
+        "name": "spring-aop-2.5.6.jar",
+        "component_id": "org.springframework:spring-aop:2.5.6",
+        "pkg_type": "maven",
+        "sha256": "32dff5cc773ebf023e2fcd1e96313360ec92362a93f74e7370d7dfda75bbe004",
+        "sha1": "7d04f648dd88a2173ee7ff7bcb337a080ee5bea1",
+        "parent_sha256": [
+          "df0183eee62f51ac6835c710c0755c3f99d3631ee5dcc471f3d5023119ea818c"
+        ]
+      },
+      "issues": [],
+      "licenses": [
+        {
+          "name": "Apache-2.0",
+          "full_name": "The Apache Software License, Version 2.0",
+          "more_info_url": [
+            "http://www.opensource.org/licenses/Apache-2.0",
+            "http://www.opensource.org/licenses/apache2.0.php",
+            "https://spdx.org/licenses/Apache-2.0",
+            "https://spdx.org/licenses/Apache-2.0.html",
+            "http://www.apache.org/licenses/LICENSE-2.0",
+            "https://licenses.nuget.org/Apache-2.0",
+            "http://licenses.nuget.org/Apache-2.0",
+            "https://raw.githubusercontent.com/aspnet/AspNetCore/2.0.0/LICENSE.txt",
+            "http://raw.githubusercontent.com/aspnet/AspNetCore/2.0.0/LICENSE.txt"
+          ],
+          "components": [
+            "gav://org.springframework:spring-aop:2.5.6"
+          ]
+        }
+      ]
+    },
+    {
+      "general": {
+        "name": "multi2-3.7-20210317.083746-1.jar",
+        "component_id": "multi2-3.7-20210317.151616-4.jar",
+        "pkg_type": "generic",
+        "sha256": "ab05ce26e62fea98fa948d1cbb4ce0085e92c9510e49df868c89c8e37e2802c1",
+        "sha1": "fa9ec7375c5571294f85ea9a07a0397daa7ca103",
+        "parent_sha256": [
+          "3f8feda52f9d939bc8d6b6c89ae06a04c80d8a373d6fe4385cb6b544117d93fe"
+        ]
+      },
+      "issues": [],
+      "licenses": [
+        {
+          "name": "Unknown",
+          "full_name": "Unknown license",
+          "components": [
+            "generic://sha256:ab05ce26e62fea98fa948d1cbb4ce0085e92c9510e49df868c89c8e37e2802c1/multi2-3.7-20210317.151616-4.jar"
+          ]
+        }
+      ]
+    },
+    {
+      "general": {
+        "name": "multi3-3.7-20210317.150838-3.war",
+        "component_id": "multi3-3.7-20210317.150838-3.war",
+        "pkg_type": "generic",
+        "sha256": "df0183eee62f51ac6835c710c0755c3f99d3631ee5dcc471f3d5023119ea818c",
+        "sha1": "34a6d0187e97cc70b4eaf472dc53ec9def5dda23",
+        "parent_sha256": [
+          "3f8feda52f9d939bc8d6b6c89ae06a04c80d8a373d6fe4385cb6b544117d93fe"
+        ]
+      },
+      "issues": [],
+      "licenses": [
+        {
+          "name": "Unknown",
+          "full_name": "Unknown license",
+          "components": [
+            "generic://sha256:df0183eee62f51ac6835c710c0755c3f99d3631ee5dcc471f3d5023119ea818c/multi3-3.7-20210317.150838-3.war"
+          ]
+        }
+      ]
+    },
+    {
+      "general": {
+        "name": "multi3-3.7-20210317.150704-2.war",
+        "component_id": "multi3-3.7-20210317.150704-2.war",
+        "pkg_type": "generic",
+        "sha256": "d60201b1397c07a79eee6bc8c042a1bf361c8c9d371d23d70828a4afc9ed6a6c",
+        "sha1": "4445d91f751481f23bedd5263d8ac49f5bde8b3b",
+        "parent_sha256": [
+          "3f8feda52f9d939bc8d6b6c89ae06a04c80d8a373d6fe4385cb6b544117d93fe"
+        ]
+      },
+      "issues": [],
+      "licenses": [
+        {
+          "name": "Unknown",
+          "full_name": "Unknown license",
+          "components": [
+            "generic://sha256:d60201b1397c07a79eee6bc8c042a1bf361c8c9d371d23d70828a4afc9ed6a6c/multi3-3.7-20210317.150704-2.war"
+          ]
+        }
+      ]
+    },
+    {
+      "general": {
+        "name": "jsp-api-2.1.jar",
+        "component_id": "javax.servlet.jsp:jsp-api:2.1",
+        "pkg_type": "maven",
+        "sha256": "545f4e7dc678ffb4cf8bd0fd40b4a4470a409a787c0ea7d0ad2f08d56112987b",
+        "sha1": "63f943103f250ef1f3a4d5e94d145a0f961f5316",
+        "parent_sha256": [
+          "df0183eee62f51ac6835c710c0755c3f99d3631ee5dcc471f3d5023119ea818c"
+        ]
+      },
+      "issues": [],
+      "licenses": [
+        {
+          "name": "Unknown",
+          "full_name": "Unknown license",
+          "components": [
+            "gav://javax.servlet.jsp:jsp-api:2.1"
+          ]
+        }
+      ]
+    },
+    {
+      "general": {
+        "name": "multi1-3.7-20210317.083746-1-tests.jar",
+        "component_id": "multi1-3.7-20210317.151616-4-tests.jar",
+        "pkg_type": "generic",
+        "sha256": "be6ac3b10a44a9f1b339d2e5d699856790e1b14cedbb4b153ef010177b375490",
+        "sha1": "816cd72b97bbd8599209fdeacdb4df8d09a1987f",
+        "parent_sha256": [
+          "3f8feda52f9d939bc8d6b6c89ae06a04c80d8a373d6fe4385cb6b544117d93fe"
+        ]
+      },
+      "issues": [],
+      "licenses": [
+        {
+          "name": "Unknown",
+          "full_name": "Unknown license",
+          "components": [
+            "generic://sha256:be6ac3b10a44a9f1b339d2e5d699856790e1b14cedbb4b153ef010177b375490/multi1-3.7-20210317.151616-4-tests.jar"
+          ]
+        }
+      ]
+    },
+    {
+      "general": {
+        "name": "plexus-utils-1.5.1.jar",
+        "component_id": "org.codehaus.plexus:plexus-utils:1.5.1",
+        "pkg_type": "maven",
+        "sha256": "72582f8ba285601fa753ceeda73ff3cbd94c6e78f52ec611621eaa0186165452",
+        "sha1": "342d1eb41a2bc7b52fa2e54e9872463fc86e2650",
+        "parent_sha256": [
+          "df0183eee62f51ac6835c710c0755c3f99d3631ee5dcc471f3d5023119ea818c"
+        ]
+      },
+      "issues": [
+        {
+          "issue_id": "XRAY-81282",
+          "summary": "Apache Maven org.apache.maven.shared.utils.Expand Expand.java extractFile() Function Traversal Remote File Write",
+          "description": "Apache Maven contains a flaw in org.apache.maven.shared.utils.Expand that allows traversing outside of a restricted path. The issue is due to the extractFile() function in Expand.java not properly sanitizing user input, specifically path traversal style attacks (e.g. '../'). With a specially crafted request, a remote attacker can write arbitrary files.",
+          "issue_type": "security",
+          "severity": "Medium",
+          "provider": "JFrog",
+          "cves": [
+            {
+              "cvss_v2": "5.0/CVSS:2.0/AV:N/AC:L/Au:N/C:N/I:P/A:N"
+            }
+          ],
+          "created": "2019-05-02T00:00:00.455Z",
+          "components": [
+            {
+              "component_id": "org.codehaus.plexus:plexus-utils",
+              "fixed_versions": [
+                "[3.0.24]"
+              ]
+            }
+          ]
+        },
+        {
+          "issue_id": "XRAY-83897",
+          "summary": "Plexus-utils before 3.0.16 is vulnerable to command injection because it does not correctly process the contents of double quoted strings.",
+          "description": "Plexus-utils before 3.0.16 is vulnerable to command injection because it does not correctly process the contents of double quoted strings.",
+          "issue_type": "security",
+          "severity": "High",
+          "provider": "JFrog",
+          "cves": [
+            {
+              "cve": "CVE-2017-1000487",
+              "cvss_v2": "7.5/CVSS:2.0/AV:N/AC:L/Au:N/C:P/I:P/A:P"
+            }
+          ],
+          "created": "2019-06-10T00:00:00.044Z",
+          "components": [
+            {
+              "component_id": "org.codehaus.plexus:plexus-utils",
+              "fixed_versions": [
+                "[3.0.16]"
+              ]
+            }
+          ]
+        }
+      ],
+      "licenses": [
+        {
+          "name": "Apache-2.0",
+          "full_name": "The Apache Software License, Version 2.0",
+          "more_info_url": [
+            "http://www.opensource.org/licenses/Apache-2.0",
+            "http://www.opensource.org/licenses/apache2.0.php",
+            "https://spdx.org/licenses/Apache-2.0",
+            "https://spdx.org/licenses/Apache-2.0.html",
+            "http://www.apache.org/licenses/LICENSE-2.0",
+            "https://licenses.nuget.org/Apache-2.0",
+            "http://licenses.nuget.org/Apache-2.0",
+            "https://raw.githubusercontent.com/aspnet/AspNetCore/2.0.0/LICENSE.txt",
+            "http://raw.githubusercontent.com/aspnet/AspNetCore/2.0.0/LICENSE.txt"
+          ],
+          "components": [
+            "gav://org.codehaus.plexus:plexus-utils:1.5.1"
+          ]
+        }
+      ]
+    },
+    {
+      "general": {
+        "name": "multi1-3.7-SNAPSHOT.jar",
+        "component_id": "multi1-3.7-SNAPSHOT.jar",
+        "pkg_type": "generic",
+        "sha256": "8bdc5837f1f6dbb969c9d10ae5c32eebf68198bb3c1f2f722bf5d3cbe9013284",
+        "sha1": "1ed088c68c0ffb1f52623bda763d3a30cc3875f9",
+        "parent_sha256": [
+          "df0183eee62f51ac6835c710c0755c3f99d3631ee5dcc471f3d5023119ea818c"
+        ]
+      },
+      "issues": [],
+      "licenses": [
+        {
+          "name": "Unknown",
+          "full_name": "Unknown license",
+          "components": [
+            "generic://sha256:8bdc5837f1f6dbb969c9d10ae5c32eebf68198bb3c1f2f722bf5d3cbe9013284/multi1-3.7-SNAPSHOT.jar"
+          ]
+        }
+      ]
+    },
+    {
+      "general": {
+        "name": "javax.servlet:servlet-api:2.5.jar",
+        "component_id": "javax.servlet:servlet-api:2.5.jar",
+        "pkg_type": "generic",
+        "sha256": "0000000000000000000000005959582d97d8b61f4d154ca9e495aafd16726e34",
+        "sha1": "5959582d97d8b61f4d154ca9e495aafd16726e34",
+        "parent_sha256": [
+          "3f8feda52f9d939bc8d6b6c89ae06a04c80d8a373d6fe4385cb6b544117d93fe"
+        ]
+      },
+      "issues": [],
+      "licenses": [
+        {
+          "name": "Unknown",
+          "full_name": "Unknown license",
+          "components": [
+            "generic://sha256:0000000000000000000000005959582d97d8b61f4d154ca9e495aafd16726e34/javax.servlet:servlet-api:2.5.jar"
+          ]
+        }
+      ]
+    },
+    {
+      "general": {
+        "name": "hsqldb-1.8.0.10.jar",
+        "component_id": "org.hsqldb:hsqldb:1.8.0.10",
+        "pkg_type": "maven",
+        "sha256": "b04b3b3ac295d497c87230eeb4f888327a5a15b9c3c1567db202a51d83ac9e41",
+        "sha1": "7e9978fdb754bce5fcd5161133e7734ecb683036",
+        "parent_sha256": [
+          "df0183eee62f51ac6835c710c0755c3f99d3631ee5dcc471f3d5023119ea818c"
+        ]
+      },
+      "issues": [],
+      "licenses": [
+        {
+          "name": "HSQLDB",
+          "full_name": "HSQLDB License",
+          "more_info_url": [
+            "http://hsqldb.org/web/hsqlLicense.html"
+          ],
+          "components": [
+            "gav://org.hsqldb:hsqldb:1.8.0.10"
+          ]
+        }
+      ]
+    },
+    {
+      "general": {
+        "name": "commons-logging-1.1.1.jar",
+        "component_id": "commons-logging:commons-logging:1.1.1",
+        "pkg_type": "maven",
+        "sha256": "ce6f913cad1f0db3aad70186d65c5bc7ffcc9a99e3fe8e0b137312819f7c362f",
+        "sha1": "5043bfebc3db072ed80fbd362e7caf00e885d8ae",
+        "parent_sha256": [
+          "df0183eee62f51ac6835c710c0755c3f99d3631ee5dcc471f3d5023119ea818c"
+        ]
+      },
+      "issues": [],
+      "licenses": [
+        {
+          "name": "Apache-2.0",
+          "full_name": "The Apache Software License, Version 2.0",
+          "more_info_url": [
+            "http://www.opensource.org/licenses/Apache-2.0",
+            "http://www.opensource.org/licenses/apache2.0.php",
+            "https://spdx.org/licenses/Apache-2.0",
+            "https://spdx.org/licenses/Apache-2.0.html",
+            "http://www.apache.org/licenses/LICENSE-2.0",
+            "https://licenses.nuget.org/Apache-2.0",
+            "http://licenses.nuget.org/Apache-2.0",
+            "https://raw.githubusercontent.com/aspnet/AspNetCore/2.0.0/LICENSE.txt",
+            "http://raw.githubusercontent.com/aspnet/AspNetCore/2.0.0/LICENSE.txt"
+          ],
+          "components": [
+            "gav://commons-logging:commons-logging:1.1.1"
+          ]
+        }
+      ]
+    },
+    {
+      "general": {
+        "name": "spring-beans-2.5.6.jar",
+        "component_id": "org.springframework:spring-beans:2.5.6",
+        "pkg_type": "maven",
+        "sha256": "d33246bb33527685d04f23536ebf91b06ad7fa8b371fcbeb12f01523eb610104",
+        "sha1": "449ea46b27426eb846611a90b2fb8b4dcf271191",
+        "parent_sha256": [
+          "df0183eee62f51ac6835c710c0755c3f99d3631ee5dcc471f3d5023119ea818c"
+        ]
+      },
+      "issues": [
+        {
+          "issue_id": "XRAY-55883",
+          "summary": "SpringSource Spring Framework 2.5.x before 2.5.6.SEC02, 2.5.7 before 2.5.7.SR01, and 3.0.x before 3.0.3 allows remote attackers to execute arbitrary code via an HTTP request containing class.classLoader.URLs[0]=jar: followed by a URL of a crafted .jar file.",
+          "description": "SpringSource Spring Framework 2.5.x before 2.5.6.SEC02, 2.5.7 before 2.5.7.SR01, and 3.0.x before 3.0.3 allows remote attackers to execute arbitrary code via an HTTP request containing class.classLoader.URLs[0]=jar: followed by a URL of a crafted .jar file.",
+          "issue_type": "security",
+          "severity": "Medium",
+          "provider": "JFrog",
+          "cves": [
+            {
+              "cve": "CVE-2010-1622",
+              "cvss_v2": "6.0/CVSS:2.0/AV:N/AC:M/Au:S/C:P/I:P/A:P"
+            }
+          ],
+          "created": "2017-07-05T00:00:00.496Z",
+          "components": [
+            {
+              "component_id": "org.springframework:spring-beans",
+              "fixed_versions": [
+                "[2.5.6.SEC02]",
+                "[3.0.3.RELEASE]",
+                "[2.5.7.SR01]"
+              ]
+            }
+          ]
+        }
+      ],
+      "licenses": [
+        {
+          "name": "Apache-2.0",
+          "full_name": "The Apache Software License, Version 2.0",
+          "more_info_url": [
+            "http://www.opensource.org/licenses/Apache-2.0",
+            "http://www.opensource.org/licenses/apache2.0.php",
+            "https://spdx.org/licenses/Apache-2.0",
+            "https://spdx.org/licenses/Apache-2.0.html",
+            "http://www.apache.org/licenses/LICENSE-2.0",
+            "https://licenses.nuget.org/Apache-2.0",
+            "http://licenses.nuget.org/Apache-2.0",
+            "https://raw.githubusercontent.com/aspnet/AspNetCore/2.0.0/LICENSE.txt",
+            "http://raw.githubusercontent.com/aspnet/AspNetCore/2.0.0/LICENSE.txt"
+          ],
+          "components": [
+            "gav://org.springframework:spring-beans:2.5.6"
+          ]
+        }
+      ]
+    },
+    {
+      "general": {
+        "name": "commons-io-1.4.jar",
+        "component_id": "commons-io:commons-io:1.4",
+        "pkg_type": "maven",
+        "sha256": "a7f713593007813bf07d19bd1df9f81c86c0719e9a0bb2ef1b98b78313fc940d",
+        "sha1": "a8762d07e76cfde2395257a5da47ba7c1dbd3dce",
+        "parent_sha256": [
+          "df0183eee62f51ac6835c710c0755c3f99d3631ee5dcc471f3d5023119ea818c"
+        ]
+      },
+      "issues": [
+        {
+          "issue_id": "XRAY-87193",
+          "summary": "Apache Commons IO io/FileUtils.java Unsafe Directory Creation Weakness",
+          "description": "Apache Commons IO contains a flaw in io/FileUtils.java that is due to the program creating directories in an unsafe manner in the window that exists between exists() and mkdirs() invocations. This may allow a remote attacker to potentially write data into an untrusted location.",
+          "issue_type": "security",
+          "severity": "Low",
+          "provider": "JFrog",
+          "cves": [
+            {
+              "cvss_v2": "2.6/CVSS:2.0/AV:N/AC:H/Au:N/C:N/I:P/A:N"
+            }
+          ],
+          "created": "2019-08-27T00:00:00.088Z",
+          "components": [
+            {
+              "component_id": "commons-io:commons-io",
+              "fixed_versions": [
+                "[2.1-RC1]"
+              ]
+            }
+          ]
+        }
+      ],
+      "licenses": [
+        {
+          "name": "Apache-2.0",
+          "full_name": "The Apache Software License, Version 2.0",
+          "more_info_url": [
+            "http://www.opensource.org/licenses/Apache-2.0",
+            "http://www.opensource.org/licenses/apache2.0.php",
+            "https://spdx.org/licenses/Apache-2.0",
+            "https://spdx.org/licenses/Apache-2.0.html",
+            "http://www.apache.org/licenses/LICENSE-2.0",
+            "https://licenses.nuget.org/Apache-2.0",
+            "http://licenses.nuget.org/Apache-2.0",
+            "https://raw.githubusercontent.com/aspnet/AspNetCore/2.0.0/LICENSE.txt",
+            "http://raw.githubusercontent.com/aspnet/AspNetCore/2.0.0/LICENSE.txt"
+          ],
+          "components": [
+            "gav://commons-io:commons-io:1.4"
+          ]
+        }
+      ]
+    },
+    {
+      "general": {
+        "name": "commons-email-1.1.jar",
+        "component_id": "org.apache.commons:commons-email:1.1",
+        "pkg_type": "maven",
+        "sha256": "78da962833d83a9df219d07b6c8c60115a0146a7314f8e44df3efdcf15792eaa",
+        "sha1": "a05c4de7bf2e0579ac0f21e16f3737ec6fa0ff98",
+        "parent_sha256": [
+          "df0183eee62f51ac6835c710c0755c3f99d3631ee5dcc471f3d5023119ea818c"
+        ]
+      },
+      "issues": [
+        {
+          "issue_id": "XRAY-57796",
+          "summary": "When a call-site passes a subject for an email that contains line-breaks in Apache Commons Email 1.0 through 1.4, the caller can add arbitrary SMTP headers.",
+          "description": "When a call-site passes a subject for an email that contains line-breaks in Apache Commons Email 1.0 through 1.4, the caller can add arbitrary SMTP headers.",
+          "issue_type": "security",
+          "severity": "Medium",
+          "provider": "JFrog",
+          "cves": [
+            {
+              "cve": "CVE-2017-9801",
+              "cvss_v2": "5.0/CVSS:2.0/AV:N/AC:L/Au:N/C:N/I:P/A:N"
+            }
+          ],
+          "created": "2017-08-17T00:00:00.155Z",
+          "components": [
+            {
+              "component_id": "org.apache.commons:commons-email",
+              "fixed_versions": [
+                "[1.5]"
+              ]
+            }
+          ]
+        },
+        {
+          "issue_id": "XRAY-60829",
+          "summary": "If a user of Apache Commons Email (typically an application programmer) passes unvalidated input as the so-called \"Bounce Address\", and that input contains line-breaks, then the email details (recipients, contents, etc.) might be manipulated. Mitigation: Users should upgrade to Commons-Email 1.5. You can mitigate this vulnerability for older versions of Commons Email by stripping line-breaks from data, that will be passed to Email.setBounceAddress(String).",
+          "description": "If a user of Apache Commons Email (typically an application programmer) passes unvalidated input as the so-called \"Bounce Address\", and that input contains line-breaks, then the email details (recipients, contents, etc.) might be manipulated. Mitigation: Users should upgrade to Commons-Email 1.5. You can mitigate this vulnerability for older versions of Commons Email by stripping line-breaks from data, that will be passed to Email.setBounceAddress(String).",
+          "issue_type": "security",
+          "severity": "Medium",
+          "provider": "JFrog",
+          "cves": [
+            {
+              "cve": "CVE-2018-1294",
+              "cvss_v2": "5.0/CVSS:2.0/AV:N/AC:L/Au:N/C:N/I:P/A:N"
+            }
+          ],
+          "created": "2018-01-30T00:00:00.791Z",
+          "components": [
+            {
+              "component_id": "org.apache.commons:commons-email",
+              "fixed_versions": [
+                "[1.5]"
+              ]
+            }
+          ]
+        }
+      ],
+      "licenses": [
+        {
+          "name": "Apache-2.0",
+          "full_name": "The Apache Software License, Version 2.0",
+          "more_info_url": [
+            "http://www.opensource.org/licenses/Apache-2.0",
+            "http://www.opensource.org/licenses/apache2.0.php",
+            "https://spdx.org/licenses/Apache-2.0",
+            "https://spdx.org/licenses/Apache-2.0.html",
+            "http://www.apache.org/licenses/LICENSE-2.0",
+            "https://licenses.nuget.org/Apache-2.0",
+            "http://licenses.nuget.org/Apache-2.0",
+            "https://raw.githubusercontent.com/aspnet/AspNetCore/2.0.0/LICENSE.txt",
+            "http://raw.githubusercontent.com/aspnet/AspNetCore/2.0.0/LICENSE.txt"
+          ],
+          "components": [
+            "gav://org.apache.commons:commons-email:1.1"
+          ]
+        }
+      ]
+    },
+    {
+      "general": {
+        "name": "spring-core-2.5.6.jar",
+        "component_id": "org.springframework:spring-core:2.5.6",
+        "pkg_type": "maven",
+        "sha256": "cf37656069488043c47f49a5520bb06d6879b63ef6044abb200c51a7ff2d6c49",
+        "sha1": "c450bc49099430e13d21548d1e3d1a564b7e35e9",
+        "parent_sha256": [
+          "df0183eee62f51ac6835c710c0755c3f99d3631ee5dcc471f3d5023119ea818c"
+        ]
+      },
+      "issues": [
+        {
+          "issue_id": "XRAY-73799",
+          "summary": "Algorithmic complexity vulnerability in the java.util.regex.Pattern.compile method in Sun Java Development Kit (JDK) before 1.6, when used with spring.jar in SpringSource Spring Framework 1.1.0 through 2.5.6 and 3.0.0.M1 through 3.0.0.M2 and dm Server 1.0.0 through 1.0.2, allows remote attackers to cause a denial of service (CPU consumption) via serializable data with a long regex string containing multiple optional groups, a related issue to CVE-2004-2540.",
+          "description": "Algorithmic complexity vulnerability in the java.util.regex.Pattern.compile method in Sun Java Development Kit (JDK) before 1.6, when used with spring.jar in SpringSource Spring Framework 1.1.0 through 2.5.6 and 3.0.0.M1 through 3.0.0.M2 and dm Server 1.0.0 through 1.0.2, allows remote attackers to cause a denial of service (CPU consumption) via serializable data with a long regex string containing multiple optional groups, a related issue to CVE-2004-2540.",
+          "issue_type": "security",
+          "severity": "Medium",
+          "provider": "JFrog",
+          "cves": [
+            {
+              "cve": "CVE-2009-1190",
+              "cvss_v2": "5.0/CVSS:2.0/AV:N/AC:L/Au:N/C:N/I:N/A:P"
+            }
+          ],
+          "created": "2018-11-22T00:00:00.353Z",
+          "components": [
+            {
+              "component_id": "org.springframework:spring-core",
+              "fixed_versions": [
+                "[2.5.6.SEC01]",
+                "[3.0.0.M3]"
+              ]
+            }
+          ]
+        },
+        {
+          "issue_id": "XRAY-69351",
+          "summary": "Spring Framework, versions 5.0 prior to 5.0.5 and versions 4.3 prior to 4.3.15 and older unsupported versions, provide client-side support for multipart requests. When Spring MVC or Spring WebFlux server application (server A) receives input from a remote client, and then uses that input to make a multipart request to another server (server B), it can be exposed to an attack, where an extra multipart is inserted in the content of the request from server A, causing server B to use the wrong value for a part it expects. This could to lead privilege escalation, for example, if the part content represents a username or user roles.",
+          "description": "Spring Framework, versions 5.0 prior to 5.0.5 and versions 4.3 prior to 4.3.15 and older unsupported versions, provide client-side support for multipart requests. When Spring MVC or Spring WebFlux server application (server A) receives input from a remote client, and then uses that input to make a multipart request to another server (server B), it can be exposed to an attack, where an extra multipart is inserted in the content of the request from server A, causing server B to use the wrong value for a part it expects. This could to lead privilege escalation, for example, if the part content represents a username or user roles.",
+          "issue_type": "security",
+          "severity": "Medium",
+          "provider": "JFrog",
+          "cves": [
+            {
+              "cve": "CVE-2018-1272",
+              "cvss_v2": "6.0/CVSS:2.0/AV:N/AC:M/Au:S/C:P/I:P/A:P"
+            }
+          ],
+          "created": "2018-07-12T00:00:00.700Z",
+          "components": [
+            {
+              "component_id": "org.springframework:spring-core",
+              "fixed_versions": [
+                "[4.3.15.RELEASE]",
+                "[5.0.5.RELEASE]"
+              ]
+            }
+          ]
+        },
+        {
+          "issue_id": "XRAY-55865",
+          "summary": "VMware SpringSource Spring Framework before 2.5.6.SEC03, 2.5.7.SR023, and 3.x before 3.0.6, when a container supports Expression Language (EL), evaluates EL expressions in tags twice, which allows remote attackers to obtain sensitive information via a (1) name attribute in a (a) spring:hasBindErrors tag; (2) path attribute in a (b) spring:bind or (c) spring:nestedpath tag; (3) arguments, (4) code, (5) text, (6) var, (7) scope, or (8) message attribute in a (d) spring:message or (e) spring:theme tag; or (9) var, (10) scope, or (11) value attribute in a (f) spring:transform tag, aka \"Expression Language Injection.\"",
+          "description": "VMware SpringSource Spring Framework before 2.5.6.SEC03, 2.5.7.SR023, and 3.x before 3.0.6, when a container supports Expression Language (EL), evaluates EL expressions in tags twice, which allows remote attackers to obtain sensitive information via a (1) name attribute in a (a) spring:hasBindErrors tag; (2) path attribute in a (b) spring:bind or (c) spring:nestedpath tag; (3) arguments, (4) code, (5) text, (6) var, (7) scope, or (8) message attribute in a (d) spring:message or (e) spring:theme tag; or (9) var, (10) scope, or (11) value attribute in a (f) spring:transform tag, aka \"Expression Language Injection.\"",
+          "issue_type": "security",
+          "severity": "High",
+          "provider": "JFrog",
+          "cves": [
+            {
+              "cve": "CVE-2011-2730",
+              "cvss_v2": "7.5/CVSS:2.0/AV:N/AC:L/Au:N/C:P/I:P/A:P"
+            }
+          ],
+          "created": "2017-07-05T00:00:00.178Z",
+          "components": [
+            {
+              "component_id": "org.springframework:spring-core",
+              "fixed_versions": [
+                "[2.5.6.SEC03]",
+                "[3.0.6]"
+              ]
+            }
+          ]
+        }
+      ],
+      "licenses": [
+        {
+          "name": "Apache-2.0",
+          "full_name": "The Apache Software License, Version 2.0",
+          "more_info_url": [
+            "http://www.opensource.org/licenses/Apache-2.0",
+            "http://www.opensource.org/licenses/apache2.0.php",
+            "https://spdx.org/licenses/Apache-2.0",
+            "https://spdx.org/licenses/Apache-2.0.html",
+            "http://www.apache.org/licenses/LICENSE-2.0",
+            "https://licenses.nuget.org/Apache-2.0",
+            "http://licenses.nuget.org/Apache-2.0",
+            "https://raw.githubusercontent.com/aspnet/AspNetCore/2.0.0/LICENSE.txt",
+            "http://raw.githubusercontent.com/aspnet/AspNetCore/2.0.0/LICENSE.txt"
+          ],
+          "components": [
+            "gav://org.springframework:spring-core:2.5.6"
+          ]
+        }
+      ]
+    }
+  ]
+}
