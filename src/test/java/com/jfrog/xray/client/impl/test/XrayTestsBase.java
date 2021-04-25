@@ -107,5 +107,8 @@ public class XrayTestsBase {
         xray.close();
         xrayProxies.close();
         mockServer.stop();
+        while (!mockServer.hasStopped()) {
+            System.out.println("Stopping mockServer...");
+        }
     }
 }
