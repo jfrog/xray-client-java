@@ -26,6 +26,11 @@ node('java') {
         return
     }
 
+    stage('Config git') {
+        sh("git config --global user.email \"eco-system@jfrog.com\"")
+        sh("git config --global user.name \"jfrog")
+    }
+
     stage('Commit and create version tag') {
         sh("git commit -am '[artifactory-release] Release version ${VERSION}'")
         sh("git tag '${VERSION}'")
