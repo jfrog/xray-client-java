@@ -28,7 +28,7 @@ node('java') {
 
     stage('Config git') {
         sh("git config --global user.email \"eco-system@jfrog.com\"")
-        sh("git config --global user.name \"jfrog")
+        sh("git config --global user.name \"jfrog\"")
     }
 
     stage('Commit and create version tag') {
