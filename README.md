@@ -22,3 +22,6 @@ gradle test
 
 # Code Contributions
 We welcome community contribution through pull requests.
+
+# Release Notes
+The release notes are available [here](RELEASE.md#release-notes).
