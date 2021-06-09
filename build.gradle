@@ -10,6 +10,7 @@ targetCompatibility = 1.8
 
 repositories {
     mavenLocal()
+    mavenCentral()
     maven {
         url "https://oss.jfrog.org/artifactory/libs-release"
     }
@@ -23,12 +24,16 @@ repositories {
 
 dependencies {
     implementation group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.11.2'
-    implementation group: 'org.jfrog.buildinfo', name: 'build-info-extractor', version: '2.25.0'
+    implementation group: 'org.jfrog.buildinfo', name: 'build-info-extractor', version: '2.26.4'
     implementation group: 'com.fasterxml.jackson.core', name: 'jackson-core', version: '2.11.2'
+    implementation group: 'org.jfrog.buildinfo', name: 'build-info-client', version: '2.26.4'
+    implementation group: 'org.apache.httpcomponents', name: 'httpclient', version: '4.5.13'
+    implementation group: 'org.jfrog.buildinfo', name: 'build-info-api', version: '2.26.4'
     implementation group: 'org.apache.commons', name: 'commons-lang3', version: '3.11'
-    implementation group: 'commons-io', name: 'commons-io', version: '2.7'
-    testImplementation group: 'org.testng', name: 'testng', version: '7.3.0'
+    implementation group: 'commons-io', name: 'commons-io', version: '2.9.0'
+
     testImplementation group: 'org.mock-server', name: 'mockserver-netty', version: '5.11.2'
+    testImplementation group: 'org.testng', name: 'testng', version: '7.4.0'
 }
 
 //noinspection GroovyAssignabilityCheck

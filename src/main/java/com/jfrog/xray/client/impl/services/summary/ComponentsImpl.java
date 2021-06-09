@@ -2,10 +2,10 @@ package com.jfrog.xray.client.impl.services.summary;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.google.common.collect.Sets;
 import com.jfrog.xray.client.services.summary.ComponentDetail;
 import com.jfrog.xray.client.services.summary.Components;
 
+import java.util.HashSet;
 import java.util.Set;
 
 
@@ -19,7 +19,7 @@ public class ComponentsImpl implements Components {
     private Set<ComponentDetail> componentDetails;
 
     public ComponentsImpl() {
-        componentDetails = Sets.newHashSet();
+        componentDetails = new HashSet<>();
     }
 
     public ComponentsImpl(Set<ComponentDetail> componentDetails) {

@@ -3,7 +3,7 @@ package com.jfrog.xray.client.impl.services.summary;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.jfrog.xray.client.services.summary.ComponentDetail;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 
 import java.util.Objects;
 

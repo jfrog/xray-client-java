@@ -2,7 +2,7 @@ package com.jfrog.xray.client.impl.test;
 
 import com.jfrog.xray.client.Xray;
 import com.jfrog.xray.client.services.system.Version;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.ArrayUtils;
 import org.mockserver.mock.Expectation;
 import org.mockserver.model.HttpRequest;

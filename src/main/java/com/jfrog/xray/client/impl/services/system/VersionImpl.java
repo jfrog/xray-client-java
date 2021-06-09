@@ -2,7 +2,7 @@ package com.jfrog.xray.client.impl.services.system;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.jfrog.xray.client.services.system.Version;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 
 /**
  * Created by romang on 2/2/17.

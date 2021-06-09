@@ -6,7 +6,7 @@ import com.jfrog.xray.client.services.summary.Artifact;
 import com.jfrog.xray.client.services.summary.Components;
 import com.jfrog.xray.client.services.summary.Error;
 import com.jfrog.xray.client.services.summary.SummaryResponse;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.ArrayUtils;
 import org.mockserver.mock.Expectation;
 import org.mockserver.model.HttpRequest;
