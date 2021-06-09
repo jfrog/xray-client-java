@@ -1,5 +1,8 @@
 # Release Notes
 
+## 0.7.1 (June 09, 2021)
+- Upgrade dependencies
+
 ## 0.7.0 (April 27, 2021)
 
 - Add details/build API
