@@ -1,7 +1,13 @@
 package com.jfrog.xray.client.impl.services.graph;
 
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.ObjectWriter;
+import com.fasterxml.jackson.databind.ser.FilterProvider;
+import com.fasterxml.jackson.databind.ser.PropertyWriter;
+import com.fasterxml.jackson.databind.ser.impl.SimpleBeanPropertyFilter;
+import com.fasterxml.jackson.databind.ser.impl.SimpleFilterProvider;
 import com.jfrog.xray.client.impl.XrayClient;
 import com.jfrog.xray.client.impl.util.ObjectMapperHelper;
 import com.jfrog.xray.client.services.graph.Graph;
@@ -27,6 +33,10 @@ public class GraphImpl implements Graph {
 
     public GraphImpl(XrayClient xray) {
         this.xray = xray;
+        mapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
+        FilterProvider filters = new SimpleFilterProvider().setFailOnUnknownId(false)
+                .addFilter("xray-graph-filter", SimpleBeanPropertyFilter.filterOutAllExcept("component_id", "nodes"));
+        mapper.setFilterProvider(filters);
     }
 
     @Override
@@ -51,19 +61,21 @@ public class GraphImpl implements Graph {
     private GraphResponse post(String params, Object body) throws IOException, InterruptedException {
         HttpEntity entity = null;
         // First, request a scan from Xray.
-        try (CloseableHttpResponse response = xray.post("scan/graph" + params, body)) {
+        try (CloseableHttpResponse response = xray.post("scan/graph" + params, body, mapper)) {
             entity = response.getEntity();
-            GraphResponse requestResponse = mapper.readValue(response.getEntity().getContent(), GraphResponse.class);
+            GraphResponse requestResponse = mapper.readValue(response.getEntity().getContent(), GraphResponseImpl.class);
             String scanId = requestResponse.getScanId();
+            // If no context was provided (project name), we would like to receive all known vulnerabilities.
+            String includeVulnerabilities = params.isEmpty() ? "" : "&include_vulnerabilities=true";
             // Xray will respond with 201 until the completion of the scan, then 200 will be returned.
             for (int i = 0; i < MAX_ATTEMPTS; i++) {
-                try (CloseableHttpResponse res = xray.get("scan/graph/" + scanId + "?include_licenses=true")) {
-                    StatusLine statusLine = response.getStatusLine();
+                try (CloseableHttpResponse res = xray.get("scan/graph/" + scanId + "?include_licenses=true" + includeVulnerabilities)) {
+                    StatusLine statusLine = res.getStatusLine();
                     int statusCode = statusLine.getStatusCode();
                     if (statusCode == HttpStatus.SC_OK) {
                         // We got an answer (scan completed), return it.
-                        entity = response.getEntity();
-                        return mapper.readValue(response.getEntity().getContent(), GraphResponse.class);
+                        entity = res.getEntity();
+                        return mapper.readValue(res.getEntity().getContent(), GraphResponseImpl.class);
                     }
                 } finally {
                     EntityUtils.consumeQuietly(entity);

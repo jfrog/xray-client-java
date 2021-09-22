@@ -73,7 +73,9 @@ public class XrayClient extends PreemptiveHttpClient implements Xray {
     }
 
     @Override
-    public Graph graph() { return new GraphImpl(this); }
+    public Graph graph() {
+        return new GraphImpl(this);
+    }
 
     public CloseableHttpResponse get(String uri) throws IOException {
         HttpGet getRequest = new HttpGet(createUrl(uri));
@@ -89,6 +91,10 @@ public class XrayClient extends PreemptiveHttpClient implements Xray {
     }
 
     public CloseableHttpResponse post(String uri, Object payload) throws IOException {
+        return post(uri, payload, this.mapper);
+    }
+
+    public CloseableHttpResponse post(String uri, Object payload, ObjectMapper mapper) throws IOException {
         HttpPost postRequest = new HttpPost(createUrl(uri));
         byte[] body = mapper.writeValueAsBytes(payload);
         log.debug("POST " + postRequest.getURI() + "\n" + new String(body, StandardCharsets.UTF_8));
