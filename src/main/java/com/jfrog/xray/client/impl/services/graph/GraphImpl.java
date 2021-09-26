@@ -66,7 +66,7 @@ public class GraphImpl implements Graph {
             GraphResponse requestResponse = mapper.readValue(response.getEntity().getContent(), GraphResponseImpl.class);
             String scanId = requestResponse.getScanId();
             // If no context was provided (project name), we would like to receive all known vulnerabilities.
-            String includeVulnerabilities = params.isEmpty() ? "" : "&include_vulnerabilities=true";
+            String includeVulnerabilities = !params.isEmpty() ? "" : "&include_vulnerabilities=true";
             // Xray will respond with 201 until the completion of the scan, then 200 will be returned.
             for (int i = 0; i < MAX_ATTEMPTS; i++) {
                 try (CloseableHttpResponse res = xray.get("scan/graph/" + scanId + "?include_licenses=true" + includeVulnerabilities)) {

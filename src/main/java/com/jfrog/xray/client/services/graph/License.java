@@ -6,17 +6,11 @@ import java.util.List;
 import java.util.Map;
 
 public interface License {
-    @JsonProperty("key")
+    @JsonProperty("license_key")
     String getKey();
 
-    @JsonProperty("name")
+    @JsonProperty("license_name")
     String getName();
-
-    @JsonProperty("custom")
-    boolean getCustom();
-
-    @JsonProperty("references")
-    List<String> getReferences();
 
     @JsonProperty("components")
     Map<String, ? extends Component> getComponents();

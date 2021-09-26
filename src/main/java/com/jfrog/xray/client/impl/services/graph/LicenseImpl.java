@@ -18,27 +18,23 @@ public class LicenseImpl implements License {
     private List<String> references= null;
 
     @Override
-    @JsonProperty("name")
+    @JsonProperty("license_name")
     public String getName() {
         return name;
     }
 
     @Override
-    @JsonProperty("key")
+    @JsonProperty("license_key")
     public String getKey() { return key; }
-
-    @Override
-    @JsonProperty("custom")
-    public boolean getCustom() { return custom; }
-
-    @Override
-    @JsonProperty("references")
-    public List<String> getReferences() { return references; }
 
     @Override
     @JsonProperty("components")
     public Map<String, ? extends Component> getComponents() {
         return components;
+    }
+    @JsonProperty("components")
+    public void setComponents(Map<String, ComponentImpl> components) {
+        this.components = components;
     }
 
 }

@@ -45,4 +45,9 @@ public class GraphResponseImpl implements GraphResponse {
     public List<? extends License> getLicenses() {
         return licenses;
     }
+
+    @JsonProperty("licenses")
+    public void setLicenses(List<LicenseImpl> licenses) {
+        this.licenses = licenses;
+    }
 }
