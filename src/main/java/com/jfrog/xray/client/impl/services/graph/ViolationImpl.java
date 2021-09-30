@@ -18,9 +18,9 @@ public class ViolationImpl implements Violation {
     private String licenseName;
     private String ignoreUrl;
     private boolean failBuild;
-    private Map<String, ComponentImpl> components = null;
-    private List<CveImpl> cves = null;
-    private List<String> references = null;
+    private Map<String, ComponentImpl> components;
+    private List<CveImpl> cves;
+    private List<String> references;
 
     @Override
     @JsonProperty("cves")

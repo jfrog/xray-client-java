@@ -2,7 +2,6 @@ package com.jfrog.xray.client.services.graph;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import java.util.List;
 import java.util.Map;
 
 public interface License {

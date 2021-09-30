@@ -13,9 +13,7 @@ public class LicenseImpl implements License {
 
     private String name;
     private String key;
-    private boolean custom;
     private Map<String, ComponentImpl> components = null;
-    private List<String> references= null;
 
     @Override
     @JsonProperty("license_name")
