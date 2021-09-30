@@ -12,6 +12,6 @@ import java.util.List;
  */
 public interface Graph extends Serializable {
 
-    GraphResponse graph(DependencyTree dependencies, String projectName) throws IOException, InterruptedException;
+    GraphResponse graph(DependencyTree dependencies, String projectKey) throws IOException, InterruptedException;
     GraphResponse graph(DependencyTree dependencies) throws IOException, InterruptedException;
 }

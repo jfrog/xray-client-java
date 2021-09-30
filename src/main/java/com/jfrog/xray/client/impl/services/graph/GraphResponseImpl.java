@@ -15,7 +15,6 @@ public class GraphResponseImpl implements GraphResponse {
     private List<VulnerabilityImpl> vulnerabilities = null;
     private List<LicenseImpl> licenses = null;
 
-
     @Override
     @JsonProperty("scan_id")
     public String getScanId() {

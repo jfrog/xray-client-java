@@ -19,10 +19,8 @@ public class ViolationImpl implements Violation {
     private String ignoreUrl;
     private boolean failBuild;
     private Map<String, ComponentImpl> components = null;
-    private List<String> vulnerableComponents = null;
     private List<CveImpl> cves = null;
     private List<String> references = null;
-
 
     @Override
     @JsonProperty("cves")

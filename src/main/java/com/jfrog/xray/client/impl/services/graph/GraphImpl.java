@@ -40,14 +40,14 @@ public class GraphImpl implements Graph {
     }
 
     @Override
-    public GraphResponse graph(DependencyTree dependencies, String projectName) throws IOException, InterruptedException {
-        if (projectName == null || projectName.isEmpty()) {
+    public GraphResponse graph(DependencyTree dependencies, String projectKey) throws IOException, InterruptedException {
+        if (projectKey == null || projectKey.isEmpty()) {
             return graph(dependencies);
         }
         if (dependencies == null) {
             return new GraphResponseImpl();
         }
-        return this.post("?project=" + projectName, dependencies);
+        return this.post("?project=" + projectKey, dependencies);
     }
 
     @Override
@@ -67,7 +67,7 @@ public class GraphImpl implements Graph {
             String scanId = requestResponse.getScanId();
             // If no context was provided (project name), we would like to receive all known vulnerabilities.
             String includeVulnerabilities = !params.isEmpty() ? "" : "&include_vulnerabilities=true";
-            // Xray will respond with 201 until the completion of the scan, then 200 will be returned.
+            // Xray will respond with 201 until the completion of the scan. Once completed, 200 will be returned.
             for (int i = 0; i < MAX_ATTEMPTS; i++) {
                 try (CloseableHttpResponse res = xray.get("scan/graph/" + scanId + "?include_licenses=true" + includeVulnerabilities)) {
                     StatusLine statusLine = res.getStatusLine();
@@ -88,8 +88,5 @@ public class GraphImpl implements Graph {
         }
         // Will get here only in case of timeout, consider to throw exception here...
         return null;
-
     }
-
-
 }

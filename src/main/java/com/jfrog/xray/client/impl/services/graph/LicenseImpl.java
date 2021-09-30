@@ -32,9 +32,9 @@ public class LicenseImpl implements License {
     public Map<String, ? extends Component> getComponents() {
         return components;
     }
+
     @JsonProperty("components")
     public void setComponents(Map<String, ComponentImpl> components) {
         this.components = components;
     }
-
 }

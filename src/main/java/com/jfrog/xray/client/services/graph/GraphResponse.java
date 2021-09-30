@@ -11,6 +11,4 @@ public interface GraphResponse extends Serializable {
     List<? extends Violation> getViolations();
     List<? extends Vulnerability> getVulnerabilities();
     List<? extends License> getLicenses();
-
-
 }
