@@ -10,7 +10,7 @@ import java.util.List;
 
 public class GraphResponseImpl implements GraphResponse {
     private String scanId;
-    private String package_type;
+    private String packageType;
     private List<ViolationImpl> violations = null;
     private List<VulnerabilityImpl> vulnerabilities = null;
     private List<LicenseImpl> licenses = null;
@@ -24,7 +24,12 @@ public class GraphResponseImpl implements GraphResponse {
     @Override
     @JsonProperty("package_type")
     public String getPackageType() {
-        return package_type;
+        return packageType;
+    }
+
+    @JsonProperty("package_type")
+    public void setPackageType(String packageType) {
+        this.packageType = packageType;
     }
 
     @Override
