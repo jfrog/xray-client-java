@@ -67,26 +67,32 @@ public class GraphImpl implements Graph {
             String scanId = requestResponse.getScanId();
             // If no context was provided (project name), we would like to receive all known vulnerabilities.
             String includeVulnerabilities = !params.isEmpty() ? "" : "&include_vulnerabilities=true";
-            // Xray will respond with 201 until the completion of the scan. Once completed, 200 will be returned.
-            for (int i = 0; i < MAX_ATTEMPTS; i++) {
-                try (CloseableHttpResponse res = xray.get("scan/graph/" + scanId + "?include_licenses=true" + includeVulnerabilities)) {
-                    StatusLine statusLine = res.getStatusLine();
-                    int statusCode = statusLine.getStatusCode();
-                    if (statusCode == HttpStatus.SC_OK) {
-                        // We got an answer (scan completed), return it.
-                        entity = res.getEntity();
-                        return mapper.readValue(res.getEntity().getContent(), GraphResponseImpl.class);
-                    }
-                } finally {
-                    EntityUtils.consumeQuietly(entity);
-                }
-                // Wait between polling attempts.
-                Thread.sleep(SYNC_SLEEP_INTERVAL);
-            }
+            return getGraphScanResults(scanId, includeVulnerabilities);
+
         } finally {
             EntityUtils.consumeQuietly(entity);
         }
-        // Will get here only in case of timeout, consider to throw exception here...
-        return null;
+    }
+
+    private GraphResponse getGraphScanResults(String scanId, String includeVulnerabilities) throws IOException, InterruptedException {
+        HttpEntity entity = null;
+        // Xray will respond with 201 until the completion of the scan. Once completed, 200 will be returned.
+        for (int i = 0; i < MAX_ATTEMPTS; i++) {
+            try (CloseableHttpResponse res = xray.get("scan/graph/" + scanId + "?include_licenses=true" + includeVulnerabilities)) {
+                StatusLine statusLine = res.getStatusLine();
+                int statusCode = statusLine.getStatusCode();
+                if (statusCode == HttpStatus.SC_OK) {
+                    // We got an answer (scan completed), return it.
+                    entity = res.getEntity();
+                    return mapper.readValue(res.getEntity().getContent(), GraphResponseImpl.class);
+                }
+            } finally {
+                EntityUtils.consumeQuietly(entity);
+            }
+            // Wait between polling attempts.
+            Thread.sleep(SYNC_SLEEP_INTERVAL);
+        }
+        // Will get here only in case of timeout.
+        throw new IOException("Xray get graph scan exceeded the timeout.");
     }
 }
