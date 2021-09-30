@@ -23,7 +23,9 @@ public class LicenseImpl implements License {
 
     @Override
     @JsonProperty("license_key")
-    public String getKey() { return key; }
+    public String getKey() {
+        return key;
+    }
 
     @Override
     @JsonProperty("components")

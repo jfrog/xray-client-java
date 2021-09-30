@@ -12,21 +12,31 @@ public class CveImpl implements Cve {
 
     @Override
     @JsonProperty("cve")
-    public String getId() { return id;  }
+    public String getId() {
+        return id;
+    }
 
     @Override
     @JsonProperty("cvss_v2_score")
-    public String getCvssV2Score() { return cvssV2Score;  }
+    public String getCvssV2Score() {
+        return cvssV2Score;
+    }
 
     @Override
     @JsonProperty("cvss_v2_vector")
-    public String getCvssV2Vector() {  return cvssV2Vector; }
+    public String getCvssV2Vector() {
+        return cvssV2Vector;
+    }
 
     @Override
     @JsonProperty("cvss_v3_score")
-    public String getCvssV3Score() { return cvssV3Score; }
+    public String getCvssV3Score() {
+        return cvssV3Score;
+    }
 
     @Override
     @JsonProperty("cvss_v3_vector")
-    public String getCvssV3Vector() { return cvssV3Vector; }
+    public String getCvssV3Vector() {
+        return cvssV3Vector;
+    }
 }

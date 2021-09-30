@@ -7,6 +7,7 @@ public class ImpactPathImpl implements ImpactPath {
 
     private String id;
     private String fullPath;
+
     @Override
     @JsonProperty("component_id")
     public String getComponentId() {
