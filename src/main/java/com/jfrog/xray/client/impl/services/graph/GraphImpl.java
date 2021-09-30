@@ -20,7 +20,7 @@ import org.jfrog.build.extractor.scan.DependencyTree;
 import java.io.IOException;
 
 /**
- * Created by romang on 2/27/17.
+ * Created by tala on 9/30/21.
  */
 public class GraphImpl implements Graph {
 

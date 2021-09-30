@@ -11,9 +11,9 @@ import java.util.List;
 public class GraphResponseImpl implements GraphResponse {
     private String scanId;
     private String packageType;
-    private List<ViolationImpl> violations = null;
-    private List<VulnerabilityImpl> vulnerabilities = null;
-    private List<LicenseImpl> licenses = null;
+    private List<ViolationImpl> violations;
+    private List<VulnerabilityImpl> vulnerabilities;
+    private List<LicenseImpl> licenses;
 
     @Override
     @JsonProperty("scan_id")

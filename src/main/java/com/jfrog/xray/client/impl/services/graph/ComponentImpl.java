@@ -6,8 +6,8 @@ import com.jfrog.xray.client.services.graph.Component;
 import java.util.List;
 
 public class ComponentImpl implements Component {
-    private List<String> fixedVersions = null;
-    private List<List<ImpactPathImpl>> impactPaths = null;
+    private List<String> fixedVersions;
+    private List<List<ImpactPathImpl>> impactPaths;
 
     @Override
     @JsonProperty("fixed_versions")
