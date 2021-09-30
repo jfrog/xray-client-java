@@ -3,11 +3,13 @@ package com.jfrog.xray.client.impl;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.jfrog.xray.client.Xray;
 import com.jfrog.xray.client.impl.services.details.DetailsImpl;
+import com.jfrog.xray.client.impl.services.graph.GraphImpl;
 import com.jfrog.xray.client.impl.services.summary.SummaryImpl;
 import com.jfrog.xray.client.impl.services.system.SystemImpl;
 import com.jfrog.xray.client.impl.util.ObjectMapperHelper;
 import com.jfrog.xray.client.impl.util.URIUtil;
 import com.jfrog.xray.client.services.details.Details;
+import com.jfrog.xray.client.services.graph.Graph;
 import com.jfrog.xray.client.services.summary.Summary;
 import com.jfrog.xray.client.services.system.System;
 import org.apache.commons.io.IOUtils;
@@ -70,6 +72,11 @@ public class XrayClient extends PreemptiveHttpClient implements Xray {
         return new DetailsImpl(this);
     }
 
+    @Override
+    public Graph graph() {
+        return new GraphImpl(this);
+    }
+
     public CloseableHttpResponse get(String uri) throws IOException {
         HttpGet getRequest = new HttpGet(createUrl(uri));
         log.debug("GET " + getRequest.getURI());
@@ -84,6 +91,10 @@ public class XrayClient extends PreemptiveHttpClient implements Xray {
     }
 
     public CloseableHttpResponse post(String uri, Object payload) throws IOException {
+        return post(uri, payload, this.mapper);
+    }
+
+    public CloseableHttpResponse post(String uri, Object payload, ObjectMapper mapper) throws IOException {
         HttpPost postRequest = new HttpPost(createUrl(uri));
         byte[] body = mapper.writeValueAsBytes(payload);
         log.debug("POST " + postRequest.getURI() + "\n" + new String(body, StandardCharsets.UTF_8));
