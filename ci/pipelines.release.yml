@@ -18,7 +18,7 @@ pipelines:
         type: Bash
         configuration:
           inputResources:
-            - name: idePluginsJavaReleaseGit
+            - name: xrayJavaReleaseGit
           integrations:
             - name: releases_temp
             - name: github_generic
@@ -30,7 +30,7 @@ pipelines:
 
             # Set env
             - export CI=true
-            - export JFROG_CLI_BUILD_NAME=ide-plugins-common
+            - export JFROG_CLI_BUILD_NAME=xray-client-java
             - export JFROG_CLI_BUILD_NUMBER=$run_number
 
             # Configure git
