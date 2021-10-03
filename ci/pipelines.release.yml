@@ -1,13 +1,13 @@
 pipelines:
   - name: release_xray_java
-    configuration:
+configuration:
       runtime:
         type: image
         image:
           auto:
             language: java
             versions:
-              - "8.0.0"
+              - "11"
       environmentVariables:
         readOnly:
           NEXT_VERSION: 0.0.0
@@ -18,9 +18,9 @@ pipelines:
         type: Bash
         configuration:
           inputResources:
-            - name: xrayJavaReleaseGit
+            - name: idePluginsJavaReleaseGit
           integrations:
-            - name: ojo
+            - name: releases_temp
             - name: github_generic
         execution:
           onStart:
@@ -30,7 +30,7 @@ pipelines:
 
             # Set env
             - export CI=true
-            - export JFROG_CLI_BUILD_NAME=xray-client-java
+            - export JFROG_CLI_BUILD_NAME=ide-plugins-common
             - export JFROG_CLI_BUILD_NUMBER=$run_number
 
             # Configure git
@@ -46,10 +46,9 @@ pipelines:
             - curl -fL https://getcli.jfrog.io | sh && chmod +x jfrog
 
             # Configure JFrog CLI
-            - ./jfrog c add ojo --artifactory-url $int_ojo_rt_url --access-token=$int_ojo_rt_token
+            - ./jfrog c add releases --artifactory-url=https://releases.jfrog.io/artifactory --access-token=$int_releases_temp_token
             - ./jfrog rt gradlec --use-wrapper --deploy-ivy-desc=false --deploy-maven-desc=true
-              --server-id-resolve ojo --repo-resolve remote-repos
-              --server-id-deploy ojo --repo-deploy oss-release-local
+              --server-id-deploy releases --repo-deploy oss-release-local
 
             # Update version
             - sed -i "s/\(version=\).*\$/\1${NEXT_VERSION}/" gradle.properties
@@ -64,7 +63,7 @@ pipelines:
               JFROG_CLI_BUILD_NAME=$JFROG_CLI_BUILD_NAME
               JFROG_CLI_BUILD_NUMBER=$JFROG_CLI_BUILD_NUMBER
               ./jfrog rt gradle clean install artifactoryPublish -x test
-            - ./jfrog rt bp
+#             - ./jfrog rt bp
 
             # Update next development version
             - sed -i "s/\(version=\).*\$/\1${NEXT_DEVELOPMENT_VERSION}/" gradle.properties
