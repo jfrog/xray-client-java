@@ -1,6 +1,6 @@
 pipelines:
   - name: release_xray_java
-configuration:
+    configuration:
       runtime:
         type: image
         image:
