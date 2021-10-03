@@ -1,5 +1,8 @@
 # Release Notes
 
+## 0.8.0 (October 03, 2021)
+- Add support for graph scan API
+
 ## 0.7.1 (June 09, 2021)
 - Upgrade dependencies
 
