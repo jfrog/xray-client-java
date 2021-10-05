@@ -2,7 +2,6 @@ package com.jfrog.xray.client.impl.test;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.jfrog.xray.client.impl.services.graph.GraphResponseImpl;
-import com.jfrog.xray.client.impl.util.ObjectMapperHelper;
 import com.jfrog.xray.client.services.graph.GraphResponse;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -13,7 +12,7 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.Vector;
 
-import static com.jfrog.xray.client.impl.services.graph.GraphImpl.setXrayGraphFilterOnMapper;
+import static com.jfrog.xray.client.impl.services.graph.GraphImpl.createFilteredObjectMapper;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertFalse;
 
@@ -21,12 +20,12 @@ import static org.testng.Assert.assertFalse;
  * Created by Tal Arian on 30/09/21.
  */
 public class GraphTests extends XrayTestsBase {
+
     @Test
     public void testGraphScanWithoutContext() throws IOException, InterruptedException {
         GraphResponse response = xray.graph().graph(getDummyTree(), () -> {
         });
         assertFalse(StringUtils.isBlank(response.getScanId()));
-
     }
 
     private DependencyTree getDummyTree() {
@@ -40,8 +39,7 @@ public class GraphTests extends XrayTestsBase {
     @Test
     public void testGraphResponse() throws IOException {
         String responseStr = IOUtils.resourceToString("/scan/graph/response.json", StandardCharsets.UTF_8);
-        ObjectMapper mapper = ObjectMapperHelper.get();
-        setXrayGraphFilterOnMapper(mapper);
+        ObjectMapper mapper = createFilteredObjectMapper();
         GraphResponse response = mapper.readValue(responseStr, GraphResponseImpl.class);
 
         // Check general response details
