@@ -31,6 +31,10 @@ public class GraphImpl implements Graph {
 
     public GraphImpl(XrayClient xray) {
         this.xray = xray;
+        setXrayGraphFilterOnMapper(mapper);
+    }
+
+    public static void setXrayGraphFilterOnMapper(ObjectMapper mapper) {
         mapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
         FilterProvider filters = new SimpleFilterProvider().setFailOnUnknownId(false)
                 .addFilter("xray-graph-filter", SimpleBeanPropertyFilter.filterOutAllExcept("component_id", "nodes"));

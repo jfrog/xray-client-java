@@ -1,14 +1,11 @@
 package com.jfrog.xray.client.impl.test;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.ser.FilterProvider;
-import com.fasterxml.jackson.databind.ser.impl.SimpleBeanPropertyFilter;
-import com.fasterxml.jackson.databind.ser.impl.SimpleFilterProvider;
 import com.jfrog.xray.client.impl.services.graph.GraphResponseImpl;
 import com.jfrog.xray.client.impl.util.ObjectMapperHelper;
 import com.jfrog.xray.client.services.graph.GraphResponse;
 import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.jfrog.build.extractor.scan.DependencyTree;
 import org.testng.annotations.Test;
 
@@ -16,6 +13,7 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.Vector;
 
+import static com.jfrog.xray.client.impl.services.graph.GraphImpl.setXrayGraphFilterOnMapper;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertFalse;
 
@@ -23,12 +21,11 @@ import static org.testng.Assert.assertFalse;
  * Created by Tal Arian on 30/09/21.
  */
 public class GraphTests extends XrayTestsBase {
-    
     @Test
     public void testGraphScanWithoutContext() throws IOException, InterruptedException {
         GraphResponse response = xray.graph().graph(getDummyTree(), () -> {
         });
-        assertFalse(response.getScanId() == null || response.getScanId().isEmpty());
+        assertFalse(StringUtils.isBlank(response.getScanId()));
 
     }
 
@@ -43,7 +40,8 @@ public class GraphTests extends XrayTestsBase {
     @Test
     public void testGraphResponse() throws IOException {
         String responseStr = IOUtils.resourceToString("/scan/graph/response.json", StandardCharsets.UTF_8);
-        ObjectMapper mapper = createFilteredObjectMapper();
+        ObjectMapper mapper = ObjectMapperHelper.get();
+        setXrayGraphFilterOnMapper(mapper);
         GraphResponse response = mapper.readValue(responseStr, GraphResponseImpl.class);
 
         // Check general response details
@@ -54,14 +52,5 @@ public class GraphTests extends XrayTestsBase {
         assertEquals(response.getLicenses().size(), 4);
         // Check vulnerabilities exist
         assertEquals(response.getVulnerabilities().size(), 21);
-    }
-
-    private ObjectMapper createFilteredObjectMapper() {
-        ObjectMapper mapper = ObjectMapperHelper.get();
-        mapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
-        FilterProvider filters = new SimpleFilterProvider().setFailOnUnknownId(false)
-                .addFilter("xray-graph-filter", SimpleBeanPropertyFilter.filterOutAllExcept("component_id", "nodes"));
-        mapper.setFilterProvider(filters);
-        return mapper;
     }
 }
