@@ -24,17 +24,22 @@ import java.io.IOException;
  */
 public class GraphImpl implements Graph {
 
-    private static final ObjectMapper mapper = ObjectMapperHelper.get();
+    private static final ObjectMapper mapper = createFilteredObjectMapper();
     private static final int MAX_ATTEMPTS = 60;
     private static final int SYNC_SLEEP_INTERVAL = 5000;
     private final XrayClient xray;
 
     public GraphImpl(XrayClient xray) {
         this.xray = xray;
+    }
+
+    public static ObjectMapper createFilteredObjectMapper() {
+        ObjectMapper mapper = ObjectMapperHelper.get();
         mapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
         FilterProvider filters = new SimpleFilterProvider().setFailOnUnknownId(false)
                 .addFilter("xray-graph-filter", SimpleBeanPropertyFilter.filterOutAllExcept("component_id", "nodes"));
         mapper.setFilterProvider(filters);
+        return mapper;
     }
 
     @Override
