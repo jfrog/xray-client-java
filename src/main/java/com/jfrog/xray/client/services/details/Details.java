@@ -8,4 +8,5 @@ import java.io.Serializable;
  **/
 public interface Details extends Serializable {
     DetailsResponse build(String buildName, String buildNumber) throws IOException;
+    DetailsResponse build(String buildName, String buildNumber, String project) throws IOException;
 }

@@ -27,10 +27,18 @@ public class DetailsImpl implements Details {
 
     @Override
     public DetailsResponse build(String buildName, String buildNumber) throws IOException {
+        return build(buildName, buildNumber, "");
+    }
+
+    @Override
+    public DetailsResponse build(String buildName, String buildNumber, String project) throws IOException {
         if (StringUtils.isAnyBlank(buildName, buildNumber)) {
             return new DetailsResponseImpl();
         }
         String url = String.format("details/build?build_name=%s&build_number=%s", encode(buildName), encode(buildNumber));
+        if (StringUtils.isNotBlank(project)) {
+            url += "&project_key=" + encode(project);
+        }
         HttpEntity entity = null;
         try (CloseableHttpResponse response = xray.get(url)) {
             entity = response.getEntity();
