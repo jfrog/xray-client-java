@@ -1,6 +1,7 @@
 package com.jfrog.xray.client.services.graph;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.jfrog.xray.client.services.common.Cve;
 
 import java.util.List;
 import java.util.Map;

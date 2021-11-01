@@ -1,7 +1,7 @@
-package com.jfrog.xray.client.impl.services.graph;
+package com.jfrog.xray.client.impl.services.common;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.jfrog.xray.client.services.graph.Cve;
+import com.jfrog.xray.client.services.common.Cve;
 
 public class CveImpl implements Cve {
     private String id;

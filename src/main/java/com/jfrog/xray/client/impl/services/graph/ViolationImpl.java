@@ -1,8 +1,9 @@
 package com.jfrog.xray.client.impl.services.graph;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.jfrog.xray.client.impl.services.common.CveImpl;
 import com.jfrog.xray.client.services.graph.Component;
-import com.jfrog.xray.client.services.graph.Cve;
+import com.jfrog.xray.client.services.common.Cve;
 import com.jfrog.xray.client.services.graph.Violation;
 
 import java.util.List;
