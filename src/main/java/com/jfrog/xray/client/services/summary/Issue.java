@@ -1,5 +1,7 @@
 package com.jfrog.xray.client.services.summary;
 
+import com.jfrog.xray.client.services.common.Cve;
+
 import java.io.Serializable;
 import java.util.List;
 
@@ -23,4 +25,6 @@ public interface Issue extends Serializable {
     List<String> getImpactPath();
 
     List<? extends VulnerableComponents> getVulnerableComponents();
+
+    List<? extends Cve> getCves();
 }

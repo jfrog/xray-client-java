@@ -2,6 +2,7 @@ package com.jfrog.xray.client.impl.services.summary;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.jfrog.xray.client.impl.services.common.CveImpl;
 import com.jfrog.xray.client.services.summary.Issue;
 
 import java.util.List;
@@ -19,9 +20,10 @@ public class IssueImpl implements Issue {
     @JsonProperty("issue_type")
     private String issueType;
     @JsonProperty("impact_path")
-    private List<String> impactPath = null;
+    private List<String> impactPath;
     @JsonProperty("components")
-    private List<VulnerableComponentsImpl> vulnerableComponents = null;
+    private List<VulnerableComponentsImpl> vulnerableComponents;
+    private List<CveImpl> cves;
 
     @Override
     @JsonProperty("summary")
@@ -69,6 +71,11 @@ public class IssueImpl implements Issue {
     @JsonProperty("components")
     public List<VulnerableComponentsImpl> getVulnerableComponents() {
         return vulnerableComponents;
+    }
+
+    @Override
+    public List<CveImpl> getCves() {
+        return cves;
     }
 
     @Override

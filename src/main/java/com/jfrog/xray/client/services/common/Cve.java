@@ -1,4 +1,4 @@
-package com.jfrog.xray.client.services.graph;
+package com.jfrog.xray.client.services.common;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -13,5 +13,4 @@ public interface Cve {
     String getCvssV3Score();
     @JsonProperty("cvss_v3_vector")
     String getCvssV3Vector();
-
 }
