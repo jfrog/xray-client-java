@@ -1,5 +1,9 @@
 # Release Notes
 
+## 0.9.0 (November 03, 2021)
+- Add CVE to issue
+- Support providing build to details/build API
+
 ## 0.8.0 (October 03, 2021)
 - Add support for graph scan API
 
