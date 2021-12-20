@@ -4,26 +4,29 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.jfrog.xray.client.impl.services.common.CveImpl;
 import com.jfrog.xray.client.services.summary.Issue;
+import org.apache.commons.lang3.StringUtils;
 
 import java.util.List;
+import java.util.Objects;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class IssueImpl implements Issue {
 
     private static final long serialVersionUID = 1L;
 
+    @JsonProperty("issue_id")
+    private String issueId;
     private String summary;
-    private String description;
     private String severity;
-    private String provider;
-    private String created;
-    @JsonProperty("issue_type")
-    private String issueType;
-    @JsonProperty("impact_path")
-    private List<String> impactPath;
     @JsonProperty("components")
     private List<VulnerableComponentsImpl> vulnerableComponents;
     private List<CveImpl> cves;
+
+    @Override
+    @JsonProperty("issue_id")
+    public String getIssueId() {
+        return issueId;
+    }
 
     @Override
     @JsonProperty("summary")
@@ -32,39 +35,9 @@ public class IssueImpl implements Issue {
     }
 
     @Override
-    @JsonProperty("description")
-    public String getDescription() {
-        return description;
-    }
-
-    @Override
-    @JsonProperty("issue_type")
-    public String getIssueType() {
-        return issueType;
-    }
-
-    @Override
     @JsonProperty("severity")
     public String getSeverity() {
         return severity;
-    }
-
-    @Override
-    @JsonProperty("provider")
-    public String getProvider() {
-        return provider;
-    }
-
-    @Override
-    @JsonProperty("created")
-    public String getCreated() {
-        return created;
-    }
-
-    @Override
-    @JsonProperty("impact_path")
-    public List<String> getImpactPath() {
-        return impactPath;
     }
 
     @Override
@@ -80,14 +53,14 @@ public class IssueImpl implements Issue {
 
     @Override
     public boolean equals(Object obj) {
-        IssueImpl issue = (IssueImpl) obj;
-        return issue.summary.equals(summary) && issue.description.equals(description);
+        if (!(obj instanceof Issue)) {
+            return false;
+        }
+        return StringUtils.equals(((Issue) obj).getIssueId(), issueId);
     }
 
     @Override
     public int hashCode() {
-        int result = description.hashCode();
-        result = 31 * result + summary.hashCode();
-        return result;
+        return Objects.hash(issueId);
     }
 }

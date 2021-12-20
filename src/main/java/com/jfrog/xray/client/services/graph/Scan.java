@@ -9,7 +9,7 @@ import java.io.Serializable;
 /**
  * Created by tala on 05/09/21.
  */
-public interface Graph extends Serializable {
+public interface Scan extends Serializable {
 
     GraphResponse graph(DependencyTree dependencies, Runnable checkCanceled, String projectKey) throws IOException, InterruptedException;
 

@@ -1,4 +1,4 @@
-package com.jfrog.xray.client.impl.services.graph;
+package com.jfrog.xray.client.impl.services.scan;
 
 
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -8,7 +8,7 @@ import com.fasterxml.jackson.databind.ser.impl.SimpleBeanPropertyFilter;
 import com.fasterxml.jackson.databind.ser.impl.SimpleFilterProvider;
 import com.jfrog.xray.client.impl.XrayClient;
 import com.jfrog.xray.client.impl.util.ObjectMapperHelper;
-import com.jfrog.xray.client.services.graph.Graph;
+import com.jfrog.xray.client.services.graph.Scan;
 import com.jfrog.xray.client.services.graph.GraphResponse;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpStatus;
@@ -22,14 +22,14 @@ import java.io.IOException;
 /**
  * Created by tala on 9/30/21.
  */
-public class GraphImpl implements Graph {
+public class ScanImpl implements Scan {
 
     private static final ObjectMapper mapper = createFilteredObjectMapper();
     private static final int MAX_ATTEMPTS = 60;
     private static final int SYNC_SLEEP_INTERVAL = 5000;
     private final XrayClient xray;
 
-    public GraphImpl(XrayClient xray) {
+    public ScanImpl(XrayClient xray) {
         this.xray = xray;
     }
 
