@@ -10,19 +10,11 @@ import java.util.List;
  */
 public interface Issue extends Serializable {
 
+    String getIssueId();
+
     String getSummary();
 
-    String getDescription();
-
-    String getIssueType();
-
     String getSeverity();
-
-    String getProvider();
-
-    String getCreated();
-
-    List<String> getImpactPath();
 
     List<? extends VulnerableComponents> getVulnerableComponents();
 

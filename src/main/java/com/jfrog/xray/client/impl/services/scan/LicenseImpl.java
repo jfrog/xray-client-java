@@ -1,4 +1,4 @@
-package com.jfrog.xray.client.impl.services.graph;
+package com.jfrog.xray.client.impl.services.scan;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -11,20 +11,21 @@ import java.util.Map;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class LicenseImpl implements License {
 
-    private String name;
-    private String key;
-    private Map<String, ComponentImpl> components = null;
+    private String licenseName;
+    private String licenseKey;
+    private Map<String, ComponentImpl> components;
+    private List<String> references;
 
     @Override
     @JsonProperty("license_name")
-    public String getName() {
-        return name;
+    public String getLicenseName() {
+        return licenseName;
     }
 
     @Override
     @JsonProperty("license_key")
-    public String getKey() {
-        return key;
+    public String getLicenseKey() {
+        return licenseKey;
     }
 
     @Override
@@ -36,5 +37,11 @@ public class LicenseImpl implements License {
     @JsonProperty("components")
     public void setComponents(Map<String, ComponentImpl> components) {
         this.components = components;
+    }
+
+    @JsonProperty("references")
+    @Override
+    public List<String> getReferences() {
+        return references;
     }
 }

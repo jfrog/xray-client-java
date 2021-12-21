@@ -3,13 +3,13 @@ package com.jfrog.xray.client.impl;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.jfrog.xray.client.Xray;
 import com.jfrog.xray.client.impl.services.details.DetailsImpl;
-import com.jfrog.xray.client.impl.services.graph.GraphImpl;
+import com.jfrog.xray.client.impl.services.scan.ScanImpl;
 import com.jfrog.xray.client.impl.services.summary.SummaryImpl;
 import com.jfrog.xray.client.impl.services.system.SystemImpl;
 import com.jfrog.xray.client.impl.util.ObjectMapperHelper;
 import com.jfrog.xray.client.impl.util.URIUtil;
 import com.jfrog.xray.client.services.details.Details;
-import com.jfrog.xray.client.services.graph.Graph;
+import com.jfrog.xray.client.services.graph.Scan;
 import com.jfrog.xray.client.services.summary.Summary;
 import com.jfrog.xray.client.services.system.System;
 import org.apache.commons.io.IOUtils;
@@ -73,8 +73,8 @@ public class XrayClient extends PreemptiveHttpClient implements Xray {
     }
 
     @Override
-    public Graph graph() {
-        return new GraphImpl(this);
+    public Scan scan() {
+        return new ScanImpl(this);
     }
 
     public CloseableHttpResponse get(String uri) throws IOException {
@@ -91,7 +91,7 @@ public class XrayClient extends PreemptiveHttpClient implements Xray {
     }
 
     public CloseableHttpResponse post(String uri, Object payload) throws IOException {
-        return post(uri, payload, this.mapper);
+        return post(uri, payload, mapper);
     }
 
     public CloseableHttpResponse post(String uri, Object payload, ObjectMapper mapper) throws IOException {

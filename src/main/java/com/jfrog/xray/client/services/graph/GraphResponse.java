@@ -1,7 +1,5 @@
 package com.jfrog.xray.client.services.graph;
 
-import com.jfrog.xray.client.services.summary.Artifact;
-
 import java.io.Serializable;
 import java.util.List;
 
