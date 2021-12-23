@@ -1,0 +1,8 @@
+{
+  "files": [
+    {
+      "pattern": "ecosys-oss-release-local/(com/jfrog/xray/client/xray-client-java/${version}/xray-client-java-*)",
+      "target": "oss-release-local/{1}"
+    }
+  ]
+}

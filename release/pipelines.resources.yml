@@ -1,20 +1,20 @@
 resources:
-  - name: xrayJavaSnapshotGit
+  - name: xrayClientJavaSnapshotGit
     type: GitRepo
     configuration:
       path: jfrog/xray-client-java
-      gitProvider: github
+      gitProvider: il_automation
       buildOn:
         pullRequestCreate: true
       branches:
-        include: master
+        include: main
       cancelPendingRunsOn:
         pullRequestUpdate: true
 
-  - name: xrayJavaReleaseGit
+  - name: xrayClientJavaReleaseGit
     type: GitRepo
     configuration:
       path: jfrog/xray-client-java
-      gitProvider: github
+      gitProvider: il_automation
       buildOn:
         commit: false
