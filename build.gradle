@@ -12,23 +12,23 @@ repositories {
     mavenLocal()
     mavenCentral()
     maven {
-        url "https://oss.jfrog.org/artifactory/libs-release"
+        url "https://releases.jfrog.io/artifactory/oss-releases"
     }
     maven {
-        url "https://oss.jfrog.org/artifactory/libs-snapshot"
+        url "https://releases.jfrog.io/artifactory/libs-snapshots"
         mavenContent {
             snapshotsOnly()
         }
     }
 }
 
-def buildInfoVersion = '2.31.2'
+def buildInfoVersion = '2.32.5'
 dependencies {
     implementation group: 'org.jfrog.buildinfo', name: 'build-info-extractor', version: buildInfoVersion
     implementation group: 'org.jfrog.buildinfo', name: 'build-info-client', version: buildInfoVersion
     implementation group: 'org.jfrog.buildinfo', name: 'build-info-api', version: buildInfoVersion
-    implementation group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.11.2'
-    implementation group: 'com.fasterxml.jackson.core', name: 'jackson-core', version: '2.11.2'
+    implementation group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.12.6'
+    implementation group: 'com.fasterxml.jackson.core', name: 'jackson-core', version: '2.12.6'
     implementation group: 'org.apache.httpcomponents', name: 'httpclient', version: '4.5.13'
     implementation group: 'org.jfrog.filespecs', name: 'file-specs-java', version: '1.1.0'
     implementation group: 'org.apache.commons', name: 'commons-lang3', version: '3.11'
