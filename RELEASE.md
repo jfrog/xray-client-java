@@ -1,5 +1,8 @@
 # Release Notes
 
+## 0.10.0 (December 29, 2021)
+- Refactor Graph and add issue id
+
 ## 0.9.0 (November 03, 2021)
 - Add CVE to issue
 - Support providing build to details/build API
