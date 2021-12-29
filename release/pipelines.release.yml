@@ -50,7 +50,7 @@ pipelines:
             - ./jf gradlec --use-wrapper --repo-resolve ecosys-maven-remote --repo-deploy ecosys-oss-release-local --deploy-maven-desc
 
             # Run audit
-            - ./jf ag --project $JFROG_CLI_BUILD_PROJECT
+            # - ./jf ag --project $JFROG_CLI_BUILD_PROJECT
 
             # Update version
             - sed -i "s/\(currentVersion=\).*\$/\1${NEXT_VERSION}/" gradle.properties
