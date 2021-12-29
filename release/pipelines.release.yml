@@ -35,7 +35,7 @@ pipelines:
             - export JFROG_CLI_BUILD_PROJECT=ecosys
 
             # Configure git
-            - git checkout main
+            - git checkout master
             - git remote set-url origin https://$int_il_automation_token@github.com/jfrog/xray-client-java.git
 
             # Make sure versions provided
