@@ -2,7 +2,8 @@ package com.jfrog.xray.client.impl.test;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.jfrog.xray.client.impl.services.scan.GraphResponseImpl;
-import com.jfrog.xray.client.services.graph.GraphResponse;
+import com.jfrog.xray.client.services.scan.GraphResponse;
+import com.jfrog.xray.client.services.scan.ScanGraphProgress;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.jfrog.build.extractor.scan.DependencyTree;
@@ -23,7 +24,7 @@ public class ScanTests extends XrayTestsBase {
 
     @Test
     public void testGraphScanWithoutContext() throws IOException, InterruptedException {
-        GraphResponse response = xray.scan().graph(getDummyTree(), () -> {
+        GraphResponse response = xray.scan().graph(getDummyTree(), new DummyProgress(), () -> {
         });
         assertFalse(StringUtils.isBlank(response.getScanId()));
     }
@@ -50,5 +51,11 @@ public class ScanTests extends XrayTestsBase {
         assertEquals(response.getLicenses().size(), 4);
         // Check vulnerabilities exist
         assertEquals(response.getVulnerabilities().size(), 21);
+    }
+
+    private static class DummyProgress implements ScanGraphProgress {
+        @Override
+        public void setFraction(double fraction) {
+        }
     }
 }

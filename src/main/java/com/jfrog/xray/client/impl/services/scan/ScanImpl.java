@@ -8,8 +8,9 @@ import com.fasterxml.jackson.databind.ser.impl.SimpleBeanPropertyFilter;
 import com.fasterxml.jackson.databind.ser.impl.SimpleFilterProvider;
 import com.jfrog.xray.client.impl.XrayClient;
 import com.jfrog.xray.client.impl.util.ObjectMapperHelper;
-import com.jfrog.xray.client.services.graph.Scan;
-import com.jfrog.xray.client.services.graph.GraphResponse;
+import com.jfrog.xray.client.services.scan.GraphResponse;
+import com.jfrog.xray.client.services.scan.Scan;
+import com.jfrog.xray.client.services.scan.ScanGraphProgress;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpStatus;
 import org.apache.http.StatusLine;
@@ -43,25 +44,25 @@ public class ScanImpl implements Scan {
     }
 
     @Override
-    public GraphResponse graph(DependencyTree dependencies, Runnable checkCanceled, String projectKey) throws IOException, InterruptedException {
+    public GraphResponse graph(DependencyTree dependencies, ScanGraphProgress progress, Runnable checkCanceled, String projectKey) throws IOException, InterruptedException {
         if (projectKey == null || projectKey.isEmpty()) {
-            return graph(dependencies, checkCanceled);
+            return graph(dependencies, progress, checkCanceled);
         }
         if (dependencies == null) {
             return new GraphResponseImpl();
         }
-        return this.post("?project=" + projectKey, dependencies, checkCanceled);
+        return this.post("?project=" + projectKey, dependencies, progress, checkCanceled);
     }
 
     @Override
-    public GraphResponse graph(DependencyTree dependencies, Runnable checkCanceled) throws IOException, InterruptedException {
+    public GraphResponse graph(DependencyTree dependencies, ScanGraphProgress progress, Runnable checkCanceled) throws IOException, InterruptedException {
         if (dependencies == null) {
             return new GraphResponseImpl();
         }
-        return this.post("", dependencies, checkCanceled);
+        return this.post("", dependencies, progress, checkCanceled);
     }
 
-    private GraphResponse post(String params, Object body, Runnable checkCanceled) throws IOException, InterruptedException {
+    private GraphResponse post(String params, Object body, ScanGraphProgress progress, Runnable checkCanceled) throws IOException, InterruptedException {
         HttpEntity entity = null;
         // First, request a scan from Xray.
         try (CloseableHttpResponse response = xray.post("scan/graph" + params, body, mapper)) {
@@ -71,16 +72,16 @@ public class ScanImpl implements Scan {
             String scanId = requestResponse.getScanId();
             // If no context was provided (project name), we would like to receive all known vulnerabilities.
             String includeVulnerabilities = !params.isEmpty() ? "" : "&include_vulnerabilities=true";
-            return getGraphScanResults(scanId, includeVulnerabilities, checkCanceled);
-
+            return getGraphScanResults(scanId, includeVulnerabilities, progress, checkCanceled);
         } finally {
             EntityUtils.consumeQuietly(entity);
+            progress.setFraction(1);
         }
     }
 
-    private GraphResponse getGraphScanResults(String scanId, String includeVulnerabilities, Runnable checkCanceled) throws IOException, InterruptedException {
+    private GraphResponse getGraphScanResults(String scanId, String includeVulnerabilities, ScanGraphProgress progress, Runnable checkCanceled) throws IOException, InterruptedException {
         HttpEntity entity = null;
-        // Xray will respond with 201 until the completion of the scan. Once completed, 200 will be returned.
+        // Xray will respond with 202 until the completion of the scan. Once completed, 200 will be returned.
         for (int i = 0; i < MAX_ATTEMPTS; i++) {
             try (CloseableHttpResponse res = xray.get("scan/graph/" + scanId + "?include_licenses=true" + includeVulnerabilities)) {
                 checkCanceled.run();
@@ -90,6 +91,9 @@ public class ScanImpl implements Scan {
                     // We got an answer (scan completed), return it.
                     entity = res.getEntity();
                     return mapper.readValue(res.getEntity().getContent(), GraphResponseImpl.class);
+                } else if (statusCode == HttpStatus.SC_ACCEPTED) {
+                    GraphResponse response = mapper.readValue(res.getEntity().getContent(), GraphResponseImpl.class);
+                    progress.setFraction((double) response.getProgressPercentage() / 100);
                 }
             } finally {
                 EntityUtils.consumeQuietly(entity);
