@@ -8,8 +8,9 @@ import com.fasterxml.jackson.databind.ser.impl.SimpleBeanPropertyFilter;
 import com.fasterxml.jackson.databind.ser.impl.SimpleFilterProvider;
 import com.jfrog.xray.client.impl.XrayClient;
 import com.jfrog.xray.client.impl.util.ObjectMapperHelper;
-import com.jfrog.xray.client.services.graph.Scan;
 import com.jfrog.xray.client.services.graph.GraphResponse;
+import com.jfrog.xray.client.services.graph.Scan;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpStatus;
 import org.apache.http.StatusLine;
@@ -43,14 +44,17 @@ public class ScanImpl implements Scan {
     }
 
     @Override
-    public GraphResponse graph(DependencyTree dependencies, Runnable checkCanceled, String projectKey) throws IOException, InterruptedException {
-        if (projectKey == null || projectKey.isEmpty()) {
-            return graph(dependencies, checkCanceled);
-        }
+    public GraphResponse graph(DependencyTree dependencies, Runnable checkCanceled, String projectKey, String watch) throws IOException, InterruptedException {
         if (dependencies == null) {
             return new GraphResponseImpl();
         }
-        return this.post("?project=" + projectKey, dependencies, checkCanceled);
+        if (StringUtils.isNotBlank(projectKey)) {
+            return this.post("?project=" + projectKey, dependencies, checkCanceled);
+        }
+        if (StringUtils.isNotBlank(watch)) {
+            return this.post("?watch=" + watch, dependencies, checkCanceled);
+        }
+        return graph(dependencies, checkCanceled);
     }
 
     @Override
