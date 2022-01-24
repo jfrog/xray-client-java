@@ -3,7 +3,7 @@ package com.jfrog.xray.client.impl.test;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.jfrog.xray.client.impl.services.scan.GraphResponseImpl;
 import com.jfrog.xray.client.services.scan.GraphResponse;
-import com.jfrog.xray.client.services.scan.ScanGraphProgress;
+import com.jfrog.xray.client.services.scan.XrayScanProgress;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.jfrog.build.extractor.scan.DependencyTree;
@@ -53,7 +53,7 @@ public class ScanTests extends XrayTestsBase {
         assertEquals(response.getVulnerabilities().size(), 21);
     }
 
-    private static class DummyProgress implements ScanGraphProgress {
+    private static class DummyProgress implements XrayScanProgress {
         @Override
         public void setFraction(double fraction) {
         }

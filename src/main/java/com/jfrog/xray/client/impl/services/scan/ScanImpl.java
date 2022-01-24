@@ -10,7 +10,7 @@ import com.jfrog.xray.client.impl.XrayClient;
 import com.jfrog.xray.client.impl.util.ObjectMapperHelper;
 import com.jfrog.xray.client.services.scan.GraphResponse;
 import com.jfrog.xray.client.services.scan.Scan;
-import com.jfrog.xray.client.services.scan.ScanGraphProgress;
+import com.jfrog.xray.client.services.scan.XrayScanProgress;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpStatus;
 import org.apache.http.StatusLine;
@@ -44,7 +44,7 @@ public class ScanImpl implements Scan {
     }
 
     @Override
-    public GraphResponse graph(DependencyTree dependencies, ScanGraphProgress progress, Runnable checkCanceled, String projectKey) throws IOException, InterruptedException {
+    public GraphResponse graph(DependencyTree dependencies, XrayScanProgress progress, Runnable checkCanceled, String projectKey) throws IOException, InterruptedException {
         if (projectKey == null || projectKey.isEmpty()) {
             return graph(dependencies, progress, checkCanceled);
         }
@@ -55,14 +55,14 @@ public class ScanImpl implements Scan {
     }
 
     @Override
-    public GraphResponse graph(DependencyTree dependencies, ScanGraphProgress progress, Runnable checkCanceled) throws IOException, InterruptedException {
+    public GraphResponse graph(DependencyTree dependencies, XrayScanProgress progress, Runnable checkCanceled) throws IOException, InterruptedException {
         if (dependencies == null) {
             return new GraphResponseImpl();
         }
         return this.post("", dependencies, progress, checkCanceled);
     }
 
-    private GraphResponse post(String params, Object body, ScanGraphProgress progress, Runnable checkCanceled) throws IOException, InterruptedException {
+    private GraphResponse post(String params, Object body, XrayScanProgress progress, Runnable checkCanceled) throws IOException, InterruptedException {
         HttpEntity entity = null;
         // First, request a scan from Xray.
         try (CloseableHttpResponse response = xray.post("scan/graph" + params, body, mapper)) {
@@ -79,7 +79,7 @@ public class ScanImpl implements Scan {
         }
     }
 
-    private GraphResponse getGraphScanResults(String scanId, String includeVulnerabilities, ScanGraphProgress progress, Runnable checkCanceled) throws IOException, InterruptedException {
+    private GraphResponse getGraphScanResults(String scanId, String includeVulnerabilities, XrayScanProgress progress, Runnable checkCanceled) throws IOException, InterruptedException {
         HttpEntity entity = null;
         // Xray will respond with 202 until the completion of the scan. Once completed, 200 will be returned.
         for (int i = 0; i < MAX_ATTEMPTS; i++) {
