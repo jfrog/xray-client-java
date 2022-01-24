@@ -10,6 +10,7 @@ import com.jfrog.xray.client.impl.XrayClient;
 import com.jfrog.xray.client.impl.util.ObjectMapperHelper;
 import com.jfrog.xray.client.services.graph.GraphResponse;
 import com.jfrog.xray.client.services.graph.Scan;
+import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpStatus;
@@ -44,15 +45,16 @@ public class ScanImpl implements Scan {
     }
 
     @Override
-    public GraphResponse graph(DependencyTree dependencies, Runnable checkCanceled, String projectKey, String watch) throws IOException, InterruptedException {
+    public GraphResponse graph(DependencyTree dependencies, Runnable checkCanceled, String projectKey, String[] watches) throws IOException, InterruptedException {
         if (dependencies == null) {
             return new GraphResponseImpl();
         }
         if (StringUtils.isNotBlank(projectKey)) {
             return this.post("?project=" + projectKey, dependencies, checkCanceled);
         }
-        if (StringUtils.isNotBlank(watch)) {
-            return this.post("?watch=" + watch, dependencies, checkCanceled);
+        if (ArrayUtils.isNotEmpty(watches)) {
+            String watchesStr = "?watch=" + String.join("&watch=", watches);
+            return this.post(watchesStr, dependencies, checkCanceled);
         }
         return graph(dependencies, checkCanceled);
     }
