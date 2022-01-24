@@ -1,7 +1,7 @@
 package com.jfrog.xray.client.impl.services.scan;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.jfrog.xray.client.services.graph.ImpactPath;
+import com.jfrog.xray.client.services.scan.ImpactPath;
 
 public class ImpactPathImpl implements ImpactPath {
 

@@ -1,4 +1,4 @@
-package com.jfrog.xray.client.services.graph;
+package com.jfrog.xray.client.services.scan;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
