@@ -1,16 +1,17 @@
 package com.jfrog.xray.client.impl.services.scan;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.jfrog.xray.client.services.graph.GraphResponse;
-import com.jfrog.xray.client.services.graph.License;
-import com.jfrog.xray.client.services.graph.Violation;
-import com.jfrog.xray.client.services.graph.Vulnerability;
+import com.jfrog.xray.client.services.scan.GraphResponse;
+import com.jfrog.xray.client.services.scan.License;
+import com.jfrog.xray.client.services.scan.Violation;
+import com.jfrog.xray.client.services.scan.Vulnerability;
 
 import java.util.List;
 
 public class GraphResponseImpl implements GraphResponse {
     private String scanId;
     private String packageType;
+    private int progressPercentage;
     private List<ViolationImpl> violations;
     private List<VulnerabilityImpl> vulnerabilities;
     private List<LicenseImpl> licenses;
@@ -30,6 +31,12 @@ public class GraphResponseImpl implements GraphResponse {
     @JsonProperty("package_type")
     public void setPackageType(String packageType) {
         this.packageType = packageType;
+    }
+
+    @Override
+    @JsonProperty("progress_percentage")
+    public int getProgressPercentage() {
+        return progressPercentage;
     }
 
     @Override

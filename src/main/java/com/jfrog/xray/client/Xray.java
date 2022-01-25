@@ -1,7 +1,7 @@
 package com.jfrog.xray.client;
 
 import com.jfrog.xray.client.services.details.Details;
-import com.jfrog.xray.client.services.graph.Scan;
+import com.jfrog.xray.client.services.scan.Scan;
 import com.jfrog.xray.client.services.summary.Summary;
 import com.jfrog.xray.client.services.system.System;
 

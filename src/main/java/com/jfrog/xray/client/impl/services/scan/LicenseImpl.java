@@ -2,8 +2,8 @@ package com.jfrog.xray.client.impl.services.scan;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.jfrog.xray.client.services.graph.Component;
-import com.jfrog.xray.client.services.graph.License;
+import com.jfrog.xray.client.services.scan.Component;
+import com.jfrog.xray.client.services.scan.License;
 
 import java.util.List;
 import java.util.Map;

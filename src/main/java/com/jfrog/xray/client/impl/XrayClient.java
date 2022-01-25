@@ -9,7 +9,7 @@ import com.jfrog.xray.client.impl.services.system.SystemImpl;
 import com.jfrog.xray.client.impl.util.ObjectMapperHelper;
 import com.jfrog.xray.client.impl.util.URIUtil;
 import com.jfrog.xray.client.services.details.Details;
-import com.jfrog.xray.client.services.graph.Scan;
+import com.jfrog.xray.client.services.scan.Scan;
 import com.jfrog.xray.client.services.summary.Summary;
 import com.jfrog.xray.client.services.system.System;
 import org.apache.commons.io.IOUtils;
