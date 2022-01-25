@@ -11,6 +11,8 @@ import com.jfrog.xray.client.impl.util.ObjectMapperHelper;
 import com.jfrog.xray.client.services.scan.GraphResponse;
 import com.jfrog.xray.client.services.scan.Scan;
 import com.jfrog.xray.client.services.scan.XrayScanProgress;
+import org.apache.commons.lang3.ArrayUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpStatus;
 import org.apache.http.StatusLine;
@@ -44,14 +46,15 @@ public class ScanImpl implements Scan {
     }
 
     @Override
-    public GraphResponse graph(DependencyTree dependencies, XrayScanProgress progress, Runnable checkCanceled, String projectKey) throws IOException, InterruptedException {
-        if (projectKey == null || projectKey.isEmpty()) {
-            return graph(dependencies, progress, checkCanceled);
+    public GraphResponse graph(DependencyTree dependencies, XrayScanProgress progress, Runnable checkCanceled, String projectKey, String[] watches) throws IOException, InterruptedException {
+        if (StringUtils.isNotBlank(projectKey)) {
+            return this.post("?project=" + projectKey, dependencies, progress, checkCanceled);
         }
-        if (dependencies == null) {
-            return new GraphResponseImpl();
+        if (ArrayUtils.isNotEmpty(watches)) {
+            String watchesStr = "?watch=" + String.join("&watch=", watches);
+            return this.post(watchesStr, dependencies, progress, checkCanceled);
         }
-        return this.post("?project=" + projectKey, dependencies, progress, checkCanceled);
+        return graph(dependencies, progress, checkCanceled);
     }
 
     @Override
