@@ -18,6 +18,7 @@ public class ViolationImpl implements Violation {
     private Map<String, ComponentImpl> components;
     private List<CveImpl> cves;
     private List<String> references;
+    private String ignoreUrl;
 
     @Override
     @JsonProperty("cves")
@@ -53,6 +54,12 @@ public class ViolationImpl implements Violation {
     @JsonProperty("references")
     public List<String> getReferences() {
         return references;
+    }
+
+    @Override
+    @JsonProperty("ignore_url")
+    public String getIgnoreUrl() {
+        return ignoreUrl;
     }
 
     @Override
