@@ -18,7 +18,7 @@ public class ViolationImpl implements Violation {
     private Map<String, ComponentImpl> components;
     private List<CveImpl> cves;
     private List<String> references;
-    private String ignoreUrl;
+    private String ignoreRuleUrl;
 
     @Override
     @JsonProperty("cves")
@@ -58,8 +58,8 @@ public class ViolationImpl implements Violation {
 
     @Override
     @JsonProperty("ignore_url")
-    public String getIgnoreUrl() {
-        return ignoreUrl;
+    public String getIgnoreRuleUrl() {
+        return ignoreRuleUrl;
     }
 
     @Override
