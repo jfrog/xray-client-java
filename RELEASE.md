@@ -1,5 +1,12 @@
 # Release Notes
 
+## 0.11.0 (February 13, 2021)
+- Breaking changes in scan/graph:
+  - Package changes from com.jfrog.xray.client.services.graph.Scan to com.jfrog.xray.client.services.scan.Scan
+  - Add progress argument
+  - Add watches argument
+- Add ignore URL and references in Vulnerability and Violation
+
 ## 0.10.0 (December 29, 2021)
 - Refactor Graph and add issue id
 
