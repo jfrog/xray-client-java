@@ -22,7 +22,6 @@ pipelines:
           integrations:
             - name: il_automation
             - name: entplus_deployer
-            - name: mvn_central
         execution:
           onExecute:
             - cd $res_xrayClientJavaReleaseGit_resourcePath
