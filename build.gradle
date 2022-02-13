@@ -15,7 +15,7 @@ repositories {
         url "https://releases.jfrog.io/artifactory/oss-releases"
     }
     maven {
-        url "https://releases.jfrog.io/artifactory/libs-snapshots"
+        url "https://releases.jfrog.io/artifactory/oss-snapshots"
         mavenContent {
             snapshotsOnly()
         }
