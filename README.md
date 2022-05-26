@@ -1,4 +1,4 @@
-[![Build status](https://ci.appveyor.com/api/projects/status/9f5ky95h430ppmn1?svg=true)](https://ci.appveyor.com/project/jfrog-ecosystem/xray-client-java)
+[![Test](https://github.com/jfrog/xray-client-java/actions/workflows/test.yml/badge.svg)](https://github.com/jfrog/xray-client-java/actions/workflows/test.yml)
 
 # Xray Java Client 
 
@@ -14,7 +14,7 @@ gradle clean install
 ```
 4. If you'd like run the *xray-client-java* integration tests, follow these steps:
 * Make sure your Xray instance is up and running.
-* Set the *CLIENTTESTS_XRAY_URL*, *CLIENTTESTS_XRAY_USERNAME* and *CLIENTTESTS_XRAY_PASSWORD* environment variables with your Xray URL, username and password.
+* Set the *CLIENTTESTS_XRAY_URL*, *CLIENTTESTS_XRAY_TOKEN* environment variables with your Xray URL, and access token.
 * Run the following command:
 ```
 gradle test

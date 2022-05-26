@@ -36,14 +36,12 @@ public class XrayTestsBase {
         if (!url.endsWith("/")) {
             url += "/";
         }
-        String username = readParam(props, "username");
-        String password = readParam(props, "password");
+        String accessToken = readParam(props, "token");
 
         // Create an xray client
         xray = (Xray) new XrayClientBuilder()
                 .setUrl(url)
-                .setUserName(username)
-                .setPassword(password)
+                .setAccessToken(accessToken)
                 .build();
 
         // Create an xray client that uses proxy
@@ -52,8 +50,7 @@ public class XrayTestsBase {
         proxyConfig.host = "localhost";
         xrayProxies = (Xray) new XrayClientBuilder()
                 .setUrl(url)
-                .setUserName(username)
-                .setPassword(password)
+                .setAccessToken(accessToken)
                 .setProxyConfiguration(proxyConfig)
                 .setInsecureTls(true)
                 .build();
