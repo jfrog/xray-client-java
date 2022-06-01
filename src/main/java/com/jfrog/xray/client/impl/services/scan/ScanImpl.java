@@ -28,8 +28,9 @@ import java.io.IOException;
 public class ScanImpl implements Scan {
 
     private static final ObjectMapper mapper = createFilteredObjectMapper();
-    private static final int MAX_ATTEMPTS = 60;
-    private static final int SYNC_SLEEP_INTERVAL = 5000;
+    // 30 minutes timeout
+    private static final int SYNC_SLEEP_INTERVAL_MILLIS = 10000;
+    private static final int MAX_ATTEMPTS = 180;
     private final XrayClient xray;
 
     public ScanImpl(XrayClient xray) {
@@ -102,7 +103,7 @@ public class ScanImpl implements Scan {
                 EntityUtils.consumeQuietly(entity);
             }
             // Wait between polling attempts.
-            Thread.sleep(SYNC_SLEEP_INTERVAL);
+            Thread.sleep(SYNC_SLEEP_INTERVAL_MILLIS);
         }
         // Will get here only in case of timeout.
         throw new IOException("Xray get graph scan exceeded the timeout.");
