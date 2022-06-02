@@ -31,11 +31,11 @@ jobs:
         run: ./gradlew clean test
         if: runner.os != 'Windows'
         env:
-          CLIENTTESTS_XRAY_URL: ${{ secrets.PLATFORM_URL }}/xray
-          CLIENTTESTS_XRAY_TOKEN: ${{ secrets.PLATFORM_TOKEN }}
+          CLIENTTESTS_XRAY_URL: ${{ secrets.CLIENTTESTS_XRAY_URL }}/xray
+          CLIENTTESTS_XRAY_TOKEN: ${{ secrets.CLIENTTESTS_XRAY_TOKEN }}
       - name: Tests on Windows
         run: ./gradlew.bat clean test
         if: runner.os == 'Windows'
         env:
-          CLIENTTESTS_XRAY_URL: ${{ secrets.PLATFORM_URL }}/xray
-          CLIENTTESTS_XRAY_TOKEN: ${{ secrets.PLATFORM_TOKEN }}
+          CLIENTTESTS_XRAY_URL: ${{ secrets.CLIENTTESTS_XRAY_URL }}/xray
+          CLIENTTESTS_XRAY_TOKEN: ${{ secrets.CLIENTTESTS_XRAY_TOKEN }}
