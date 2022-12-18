@@ -2,8 +2,7 @@ package com.jfrog.xray.client.impl.test;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.jfrog.xray.client.impl.services.scan.GraphResponseImpl;
-import com.jfrog.xray.client.services.scan.GraphResponse;
-import com.jfrog.xray.client.services.scan.XrayScanProgress;
+import com.jfrog.xray.client.services.scan.*;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.jfrog.build.extractor.scan.DependencyTree;
@@ -14,8 +13,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.Vector;
 
 import static com.jfrog.xray.client.impl.services.scan.ScanImpl.createFilteredObjectMapper;
-import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertFalse;
+import static org.testng.Assert.*;
 
 /**
  * Created by Tal Arian on 30/09/21.
@@ -51,6 +49,50 @@ public class ScanTests extends XrayTestsBase {
         assertEquals(response.getLicenses().size(), 4);
         // Check vulnerabilities exist
         assertEquals(response.getVulnerabilities().size(), 21);
+    }
+
+    @Test
+    public void testGraphResponseWithResearch() throws IOException {
+        String responseStr = IOUtils.resourceToString("/scan/graph/response-with-research.json", StandardCharsets.UTF_8);
+        ObjectMapper mapper = createFilteredObjectMapper();
+        GraphResponse response = mapper.readValue(responseStr, GraphResponseImpl.class);
+
+        // Check general response details
+        assertEquals(response.getPackageType(), "Generic");
+
+        // Check violation
+        assertEquals(response.getViolations().size(), 1);
+        Violation violation = response.getViolations().get(0);
+        assertEquals(violation.getIssueId(), "XRAY-129823");
+        assertEquals(violation.getReferences().size(), 43);
+        assertEquals(violation.getIgnoreRuleUrl(), "https://acme.jfrog.io/xray/ir/c970becce");
+        assertEquals(violation.getWatchName(), "all-watch");
+        assertEquals(violation.getUpdated(), "2022-12-18T11:34:52Z");
+        assertEquals(violation.getEdited(), violation.getUpdated());
+
+        // Check extended information
+        assertNotNull(violation.getExtendedInformation());
+        ExtendedInformation extendedInformation = violation.getExtendedInformation();
+        assertEquals(extendedInformation.getJFrogResearchSeverity(), "Low");
+        assertEquals(extendedInformation.getShortDescription(), "Improper temporary directory management in Guava can lead to data leakage");
+        assertTrue(StringUtils.isNotBlank(extendedInformation.getFullDescription()));
+        assertTrue(StringUtils.isNotBlank(extendedInformation.getRemediation()));
+
+        // Check severity reasons
+        SeverityReasons[] severityReasons = extendedInformation.getJFrogResearchSeverityReasons();
+        assertNotNull(severityReasons);
+        assertEquals(3, severityReasons.length);
+        for (SeverityReasons severityReason : severityReasons) {
+            switch (severityReason.getName()) {
+                case "Exploitation of the issue is only possible when the vulnerable component is used in a specific manner. The attacker has to perform per-target research to determine the vulnerable attack vector.":
+                case "The issue can only be exploited by an attacker that can execute code on the vulnerable machine (excluding exceedingly rare circumstances)":
+                    assertTrue(severityReason.isPositive());
+                    break;
+                case "A local attacker can simply read files created under `java.io.tmpdir`":
+                    assertFalse(severityReason.isPositive());
+            }
+            assertTrue(StringUtils.isNotBlank(severityReason.getDescription()));
+        }
     }
 
     private static class DummyProgress implements XrayScanProgress {
