@@ -1,6 +1,10 @@
 # Release Notes
 
-## 0.11.0 (February 13, 2021)
+## 0.12.0 (December 18, 2022)
+- Add more fields to the scan/graph response
+- Increase Graph scan timeout to 30 minutes
+
+## 0.11.0 (February 13, 2022)
 - Breaking changes in scan/graph:
   - Package changes from com.jfrog.xray.client.services.graph.Scan to com.jfrog.xray.client.services.scan.Scan
   - Add progress argument
