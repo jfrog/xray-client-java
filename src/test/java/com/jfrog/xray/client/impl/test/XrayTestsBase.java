@@ -86,15 +86,12 @@ public class XrayTestsBase {
                 "Failed to load test Artifactory instance credentials. " +
                         "Looking for System properties '" +
                         CLIENTTESTS_XRAY_PROPERTIES_PREFIX +
-                        "url', " +
+                        "url' and " +
                         CLIENTTESTS_XRAY_PROPERTIES_PREFIX +
-                        "username' and " +
-                        CLIENTTESTS_XRAY_PROPERTIES_PREFIX +
-                        "password' or a properties file with those properties in classpath " +
+                        "token' or a properties file with those properties in classpath " +
                         "or Environment variables '" +
-                        CLIENTTESTS_XRAY_ENV_VAR_PREFIX + "URL', " +
-                        CLIENTTESTS_XRAY_ENV_VAR_PREFIX + "USERNAME' and " +
-                        CLIENTTESTS_XRAY_ENV_VAR_PREFIX + "PASSWORD'";
+                        CLIENTTESTS_XRAY_ENV_VAR_PREFIX + "URL' and '" +
+                        CLIENTTESTS_XRAY_ENV_VAR_PREFIX + "TOKEN'";
 
         Assert.fail(message);
     }

@@ -67,9 +67,9 @@ public class SummaryTests extends XrayTestsBase {
             assertNotNull(artifact.getGeneral());
             assertNotNull(artifact.getLicenses());
             assertNotNull(artifact.getIssues());
-            assertEquals(artifact.getIssues().size(), 3);
+            assertEquals(artifact.getIssues().size(), 1);
             assertNotNull(artifact.getIssues().get(0).getVulnerableComponents());
-            assertEquals(artifact.getIssues().get(0).getVulnerableComponents().size(), 1);
+            assertEquals(artifact.getIssues().get(0).getVulnerableComponents().size(), 2);
             assertEquals(artifact.getIssues().get(0).getVulnerableComponents().get(0).getFixedVersions().size(), 4);
         }
     }
