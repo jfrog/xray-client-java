@@ -83,10 +83,10 @@ public class XrayTestsBase {
 
     private void failInit() {
         String message =
-                "Failed to load test Artifactory instance credentials. " +
+                "Failed to load test Xray instance credentials. " +
                         "Looking for System properties '" +
                         CLIENTTESTS_XRAY_PROPERTIES_PREFIX +
-                        "url' and " +
+                        "url' and '" +
                         CLIENTTESTS_XRAY_PROPERTIES_PREFIX +
                         "token' or a properties file with those properties in classpath " +
                         "or Environment variables '" +
