@@ -15,6 +15,6 @@ public interface Violation extends Vulnerability, License {
     @JsonProperty("watch_name")
     String getWatchName();
 
-    @JsonProperty("extended_information")
-    ExtendedInformation getExtendedInformation();
+    @JsonProperty("ignore_url")
+    String getIgnoreRuleUrl();
 }
