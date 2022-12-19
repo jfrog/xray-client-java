@@ -1,5 +1,9 @@
 # Release Notes
 
+## 0.12.1 (December 19, 2022)
+- Move extended_information from violation to vulnerability
+- Move ignore_url from vulnerability to violation
+
 ## 0.12.0 (December 18, 2022)
 - Add more fields to the scan/graph response
 - Increase Graph scan timeout to 30 minutes
