@@ -29,9 +29,8 @@ public class ScanTests extends XrayTestsBase {
 
     private DependencyTree getDummyTree() {
         DependencyTree tree = new DependencyTree("gav://idea");
-        Vector<DependencyTree> children = tree.getChildren();
-        children.add(new DependencyTree("gav://com.jfrog.ide:ide-plugins-common:1.6.x-SNAPSHOT"));
-        children.add(new DependencyTree("gav://com.jfrog.xray.client:xray-client-java:0.7.x-SNAPSHOT"));
+        tree.add(new DependencyTree("gav://com.jfrog.ide:ide-plugins-common:1.6.x-SNAPSHOT"));
+        tree.add(new DependencyTree("gav://com.jfrog.xray.client:xray-client-java:0.7.x-SNAPSHOT"));
         return tree;
     }
 
