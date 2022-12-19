@@ -52,8 +52,8 @@ public class ScanTests extends XrayTestsBase {
     }
 
     @Test
-    public void testGraphResponseWithResearch() throws IOException {
-        String responseStr = IOUtils.resourceToString("/scan/graph/response-with-research.json", StandardCharsets.UTF_8);
+    public void testGraphResponseViolationWithResearch() throws IOException {
+        String responseStr = IOUtils.resourceToString("/scan/graph/response-violation-with-research.json", StandardCharsets.UTF_8);
         ObjectMapper mapper = createFilteredObjectMapper();
         GraphResponse response = mapper.readValue(responseStr, GraphResponseImpl.class);
 
@@ -73,6 +73,46 @@ public class ScanTests extends XrayTestsBase {
         // Check extended information
         assertNotNull(violation.getExtendedInformation());
         ExtendedInformation extendedInformation = violation.getExtendedInformation();
+        assertEquals(extendedInformation.getJFrogResearchSeverity(), "Low");
+        assertEquals(extendedInformation.getShortDescription(), "Improper temporary directory management in Guava can lead to data leakage");
+        assertTrue(StringUtils.isNotBlank(extendedInformation.getFullDescription()));
+        assertTrue(StringUtils.isNotBlank(extendedInformation.getRemediation()));
+
+        // Check severity reasons
+        SeverityReasons[] severityReasons = extendedInformation.getJFrogResearchSeverityReasons();
+        assertNotNull(severityReasons);
+        assertEquals(3, severityReasons.length);
+        for (SeverityReasons severityReason : severityReasons) {
+            switch (severityReason.getName()) {
+                case "Exploitation of the issue is only possible when the vulnerable component is used in a specific manner. The attacker has to perform per-target research to determine the vulnerable attack vector.":
+                case "The issue can only be exploited by an attacker that can execute code on the vulnerable machine (excluding exceedingly rare circumstances)":
+                    assertTrue(severityReason.isPositive());
+                    break;
+                case "A local attacker can simply read files created under `java.io.tmpdir`":
+                    assertFalse(severityReason.isPositive());
+            }
+            assertTrue(StringUtils.isNotBlank(severityReason.getDescription()));
+        }
+    }
+
+    @Test
+    public void testGraphResponseVulnerabilityWithResearch() throws IOException {
+        String responseStr = IOUtils.resourceToString("/scan/graph/response-vulnerability-with-research.json", StandardCharsets.UTF_8);
+        ObjectMapper mapper = createFilteredObjectMapper();
+        GraphResponse response = mapper.readValue(responseStr, GraphResponseImpl.class);
+
+        // Check general response details
+        assertEquals(response.getPackageType(), "Generic");
+
+        // Check vulnerability
+        assertEquals(response.getVulnerabilities().size(), 1);
+        Vulnerability vulnerability = response.getVulnerabilities().get(0);
+        assertEquals(vulnerability.getIssueId(), "XRAY-129823");
+        assertEquals(vulnerability.getReferences().size(), 43);
+
+        // Check extended information
+        assertNotNull(vulnerability.getExtendedInformation());
+        ExtendedInformation extendedInformation = vulnerability.getExtendedInformation();
         assertEquals(extendedInformation.getJFrogResearchSeverity(), "Low");
         assertEquals(extendedInformation.getShortDescription(), "Improper temporary directory management in Guava can lead to data leakage");
         assertTrue(StringUtils.isNotBlank(extendedInformation.getFullDescription()));
