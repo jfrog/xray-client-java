@@ -9,6 +9,9 @@ public interface Component {
     @JsonProperty("fixed_versions")
     List<String> getFixedVersions();
 
+    @JsonProperty("infected_versions")
+    List<String> getInfectedVersions();
+
     @JsonProperty("impact_paths")
-    List<List<ImpactPathImpl>>  getImpactPaths();
+    List<List<ImpactPathImpl>> getImpactPaths();
 }
