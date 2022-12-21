@@ -1,6 +1,7 @@
 package com.jfrog.xray.client.impl.test;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.common.collect.Lists;
 import com.jfrog.xray.client.impl.services.scan.GraphResponseImpl;
 import com.jfrog.xray.client.services.scan.*;
 import org.apache.commons.io.IOUtils;
@@ -10,7 +11,6 @@ import org.testng.annotations.Test;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
-import java.util.Vector;
 
 import static com.jfrog.xray.client.impl.services.scan.ScanImpl.createFilteredObjectMapper;
 import static org.testng.Assert.*;
@@ -108,6 +108,12 @@ public class ScanTests extends XrayTestsBase {
         Vulnerability vulnerability = response.getVulnerabilities().get(0);
         assertEquals(vulnerability.getIssueId(), "XRAY-129823");
         assertEquals(vulnerability.getReferences().size(), 43);
+
+        // Check components
+        assertEquals(vulnerability.getComponents().size(), 1);
+        Component guava = vulnerability.getComponents().get("gav://com.google.guava:guava:19.0");
+        assertNotNull(guava);
+        assertEquals(guava.getInfectedVersions(), Lists.newArrayList("(,29.0]"));
 
         // Check extended information
         assertNotNull(vulnerability.getExtendedInformation());

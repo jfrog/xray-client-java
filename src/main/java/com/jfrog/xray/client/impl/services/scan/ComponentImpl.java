@@ -7,6 +7,7 @@ import java.util.List;
 
 public class ComponentImpl implements Component {
     private List<String> fixedVersions;
+    private List<String> infectedVersions;
     private List<List<ImpactPathImpl>> impactPaths;
 
     @Override
@@ -15,9 +16,20 @@ public class ComponentImpl implements Component {
         return fixedVersions;
     }
 
+    @Override
+    @JsonProperty("infected_versions")
+    public List<String> getInfectedVersions() {
+        return infectedVersions;
+    }
+
     @JsonProperty("fixed_versions")
     public void setFixedVersions(List<String> fixedVersions) {
         this.fixedVersions = fixedVersions;
+    }
+
+    @JsonProperty("infected_versions")
+    public void setInfectedVersions(List<String> infectedVersions) {
+        this.infectedVersions = infectedVersions;
     }
 
     @Override
