@@ -1,5 +1,8 @@
 # Release Notes
 
+## 0.13.0 (December 21, 2022)
+- Support infected versions in vulnerabilities
+
 ## 0.12.1 (December 19, 2022)
 - Move extended_information from violation to vulnerability
 - Move ignore_url from vulnerability to violation
