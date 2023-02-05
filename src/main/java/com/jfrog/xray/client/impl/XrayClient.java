@@ -6,6 +6,7 @@ import com.jfrog.xray.client.impl.services.details.DetailsImpl;
 import com.jfrog.xray.client.impl.services.scan.ScanImpl;
 import com.jfrog.xray.client.impl.services.summary.SummaryImpl;
 import com.jfrog.xray.client.impl.services.system.SystemImpl;
+import com.jfrog.xray.client.impl.util.JFrogInactiveEnvironmentException;
 import com.jfrog.xray.client.impl.util.ObjectMapperHelper;
 import com.jfrog.xray.client.impl.util.URIUtil;
 import com.jfrog.xray.client.services.details.Details;
@@ -20,6 +21,7 @@ import org.apache.http.StatusLine;
 import org.apache.http.client.AuthCache;
 import org.apache.http.client.HttpResponseException;
 import org.apache.http.client.methods.*;
+import org.apache.http.client.protocol.HttpClientContext;
 import org.apache.http.entity.ByteArrayEntity;
 import org.apache.http.entity.ContentType;
 import org.apache.http.impl.client.BasicCredentialsProvider;
@@ -32,7 +34,9 @@ import org.jfrog.build.client.PreemptiveHttpClient;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.StringWriter;
+import java.net.URI;
 import java.nio.charset.StandardCharsets;
+import java.util.List;
 
 
 /**
@@ -108,9 +112,20 @@ public class XrayClient extends PreemptiveHttpClient implements Xray {
     }
 
     private CloseableHttpResponse setHeadersAndExecute(HttpUriRequest request) throws IOException {
-        CloseableHttpResponse response = execute(request);
+        HttpClientContext context = HttpClientContext.create();
+        CloseableHttpResponse response = execute(request, context);
         StatusLine statusLine = response.getStatusLine();
         int statusCode = statusLine.getStatusCode();
+
+        List<URI> locations = context.getRedirectLocations();
+        // Redirection indication
+        if (locations != null) {
+            for (URI uri : locations) {
+                if (uri.toString().contains("reactivate-server")) {
+                    throw new JFrogInactiveEnvironmentException(statusCode, "JFrog Platform is inactive", uri.toString());
+                }
+            }
+        }
         if (statusNotOk(statusCode)) {
             String body = null;
             HttpEntity entity = response.getEntity();
