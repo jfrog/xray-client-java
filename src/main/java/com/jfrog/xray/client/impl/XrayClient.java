@@ -116,16 +116,7 @@ public class XrayClient extends PreemptiveHttpClient implements Xray {
         CloseableHttpResponse response = execute(request, context);
         StatusLine statusLine = response.getStatusLine();
         int statusCode = statusLine.getStatusCode();
-
-        List<URI> locations = context.getRedirectLocations();
-        // Redirection indication
-        if (locations != null) {
-            for (URI uri : locations) {
-                if (uri.toString().contains("reactivate-server")) {
-                    throw new JFrogInactiveEnvironmentException(statusCode, "JFrog Platform is inactive", uri.toString());
-                }
-            }
-        }
+        detectInactiveEnvironment(context, statusCode);
         if (statusNotOk(statusCode)) {
             String body = null;
             HttpEntity entity = response.getEntity();
@@ -146,6 +137,18 @@ public class XrayClient extends PreemptiveHttpClient implements Xray {
         }
         log.debug("Received status " + statusCode + " for " + request.getMethod() + " " + request.getURI());
         return response;
+    }
+
+    private void detectInactiveEnvironment(HttpClientContext context, int statusCode) throws JFrogInactiveEnvironmentException {
+        List<URI> locations = context.getRedirectLocations();
+        // Redirection indication
+        if (locations != null) {
+            for (URI uri : locations) {
+                if (uri.toString().contains("reactivate-server")) {
+                    throw new JFrogInactiveEnvironmentException(statusCode, "JFrog Platform is inactive", uri.toString());
+                }
+            }
+        }
     }
 
     private static String readStream(InputStream stream) throws IOException {
