@@ -13,7 +13,7 @@ public interface DetailsResponse extends Serializable {
 
     String getBuildNumber();
 
-    boolean getScanCompleted();
+    boolean isScanCompleted();
 
     List<? extends Artifact> getComponents();
 

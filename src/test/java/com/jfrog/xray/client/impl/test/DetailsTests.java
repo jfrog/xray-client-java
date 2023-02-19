@@ -29,7 +29,7 @@ public class DetailsTests extends XrayTestsBase {
         // Check general build details
         assertEquals(response.getBuildName(), "maven-build");
         assertEquals(response.getBuildNumber(), "1");
-        assertTrue(response.getScanCompleted());
+        assertTrue(response.isScanCompleted());
         assertNull(response.getError());
 
         // Check build dependency
@@ -54,7 +54,7 @@ public class DetailsTests extends XrayTestsBase {
         // Check general build details
         assertEquals(response.getBuildName(), "buildNotExist");
         assertEquals(response.getBuildNumber(), "18");
-        assertFalse(response.getScanCompleted());
+        assertFalse(response.isScanCompleted());
         assertNull(response.getComponents());
 
         // Check error

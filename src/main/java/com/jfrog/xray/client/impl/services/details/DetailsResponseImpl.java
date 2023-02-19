@@ -15,7 +15,7 @@ import java.util.List;
 public class DetailsResponseImpl implements DetailsResponse {
     private String buildName;
     private String buildNumber;
-    private boolean scanCompleted;
+    private boolean isScanCompleted;
     private List<ArtifactImpl> components;
     private ErrorImpl error;
 
@@ -30,8 +30,8 @@ public class DetailsResponseImpl implements DetailsResponse {
     }
 
     @JsonProperty("is_scan_completed")
-    public boolean getScanCompleted() {
-        return scanCompleted;
+    public boolean isScanCompleted() {
+        return isScanCompleted;
     }
 
     @JsonProperty("components")

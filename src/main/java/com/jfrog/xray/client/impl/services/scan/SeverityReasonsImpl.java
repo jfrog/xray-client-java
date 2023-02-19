@@ -8,7 +8,7 @@ import com.jfrog.xray.client.services.scan.SeverityReasons;
  **/
 public class SeverityReasonsImpl implements SeverityReasons {
     public String description;
-    public boolean positive;
+    public boolean isPositive;
     public String name;
 
     @Override
@@ -26,6 +26,6 @@ public class SeverityReasonsImpl implements SeverityReasons {
     @Override
     @JsonProperty("is_positive")
     public boolean isPositive() {
-        return positive;
+        return isPositive;
     }
 }
