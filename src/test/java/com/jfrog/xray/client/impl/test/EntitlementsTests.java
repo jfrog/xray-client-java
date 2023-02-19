@@ -14,10 +14,15 @@ import static org.testng.Assert.*;
 
 public class EntitlementsTests extends XrayTestsBase {
     @Test
-    public void testIsEntitled() throws IOException {
+    public void testIsEntitledParse() throws IOException {
         try (Xray xrayMock = new XrayClientBuilder().setUrl("http://localhost:8888/xray/").build()) {
             mockServer.when(request().withPath("/xray/api/v1/entitlements/feature/" + Feature.ContextualAnalysis)).respond(response().withBody("{\"entitled\":true,\"feature_id\":\"" + Feature.ContextualAnalysis + "\"}").withStatusCode(200));
             assertTrue(xrayMock.entitlements().isEntitled(Feature.ContextualAnalysis));
         }
+    }
+
+    @Test
+    public void testIsEntitled() throws IOException {
+        assertNotNull(xray.entitlements().isEntitled(Feature.ContextualAnalysis));
     }
 }
