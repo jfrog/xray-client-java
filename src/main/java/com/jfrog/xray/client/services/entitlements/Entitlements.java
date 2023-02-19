@@ -1,6 +1,8 @@
 package com.jfrog.xray.client.services.entitlements;
 
 
+import java.io.IOException;
+
 public interface Entitlements {
-    Boolean isEntitled(Feature feature);
+    boolean isEntitled(Feature feature) throws IOException;
 }

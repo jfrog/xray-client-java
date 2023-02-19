@@ -10,6 +10,8 @@ import org.apache.http.HttpEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.util.EntityUtils;
 
+import java.io.IOException;
+
 
 public class EntitlementsImpl implements Entitlements {
     private final XrayClient xray;
@@ -20,14 +22,12 @@ public class EntitlementsImpl implements Entitlements {
     }
 
     @Override
-    public Boolean isEntitled(Feature feature) {
+    public boolean isEntitled(Feature feature) throws IOException {
         HttpEntity entity = null;
         try (CloseableHttpResponse response = xray.get(String.format("entitlements/feature/%s", feature.toString()))) {
             entity = response.getEntity();
             Entitled requestResponse = mapper.readValue(response.getEntity().getContent(), EntitledImpl.class);
             return requestResponse.isEntitled();
-        } catch (Exception e) {
-            return null;
         } finally {
             EntityUtils.consumeQuietly(entity);
         }
