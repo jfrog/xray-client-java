@@ -1,6 +1,7 @@
 package com.jfrog.xray.client;
 
 import com.jfrog.xray.client.services.details.Details;
+import com.jfrog.xray.client.services.entitlements.Entitlements;
 import com.jfrog.xray.client.services.scan.Scan;
 import com.jfrog.xray.client.services.summary.Summary;
 import com.jfrog.xray.client.services.system.System;
@@ -17,6 +18,8 @@ public interface Xray extends Closeable, Serializable {
     Details details();
 
     Scan scan();
+
+    Entitlements entitlements();
 
     @Override
     void close();

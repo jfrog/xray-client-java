@@ -13,33 +13,33 @@ import java.util.List;
  **/
 @SuppressWarnings("unused")
 public class DetailsResponseImpl implements DetailsResponse {
+    @JsonProperty("build_name")
     private String buildName;
+    @JsonProperty("build_number")
     private String buildNumber;
-    private boolean scanCompleted;
+    @JsonProperty("is_scan_completed")
+    private boolean isScanCompleted;
+    @JsonProperty("components")
     private List<ArtifactImpl> components;
+    @JsonProperty("error_details")
     private ErrorImpl error;
 
-    @JsonProperty("build_name")
     public String getBuildName() {
         return buildName;
     }
 
-    @JsonProperty("build_number")
     public String getBuildNumber() {
         return buildNumber;
     }
 
-    @JsonProperty("is_scan_completed")
-    public boolean getScanCompleted() {
-        return scanCompleted;
+    public boolean isScanCompleted() {
+        return isScanCompleted;
     }
 
-    @JsonProperty("components")
     public List<? extends Artifact> getComponents() {
         return components;
     }
 
-    @JsonProperty("error_details")
     public Error getError() {
         return error;
     }

@@ -1,0 +1,28 @@
+package com.jfrog.xray.client.impl.test;
+
+import com.jfrog.xray.client.Xray;
+import com.jfrog.xray.client.impl.XrayClientBuilder;
+import com.jfrog.xray.client.services.entitlements.Feature;
+import org.testng.annotations.Test;
+
+import java.io.IOException;
+
+import static org.mockserver.model.HttpRequest.request;
+import static org.mockserver.model.HttpResponse.response;
+import static org.testng.Assert.*;
+
+public class EntitlementsTests extends XrayTestsBase {
+    @Test
+    public void testIsEntitledParse() throws IOException {
+        try (Xray xrayMock = new XrayClientBuilder().setUrl("http://localhost:8888/xray/").build()) {
+            mockServer.when(request().withPath("/xray/api/v1/entitlements/feature/" + Feature.ContextualAnalysis)).respond(response().withBody("{\"entitled\":true,\"feature_id\":\"" + Feature.ContextualAnalysis + "\"}").withStatusCode(200));
+            assertTrue(xrayMock.entitlements().isEntitled(Feature.ContextualAnalysis));
+        }
+    }
+
+    @Test
+    public void testIsEntitled() throws IOException {
+        Boolean isEntitled = xray.entitlements().isEntitled(Feature.ContextualAnalysis);
+        assertNotNull(isEntitled);
+    }
+}

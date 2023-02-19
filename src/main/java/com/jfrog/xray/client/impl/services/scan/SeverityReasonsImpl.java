@@ -7,25 +7,25 @@ import com.jfrog.xray.client.services.scan.SeverityReasons;
  * @author yahavi
  **/
 public class SeverityReasonsImpl implements SeverityReasons {
+    @JsonProperty("description")
     public String description;
-    public boolean positive;
+    @JsonProperty("is_positive")
+    public boolean isPositive;
+    @JsonProperty("name")
     public String name;
 
     @Override
-    @JsonProperty("name")
     public String getName() {
         return name;
     }
 
     @Override
-    @JsonProperty("description")
     public String getDescription() {
         return description;
     }
 
     @Override
-    @JsonProperty("is_positive")
     public boolean isPositive() {
-        return positive;
+        return isPositive;
     }
 }

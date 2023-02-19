@@ -3,6 +3,7 @@ package com.jfrog.xray.client.impl;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.jfrog.xray.client.Xray;
 import com.jfrog.xray.client.impl.services.details.DetailsImpl;
+import com.jfrog.xray.client.impl.services.entitlements.EntitlementsImpl;
 import com.jfrog.xray.client.impl.services.scan.ScanImpl;
 import com.jfrog.xray.client.impl.services.summary.SummaryImpl;
 import com.jfrog.xray.client.impl.services.system.SystemImpl;
@@ -10,6 +11,7 @@ import com.jfrog.xray.client.impl.util.JFrogInactiveEnvironmentException;
 import com.jfrog.xray.client.impl.util.ObjectMapperHelper;
 import com.jfrog.xray.client.impl.util.URIUtil;
 import com.jfrog.xray.client.services.details.Details;
+import com.jfrog.xray.client.services.entitlements.Entitlements;
 import com.jfrog.xray.client.services.scan.Scan;
 import com.jfrog.xray.client.services.summary.Summary;
 import com.jfrog.xray.client.services.system.System;
@@ -79,6 +81,11 @@ public class XrayClient extends PreemptiveHttpClient implements Xray {
     @Override
     public Scan scan() {
         return new ScanImpl(this);
+    }
+
+    @Override
+    public Entitlements entitlements() {
+        return new EntitlementsImpl(this);
     }
 
     public CloseableHttpResponse get(String uri) throws IOException {

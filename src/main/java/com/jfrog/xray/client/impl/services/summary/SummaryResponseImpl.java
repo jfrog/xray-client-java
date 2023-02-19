@@ -14,7 +14,7 @@ public class SummaryResponseImpl implements SummaryResponse {
 
     private String buildName;
     private String buildNumber;
-    private boolean scanCompleted;
+    private boolean isScanCompleted;
     private List<ArtifactImpl> artifacts = null;
     private List<ErrorImpl> errors = null;
 
@@ -30,7 +30,7 @@ public class SummaryResponseImpl implements SummaryResponse {
 
     @JsonProperty("is_scan_completed")
     public boolean getScanCompleted() {
-        return scanCompleted;
+        return isScanCompleted;
     }
 
     @JsonProperty("artifacts")
