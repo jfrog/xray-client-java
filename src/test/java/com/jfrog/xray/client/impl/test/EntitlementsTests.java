@@ -7,7 +7,6 @@ import org.testng.annotations.Test;
 
 import java.io.IOException;
 
-import static org.apache.http.HttpHeaders.LOCATION;
 import static org.mockserver.model.HttpRequest.request;
 import static org.mockserver.model.HttpResponse.response;
 import static org.testng.Assert.*;
@@ -23,6 +22,7 @@ public class EntitlementsTests extends XrayTestsBase {
 
     @Test
     public void testIsEntitled() throws IOException {
-        assertNotNull(xray.entitlements().isEntitled(Feature.ContextualAnalysis));
+        Boolean isEntitled = xray.entitlements().isEntitled(Feature.ContextualAnalysis);
+        assertNotNull(isEntitled);
     }
 }
