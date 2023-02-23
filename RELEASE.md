@@ -1,5 +1,9 @@
 # Release Notes
 
+## 0.14.0 (February 23, 2023)
+- Handle JFrog inactive environment response
+- Add new entitlement service
+
 ## 0.13.0 (December 21, 2022)
 - Support infected versions in vulnerabilities
 
