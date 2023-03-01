@@ -69,8 +69,8 @@ pipelines:
             - jf rt bp
 
             # Distribute release bundle
-            - jf ds rbc xray-client-java $NEXT_VERSION --spec=./release/specs/prod-rbc-filespec.json --spec-vars="version=$NEXT_VERSION" --sign
-            - jf ds rbd xray-client-java $NEXT_VERSION --site="releases.jfrog.io" --sync
+            - jf ds rbc ecosystem-xray-client-java $NEXT_VERSION --spec=./release/specs/prod-rbc-filespec.json --spec-vars="version=$NEXT_VERSION" --sign
+            - jf ds rbd ecosystem-xray-client-java $NEXT_VERSION --site="releases.jfrog.io" --sync
 
             # Update next development version
             - sed -i "s/\(version=\).*\$/\1${NEXT_DEVELOPMENT_VERSION}/" gradle.properties

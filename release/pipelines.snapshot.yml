@@ -53,8 +53,8 @@ pipelines:
             - jf rt bp
 
             # Distribute release bundle
-            - jf ds rbc xray-client-java-snapshot $run_number --spec=./release/specs/dev-rbc-filespec.json --sign
-            - jf ds rbd xray-client-java-snapshot $run_number --site="releases.jfrog.io" --sync
+            - jf ds rbc ecosystem-xray-client-java-snapshot $run_number --spec=./release/specs/dev-rbc-filespec.json --sign
+            - jf ds rbd ecosystem-xray-client-java-snapshot $run_number --site="releases.jfrog.io" --sync
 
           onComplete:
             # Show tests in the *Tests* tab
