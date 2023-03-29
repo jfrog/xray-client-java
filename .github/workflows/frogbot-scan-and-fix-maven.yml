@@ -1,9 +1,5 @@
 name: "Frogbot Scan and Fix Cron job"
-on:
-  workflow_dispatch:
-    tags:
-      description: 'Test scenario tags'
-
+on: workflow_dispatch
 permissions:
   contents: write
   pull-requests: write
