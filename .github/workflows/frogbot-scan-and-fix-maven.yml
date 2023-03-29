@@ -4,8 +4,8 @@ on:
     - cron:
         '0 * * * *'
   workflow_dispatch:
-      tags:
-        description: 'Test scenario tags'
+    tags:
+      description: 'Test scenario tags'
 
 permissions:
   contents: write
