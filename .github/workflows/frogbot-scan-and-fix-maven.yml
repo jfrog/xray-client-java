@@ -2,11 +2,12 @@ name: "Frogbot Scan and Fix"
 on:
   schedule:
     - cron:
-        "0 * * * *":
+        '0 * * * *':
 permissions:
   contents: write
   pull-requests: write
   security-events: write
+  statuses: write|read
 jobs:
   create-fix-pull-requests:
     runs-on: ubuntu-latest
