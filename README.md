@@ -1,5 +1,6 @@
 [![Test](https://github.com/jfrog/xray-client-java/actions/workflows/test.yml/badge.svg)](https://github.com/jfrog/xray-client-java/actions/workflows/test.yml)
 
+
 # Xray Java Client 
 
 JFrog Xray Client adds JFrog Xray scanning capabilities to your java application.
