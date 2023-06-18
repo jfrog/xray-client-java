@@ -15,14 +15,14 @@ public class EntitlementsTests extends XrayTestsBase {
     @Test
     public void testIsEntitledParse() throws IOException {
         try (Xray xrayMock = new XrayClientBuilder().setUrl("http://localhost:8888/xray/").build()) {
-            mockServer.when(request().withPath("/xray/api/v1/entitlements/feature/" + Feature.ContextualAnalysis)).respond(response().withBody("{\"entitled\":true,\"feature_id\":\"" + Feature.ContextualAnalysis + "\"}").withStatusCode(200));
-            assertTrue(xrayMock.entitlements().isEntitled(Feature.ContextualAnalysis));
+            mockServer.when(request().withPath("/xray/api/v1/entitlements/feature/" + Feature.CONTEXTUAL_ANALYSIS)).respond(response().withBody("{\"entitled\":true,\"feature_id\":\"" + Feature.CONTEXTUAL_ANALYSIS + "\"}").withStatusCode(200));
+            assertTrue(xrayMock.entitlements().isEntitled(Feature.CONTEXTUAL_ANALYSIS));
         }
     }
 
     @Test
     public void testIsEntitled() throws IOException {
-        Boolean isEntitled = xray.entitlements().isEntitled(Feature.ContextualAnalysis);
+        Boolean isEntitled = xray.entitlements().isEntitled(Feature.CONTEXTUAL_ANALYSIS);
         assertNotNull(isEntitled);
     }
 }
