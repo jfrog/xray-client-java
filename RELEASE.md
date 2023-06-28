@@ -1,5 +1,8 @@
 # Release Notes
 
+## 0.14.1 (June 28, 2023)
+- Expand entitlement service for IaC and Secretes features
+
 ## 0.14.0 (February 23, 2023)
 - Handle JFrog inactive environment response
 - Add new entitlement service
