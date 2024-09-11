@@ -39,7 +39,7 @@ public class XrayTestsBase {
         String accessToken = readParam(props, "token");
 
         // Create an xray client
-        xray = (Xray) new XrayClientBuilder()
+        xray = (Xray) new XrayClientBuilder(null)
                 .setUrl(url)
                 .setAccessToken(accessToken)
                 .build();
@@ -48,7 +48,7 @@ public class XrayTestsBase {
         ProxyConfiguration proxyConfig = new ProxyConfiguration();
         proxyConfig.port = 8888;
         proxyConfig.host = "localhost";
-        xrayProxies = (Xray) new XrayClientBuilder()
+        xrayProxies = (Xray) new XrayClientBuilder(null)
                 .setUrl(url)
                 .setAccessToken(accessToken)
                 .setProxyConfiguration(proxyConfig)

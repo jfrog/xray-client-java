@@ -67,7 +67,7 @@ public class SystemTests extends XrayTestsBase {
     public void testJFrogInactiveEnv() throws IOException {
         mockServer.when(request().withPath("/xray/api/v1/system/version")).respond(response().withBody("{}").withStatusCode(302).withHeader(LOCATION, "http://localhost:8888/reactivate-server/eco-server"));
         mockServer.when(request().withPath("/reactivate-server/eco-server")).respond(response().withBody("{}").withStatusCode(200));
-        try (Xray xrayMock = new XrayClientBuilder().setUrl("http://localhost:8888/xray/").build()) {
+        try (Xray xrayMock = new XrayClientBuilder(null).setUrl("http://localhost:8888/xray/").build()) {
             assertThrows(JFrogInactiveEnvironmentException.class, () -> xrayMock.system().version());
         }
     }
@@ -77,7 +77,7 @@ public class SystemTests extends XrayTestsBase {
         // The redirection response doesn't contain "reactivate-server" so it should not be detected as JFrogInactiveEnv
         mockServer.when(request().withPath("/xray/api/v1/system/version")).respond(response().withBody("{}").withStatusCode(302).withHeader(LOCATION, "http://localhost:8888/eco-server"));
         mockServer.when(request().withPath("/eco-server")).respond(response().withBody("{\"xray_version\":\"3.66.4\",\"xray_revision\":\"4cae8b1\"}").withStatusCode(200));
-        try (Xray xrayMock = new XrayClientBuilder().setUrl("http://localhost:8888/xray/").build()) {
+        try (Xray xrayMock = new XrayClientBuilder(null).setUrl("http://localhost:8888/xray/").build()) {
             assertEquals(xrayMock.system().version().getVersion(), "3.66.4");
         }
     }

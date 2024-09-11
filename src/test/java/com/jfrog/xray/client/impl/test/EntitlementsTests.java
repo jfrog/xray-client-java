@@ -14,7 +14,7 @@ import static org.testng.Assert.*;
 public class EntitlementsTests extends XrayTestsBase {
     @Test
     public void testIsEntitledParse() throws IOException {
-        try (Xray xrayMock = new XrayClientBuilder().setUrl("http://localhost:8888/xray/").build()) {
+        try (Xray xrayMock = new XrayClientBuilder(null).setUrl("http://localhost:8888/xray/").build()) {
             mockServer.when(request().withPath("/xray/api/v1/entitlements/feature/" + Feature.CONTEXTUAL_ANALYSIS)).respond(response().withBody("{\"entitled\":true,\"feature_id\":\"" + Feature.CONTEXTUAL_ANALYSIS + "\"}").withStatusCode(200));
             assertTrue(xrayMock.entitlements().isEntitled(Feature.CONTEXTUAL_ANALYSIS));
         }

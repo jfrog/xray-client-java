@@ -11,7 +11,7 @@ import java.io.Serializable;
  */
 public interface Scan extends Serializable {
 
-    GraphResponse graph(DependencyTree dependencies, XrayScanProgress progress, Runnable checkCanceled, String projectKey, String[] watches) throws IOException, InterruptedException;
+    GraphResponse graph(DependencyTree dependencies, XrayScanProgress progress, Runnable checkCanceled, String projectKey, String[] watches, String msi) throws IOException, InterruptedException;
 
     GraphResponse graph(DependencyTree dependencies, XrayScanProgress progress, Runnable checkCanceled) throws IOException, InterruptedException;
 }

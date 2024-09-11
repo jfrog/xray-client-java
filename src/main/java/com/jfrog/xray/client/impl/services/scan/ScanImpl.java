@@ -47,15 +47,29 @@ public class ScanImpl implements Scan {
     }
 
     @Override
-    public GraphResponse graph(DependencyTree dependencies, XrayScanProgress progress, Runnable checkCanceled, String projectKey, String[] watches) throws IOException, InterruptedException {
+    public GraphResponse graph(DependencyTree dependencies, XrayScanProgress progress, Runnable checkCanceled, String projectKey, String[] watches, String msi) throws IOException, InterruptedException {
+        StringBuilder params = new StringBuilder();
+
+        if (msi != null) {
+            params.append("multi_scan_id=").append(msi);
+        }
         if (StringUtils.isNotBlank(projectKey)) {
-            return this.post("?project=" + projectKey, dependencies, progress, checkCanceled);
+            if (params.length() > 0) {
+                params.append("&");
+            }
+            params.append("project=").append(projectKey);
         }
+
         if (ArrayUtils.isNotEmpty(watches)) {
-            String watchesStr = "?watch=" + String.join("&watch=", watches);
-            return this.post(watchesStr, dependencies, progress, checkCanceled);
+            if (params.length() > 0) {
+                params.append("&");
+            }
+            params.append("watch=").append(String.join("&watch=", watches));
         }
-        return graph(dependencies, progress, checkCanceled);
+        String paramsString = params.toString();
+
+        return !paramsString.isEmpty() ? this.post(paramsString, dependencies, progress, checkCanceled) : graph(dependencies, progress, checkCanceled);
+
     }
 
     @Override
