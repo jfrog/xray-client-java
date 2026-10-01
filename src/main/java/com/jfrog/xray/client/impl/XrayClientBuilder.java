@@ -26,6 +26,7 @@ public class XrayClientBuilder extends PreemptiveHttpClientBuilder {
 
     public XrayClientBuilder setUrl(String url) {
         this.url = url;
+        setArtifactoryUrl(url);
         return this;
     }
 
